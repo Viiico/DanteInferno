@@ -1,12 +1,13 @@
 import { readdir } from "node:fs/promises";
 
-const recipePath = import.meta.dir + "\\..\\recipes";
+const recipePath = import.meta.dir + "\\..\\neededItems";
 const recipeFileNames = await readdir(recipePath);
 for(const recipeFilePath of recipeFileNames){
     const recipeContent = await Bun.file(recipePath + "\\" + recipeFilePath).json();
     const recipes = recipeContent?.recipe ? [recipeContent.recipe] : recipeContent.recipes;
     let updatedFile = {
-        "recipeId": recipeFilePath,
+        "source": "bazaar",
+        "recipeId": recipeFilePath.replace(".json", ""),
         "recipes": recipes.map(({type, ...rest}) => rest),
         "simplifiedRecipes": recipes.map(simplifyRecipe)
     };

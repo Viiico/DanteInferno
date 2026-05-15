@@ -1,5 +1,6 @@
 {
-  "recipeId": "REHEATED_GUMMY_POLAR_BEAR.json",
+  "source": "bazaar",
+  "recipeId": "REHEATED_GUMMY_POLAR_BEAR",
   "recipes": [
     {
       "A1": "CHILI_PEPPER:1",

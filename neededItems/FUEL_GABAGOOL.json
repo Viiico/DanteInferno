@@ -1,5 +1,6 @@
 {
-  "recipeId": "FUEL_GABAGOOL.json",
+  "source": "bazaar",
+  "recipeId": "FUEL_GABAGOOL",
   "recipes": [
     {
       "A1": "CRUDE_GABAGOOL:3",

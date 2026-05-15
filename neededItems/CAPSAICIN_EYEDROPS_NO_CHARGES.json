@@ -1,5 +1,6 @@
 {
-  "recipeId": "CAPSAICIN_EYEDROPS_NO_CHARGES.json",
+  "source": "bazaar",
+  "recipeId": "CAPSAICIN_EYEDROPS_NO_CHARGES",
   "recipes": [
     {
       "A1": "CHILI_PEPPER:1",

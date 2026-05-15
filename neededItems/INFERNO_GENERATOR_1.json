@@ -1,5 +1,6 @@
 {
-  "recipeId": "INFERNO_GENERATOR_1.json",
+  "source": "minion_auction",
+  "recipeId": "INFERNO_GENERATOR_1",
   "recipes": [
     {
       "A1": "DERELICT_ASHE:10",

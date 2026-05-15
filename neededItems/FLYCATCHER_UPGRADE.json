@@ -1,5 +1,6 @@
 {
-  "recipeId": "FLYCATCHER_UPGRADE.json",
+  "source": "bazaar",
+  "recipeId": "FLYCATCHER_UPGRADE",
   "recipes": [
     {
       "A1": "",

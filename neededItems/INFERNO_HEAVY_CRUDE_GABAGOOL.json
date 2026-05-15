@@ -1,5 +1,6 @@
 {
-  "recipeId": "INFERNO_HEAVY_CRUDE_GABAGOOL.json",
+  "source": "auction_house",
+  "recipeId": "INFERNO_HEAVY_CRUDE_GABAGOOL",
   "recipes": [
     {
       "A1": "CRUDE_GABAGOOL_DISTILLATE:1",

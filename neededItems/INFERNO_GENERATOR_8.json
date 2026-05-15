@@ -1,5 +1,6 @@
 {
-  "recipeId": "INFERNO_GENERATOR_8.json",
+  "source": "minion_auction",
+  "recipeId": "INFERNO_GENERATOR_8",
   "recipes": [
     {
       "A1": "MOLTEN_POWDER:32",
