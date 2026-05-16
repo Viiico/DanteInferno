@@ -31,7 +31,7 @@ Sulphuric Coal - B | C
 
 ## Setup
 Inferno Minion - C | MAH
- - Lower Tier Minion + Molten Powder | Derelic Ashe B
+ - Lower Tier Minion + Molten Powder | Derelic Ashe New B
  - Inferno Vertex - B
  - Inferno Apex - B
 
@@ -65,3 +65,6 @@ Inferno Vertex - B
 Inferno Apex - B - Double for T10|T11
 Gabagool the fish - A
 Reaper Pepper - B
+
+# TODO
+Add recipe id to recipes

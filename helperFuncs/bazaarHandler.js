@@ -16,4 +16,15 @@ const clearedBazaarProducts = Object.values(bazaarProducts).reduce((acc, product
     return acc;
 }, []);
 
-console.log(clearedBazaarProducts);
+clearedBazaarProducts.map(calculateCraftPrice);
+
+
+function calculateCraftPrice(product){
+    const recipes = recipeContents.find(recipeContent => recipeContent.recipeId === product["product_id"])?.simplifiedRecipes;
+    if(!recipes) return;
+    for(const recipe of recipes){
+        const subIngredients = [...Object.keys(recipe).filter(key => key !== "count")];
+        const count = recipe["count"];
+        console.log(product["product_id"], subIngredients);
+    }
+}
