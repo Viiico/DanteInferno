@@ -37,15 +37,15 @@ Inferno Minion - C | MAH
 
 Molten Powder - B
  - Derelic Ashe - B
- - Amalgamated Crimsonite - B
+ - Amalgamated Crimsonite New - B
 
-Amalgamated Crimsonite - B | C
+Amalgamated Crimsonite New - B
 
 Storage - B | C !!!
  - Minion Storage X-pander - A
  - Enchanted Oak Log
 
- Super Compactor - B | C !!!
+ Super Compactor 3000 - B
 
  Flycatcher - B | C !Spider Slayer 6!
   - Tarantula Silk - B
