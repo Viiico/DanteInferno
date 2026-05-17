@@ -68,3 +68,5 @@ Reaper Pepper - B
 
 # TODO
 Add recipe id to recipes
+Figure out good object structure for nested recipes and alternative crafting routes
+Auction House Manager
