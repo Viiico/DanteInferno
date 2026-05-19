@@ -7,8 +7,6 @@ self.onmessage = async (event) => {
         const auctionResult = await fetch(auctionPageUrl);
         const auctionData = await auctionResult.json();
 
-        // const auctionPrices = new Map(neededAuctionItems.map(key => [key, null]));
-        
         const auctions = auctionData.auctions.reduce((acc, auction) => {
             const matchedKey = neededAuctionItems.find(item => auction["item_name"].includes(item));
             if(!matchedKey)return acc;

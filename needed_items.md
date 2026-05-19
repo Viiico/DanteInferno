@@ -67,6 +67,6 @@ Gabagool the fish - A
 Reaper Pepper - B
 
 # TODO
-Add recipe id to recipes
 Figure out good object structure for nested recipes and alternative crafting routes
-Auction House Manager
+Handle the first page already in bazaarHandler, don't use it just for pageNumber
+Check if current ah fetching can be optimized a bit, add caching
