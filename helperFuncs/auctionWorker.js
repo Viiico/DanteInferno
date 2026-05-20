@@ -20,11 +20,12 @@ self.onmessage = async (event) => {
 
     const joinedResults = results.reduce((acc, result) => {
         for(const [key, value] of Object.entries(result)){
-            acc[key] = acc[key] ? acc[key].concat(value) : value;
+            acc[key] ? acc[key].push(...value) : (acc[key] = value);
         }
         return acc;
     }, {});
 
+    for (const key in joinedResults) joinedResults[key].sort((a, b) => a - b);
+
     self.postMessage(joinedResults);
-    postMessage("Hello world");
 }

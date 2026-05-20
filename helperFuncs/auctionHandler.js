@@ -5,6 +5,7 @@ const recipePath = import.meta.dir + "\\..\\neededItems";
 const itemNames = (await readdir(recipePath)).map(fileName => fileName.replace(".json", ""));
 const itemContent = await Promise.all(itemNames.map(fileName => Bun.file(recipePath + "\\" + `${fileName}.json`).json()));
 
+const start = performance.now();
 
 const neededAuctionItems = itemContent.filter(recipeContent => recipeContent.source === "auctionHouse").map(recipeContent => recipeContent.recipeId);
 const auctionUrl = new URL("https://api.hypixel.net/v2/skyblock/auctions");
@@ -26,7 +27,7 @@ const scatteredPrices = await Promise.all(pageChunks.map(pages => {
 
 const auctionItemsPrices = scatteredPrices.reduce((acc, result) => {
 for(const [key, value] of Object.entries(result)){
-    acc[key] = acc[key] ? acc[key].concat(value) : value;
+    acc[key] ? acc[key].push(...value) : (acc[key] = value);
 }
 return acc;
 }, {});
@@ -34,6 +35,8 @@ return acc;
 for(const [key, value] of Object.entries(auctionItemsPrices)){
     auctionItemsPrices[key] = value.sort((a, b) => a - b);
 }
+
+console.log(`Took ${(performance.now() - start).toFixed(2)}ms`);
 console.log(auctionItemsPrices);
 
 function chunkInto(array, numChunks = 1){
