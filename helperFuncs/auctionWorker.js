@@ -1,5 +1,5 @@
 self.onmessage = async (event) => {
-    const {pages, neededAuctionItems} = event.data;
+    const {pages, neededItems} = event.data;
 
 
     const results = await Promise.all(pages.map(async page => {
@@ -8,12 +8,12 @@ self.onmessage = async (event) => {
         const auctionData = await auctionResult.json();
 
         const auctions = auctionData.auctions.reduce((acc, auction) => {
-            const matchedKey = neededAuctionItems.find(item => auction["item_name"].includes(item));
+            const matchedKey = neededItems.find(item => auction["item_name"].includes(item));
             if(!matchedKey)return acc;
             if(!auction.bin || auction.claimed)return acc;
             acc[matchedKey].push(auction["starting_bid"]);
             return acc;
-        }, Object.fromEntries(neededAuctionItems.map(key => [key, []])));
+        }, Object.fromEntries(neededItems.map(key => [key, []])));
 
         return auctions;
     }));
