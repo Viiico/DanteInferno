@@ -28,13 +28,15 @@ export async function fetchAuctionPrices(neededItems) {
 
     const auctionItemsPrices = scatteredPrices.reduce((acc, result) => {
         for (const [key, value] of Object.entries(result)) {
-            acc[key] ? acc[key].push(...value) : (acc[key] = value);
+            const modifiedKey = key.replaceAll(" ", "_").toUpperCase();
+            const existingValue = acc.get(modifiedKey);
+            existingValue ? existingValue.push(...value) : acc.set(modifiedKey, value);
         }
         return acc;
-    }, {});
+    }, new Map());
 
-    for (const [key, value] of Object.entries(auctionItemsPrices)) {
-        auctionItemsPrices[key] = value.sort((a, b) => a - b);
+    for (const [key, value] of auctionItemsPrices) {
+        auctionItemsPrices.set(key, value.sort((a, b) => a - b));
     }
 
     return auctionItemsPrices;

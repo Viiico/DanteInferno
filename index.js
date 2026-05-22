@@ -5,29 +5,46 @@ import {fetchAuctionPrices} from "./helperFuncs/auctionHandler.js";
 
 const recipePath = `${import.meta.dir}\\neededItems`;
 const itemNames = (await readdir(recipePath)).map(fileName => fileName.replace(".json", ""));
-const itemContent = await Promise.all(
+const itemContent = (await Promise.all(
     itemNames.map(fileName => Bun.file(recipePath + "\\" + `${fileName}.json`).json())
-);
+)).reduce((acc, item) => {
+    acc.set(item.recipeId, item);
+    return acc;
+}, new Map());
 
-const neededBazaarItems = itemContent.filter(recipeContent => recipeContent.source === "bazaar").map(recipeContent => recipeContent.recipeId);
-const neededAuctionItems = itemContent.filter(recipeContent => recipeContent.source === "auctionHouse").map(recipeContent => recipeContent.recipeId);
+const neededBazaarItems = [];
+const neededAuctionItems = [];
+
+for (const item of itemContent.values()) {
+    if (item.source === "bazaar") neededBazaarItems.push(item.recipeId);
+    else if (item.source === "auctionHouse") neededAuctionItems.push(item.recipeId);
+}
+
 const bazaarPrices = await fetchBazaarPrices(neededBazaarItems);
-// const auctionPrices = await fetchAuctionPrices(neededAuctionItems);
+const auctionPrices = await fetchAuctionPrices(neededAuctionItems);
 
-calculateCraftPrice(bazaarPrices[2]);
+calculateCraftPrice(bazaarPrices.get("REHEATED_GUMMY_POLAR_BEAR"), "REHEATED_GUMMY_POLAR_BEAR");
 
-function calculateCraftPrice(product, instaBuy = false){
-    console.log(product, bazaarPrices);
-    const recipes = itemContent.find(recipeContent => recipeContent.recipeId === product["product_id"])?.simplifiedRecipes;
-    if(!recipes){
-        // Can't be crafted, must be bought
-    }
+function calculateCraftPrice(product, productId, instaBuy = false){
+    const recipes = itemContent.get(productId).simplifiedRecipes;
+    if(!recipes) return Infinity;
+    const itemPrice = instaBuy ? product.instantBuyPrice : product.buyOrderPrice;
     for(const recipe of recipes){
         const subIngredients = [...Object.keys(recipe).filter(key => key !== "count")];
-        const subIngredientsPrices = subIngredients.map(subIngredient => {
-            // console.log(bazaarPrices[subIngredient])
-    });
-        const count = recipe["count"];
-        console.log(product["product_id"], subIngredients, subIngredientsPrices);
+        let subIngredientsPrices = 0;
+        for(const subIngredient in recipe){
+            if(subIngredient === "count") continue;
+            if(bazaarPrices.has(subIngredient)){
+                const bazaarPrice = bazaarPrices.get(subIngredient);
+                subIngredientsPrices += (instaBuy ? bazaarPrice.instantBuyPrice : bazaarPrice.buyOrderPrice) * recipe[subIngredient];
+                continue;
+            }
+            const prices = auctionPrices.get(subIngredient);
+            subIngredientsPrices += prices[0] * recipe[subIngredient];
+        }
+
+    const count = recipe["count"];
+    const craftPrice = Math.ceil(subIngredientsPrices / count);
+    console.log(`${productId}, itemPrice: ${itemPrice}, craftPrice: ${craftPrice}`);
     }
 }

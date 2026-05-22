@@ -25,7 +25,5 @@ self.onmessage = async (event) => {
         return acc;
     }, {});
 
-    for (const key in joinedResults) joinedResults[key].sort((a, b) => a - b);
-
     self.postMessage(joinedResults);
 }
