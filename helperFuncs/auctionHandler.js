@@ -1,5 +1,3 @@
-import {readdir} from "node:fs/promises";
-import { readItems } from "./readItems";
 import os from "os";
 
 function chunkInto(array, numChunks = 1) {
@@ -11,9 +9,7 @@ function chunkInto(array, numChunks = 1) {
     return pageChunks;
 }
 
-export async function fetchAuctionPrices() {
-    const {neededItems} = await readItems("auctionHouse");
-    
+export async function fetchAuctionPrices(neededItems) {
     const auctionUrl = new URL("https://api.hypixel.net/v2/skyblock/auctions");
     const auctionResponse = await fetch(auctionUrl);
     const auctionPageContent = await auctionResponse.json();

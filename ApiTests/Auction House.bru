@@ -5,9 +5,13 @@ meta {
 }
 
 get {
-  url: https://api.hypixel.net/v2/skyblock/auctions
+  url: https://api.hypixel.net/v2/skyblock/auctions?page=34
   body: none
   auth: inherit
+}
+
+params:query {
+  page: 34
 }
 
 settings {

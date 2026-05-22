@@ -11,5 +11,5 @@
             .filter(recipeContent => recipeContent.source === source)
             .map(recipeContent => recipeContent.recipeId);
 
-        return {itemNames, neededItems}
+        return {itemNames, itemContent, neededItems}
 }

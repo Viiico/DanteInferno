@@ -69,4 +69,4 @@ Reaper Pepper - B
 # TODO
 Figure out good object structure for nested recipes and alternative crafting routes
 Handle the first page already in bazaarHandler, don't use it just for pageNumber
-Check if current ah fetching can be optimized a bit, add caching
+Check if current ah fetching can be optimized a bit, add caching - Double fetching(0), thry without workers or at least don't sort in them, find is m*n
