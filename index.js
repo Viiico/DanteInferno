@@ -29,6 +29,7 @@ const auctionPrices = await fetchAuctionPrices(neededAuctionItems);
 
 
 for(const item of itemContent.keys()) {
+    if(!item.endsWith("GENERATOR_2")) continue;
     console.log("Calculating prices for: " + item);
     getBuyPrice(item);
     calculateCraftPrice(item);
@@ -46,6 +47,7 @@ function calculateCraftPrice(productId, instaBuy = false){
         const subIngredientsPrices = Object.entries(recipe).reduce((acc, [subIngredient, amount]) => {
             if(subIngredient === "count") return acc;
             const subIngredientPrice = getBuyPrice(subIngredient, instaBuy)
+            console.log(subIngredient, subIngredientPrice);
             return acc + subIngredientPrice * amount;
         }, 0);
 
@@ -80,7 +82,7 @@ function getBuyPrice(productId, instaBuy = false){
         return price;
     }
 
-    return 10; // Minion Auctions for later implementation
+    return 0; // Minion Auctions for later implementation
 }
 
 function snakeToTitle(str) {
