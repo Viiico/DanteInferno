@@ -8,7 +8,11 @@ const itemNames = (await readdir(recipePath)).map(fileName => fileName.replace("
 const itemContent = (await Promise.all(
     itemNames.map(fileName => Bun.file(recipePath + "\\" + `${fileName}.json`).json())
 )).reduce((acc, item) => {
-    acc.set(item.recipeId, item);
+    acc.set(item.recipeId, {...item, prices: {
+        "buying": 0,
+        "crafting": 0,
+        "recipeId": -1
+    }});
     return acc;
 }, new Map());
 
@@ -17,34 +21,72 @@ const neededAuctionItems = [];
 
 for (const item of itemContent.values()) {
     if (item.source === "bazaar") neededBazaarItems.push(item.recipeId);
-    else if (item.source === "auctionHouse") neededAuctionItems.push(item.recipeId);
+    else if (item.source === "auctionHouse")neededAuctionItems.push(snakeToTitle(item.recipeId));
 }
 
 const bazaarPrices = await fetchBazaarPrices(neededBazaarItems);
 const auctionPrices = await fetchAuctionPrices(neededAuctionItems);
 
-calculateCraftPrice(bazaarPrices.get("REHEATED_GUMMY_POLAR_BEAR"), "REHEATED_GUMMY_POLAR_BEAR");
 
-function calculateCraftPrice(product, productId, instaBuy = false){
+for(const item of itemContent.keys()) {
+    console.log("Calculating prices for: " + item);
+    getBuyPrice(item);
+    calculateCraftPrice(item);
+    console.log(itemContent.get(item).prices);
+}
+
+// calculateCraftPrice(bazaarPrices.get("AMALGAMATED_CRIMSONITE_NEW"), "AMALGAMATED_CRIMSONITE_NEW");
+
+function calculateCraftPrice(productId, instaBuy = false){
     const recipes = itemContent.get(productId).simplifiedRecipes;
     if(!recipes) return Infinity;
-    const itemPrice = instaBuy ? product.instantBuyPrice : product.buyOrderPrice;
-    for(const recipe of recipes){
-        const subIngredients = [...Object.keys(recipe).filter(key => key !== "count")];
-        let subIngredientsPrices = 0;
-        for(const subIngredient in recipe){
-            if(subIngredient === "count") continue;
-            if(bazaarPrices.has(subIngredient)){
-                const bazaarPrice = bazaarPrices.get(subIngredient);
-                subIngredientsPrices += (instaBuy ? bazaarPrice.instantBuyPrice : bazaarPrice.buyOrderPrice) * recipe[subIngredient];
-                continue;
-            }
-            const prices = auctionPrices.get(subIngredient);
-            subIngredientsPrices += prices[0] * recipe[subIngredient];
-        }
+    let recipePrices = [];
+    for(const recipeId in recipes){
+        const recipe = recipes[recipeId];
+        const subIngredientsPrices = Object.entries(recipe).reduce((acc, [subIngredient, amount]) => {
+            if(subIngredient === "count") return acc;
+            const subIngredientPrice = getBuyPrice(subIngredient, instaBuy)
+            return acc + subIngredientPrice * amount;
+        }, 0);
 
-    const count = recipe["count"];
-    const craftPrice = Math.ceil(subIngredientsPrices / count);
-    console.log(`${productId}, itemPrice: ${itemPrice}, craftPrice: ${craftPrice}`);
+        const count = recipe["count"];
+        recipePrices.push(subIngredientsPrices / count);
     }
+
+    const cheapestRecipeId = recipePrices.indexOf(Math.min(...recipePrices));
+    itemContent.get(productId).prices.recipeId = cheapestRecipeId;
+    itemContent.get(productId).prices.crafting = Math.ceil(recipePrices[cheapestRecipeId]);
+
+}
+
+function getBuyPrice(productId, instaBuy = false){
+    const product = itemContent.get(productId);
+    if(!product){
+        throw new Error("No product with id: " + productId);
+    }
+    let price = product.prices.buying;
+    if(price !== 0)return price; // Using 0 as marker for not setting this yet
+    if(product.source === "bazaar"){
+        const bazaarPrice = bazaarPrices.get(productId);
+        price = instaBuy ? bazaarPrice.instantBuyPrice : bazaarPrice.buyOrderPrice;
+        itemContent.get(productId).prices.buying = price;
+        return price;
+    }
+
+    if(product.source === "auctionHouse"){
+        const auctionPrice = auctionPrices.get(productId);
+        price = auctionPrice[0];
+        itemContent.get(productId).prices.buying = price;
+        return price;
+    }
+
+    return 10; // Minion Auctions for later implementation
+}
+
+function snakeToTitle(str) {
+  return str
+    .toLowerCase()
+    .split('_')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
 }
