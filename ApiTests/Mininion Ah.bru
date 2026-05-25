@@ -1,0 +1,22 @@
+meta {
+  name: Mininion Ah
+  type: http
+  seq: 4
+}
+
+get {
+  url: https://minionah.com/api/internal/search/minions?take=50&where={"minion":{"AND":[{"generator":"INFERNO"},{}]}}
+  body: none
+  auth: inherit
+}
+
+params:query {
+  take: 50
+  where: {"minion":{"AND":[{"generator":"INFERNO"},{}]}}
+  ~skip: 1050
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

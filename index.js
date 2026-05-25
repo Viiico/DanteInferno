@@ -1,6 +1,7 @@
 import {readdir} from "node:fs/promises";
 import {fetchBazaarPrices} from "./helperFuncs/bazaarHandler.js";
 import {fetchAuctionPrices} from "./helperFuncs/auctionHandler.js";
+import {fetchMinionPrices} from "./helperFuncs/minionAhHandler.js";
 
 
 const recipePath = `${import.meta.dir}\\neededItems`;
@@ -26,15 +27,17 @@ for (const item of itemContent.values()) {
 
 const bazaarPrices = await fetchBazaarPrices(neededBazaarItems);
 const auctionPrices = await fetchAuctionPrices(neededAuctionItems);
+const minionPrices = await fetchMinionPrices();
+console.log(minionPrices)
 
 
-for(const item of itemContent.keys()) {
-    if(!item.endsWith("GENERATOR_2")) continue;
-    console.log("Calculating prices for: " + item);
-    getBuyPrice(item);
-    calculateCraftPrice(item);
-    console.log(itemContent.get(item).prices);
-}
+// for(const item of itemContent.keys()) {
+//     if(!item.endsWith("GENERATOR_2")) continue;
+//     console.log("Calculating prices for: " + item);
+//     getBuyPrice(item);
+//     calculateCraftPrice(item);
+//     console.log(itemContent.get(item).prices);
+// }
 
 // calculateCraftPrice(bazaarPrices.get("AMALGAMATED_CRIMSONITE_NEW"), "AMALGAMATED_CRIMSONITE_NEW");
 
@@ -47,7 +50,6 @@ function calculateCraftPrice(productId, instaBuy = false){
         const subIngredientsPrices = Object.entries(recipe).reduce((acc, [subIngredient, amount]) => {
             if(subIngredient === "count") return acc;
             const subIngredientPrice = getBuyPrice(subIngredient, instaBuy)
-            console.log(subIngredient, subIngredientPrice);
             return acc + subIngredientPrice * amount;
         }, 0);
 
