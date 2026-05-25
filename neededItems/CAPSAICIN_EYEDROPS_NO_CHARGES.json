@@ -17,10 +17,25 @@
   ],
   "simplifiedRecipes": [
     {
-      "CHILI_PEPPER": 4,
-      "EXPORTABLE_CARROTS": 128,
-      "ENCHANTED_CARROT": 128,
-      "WATER_HYDRA_HEAD": 1,
+      "id": "CAPSAICIN_EYEDROPS_NO_CHARGES#0",
+      "ingredients": [
+        {
+          "ingredient": "CHILI_PEPPER",
+          "count": 4
+        },
+        {
+          "ingredient": "EXPORTABLE_CARROTS",
+          "count": 128
+        },
+        {
+          "ingredient": "ENCHANTED_CARROT",
+          "count": 128
+        },
+        {
+          "ingredient": "WATER_HYDRA_HEAD",
+          "count": 1
+        }
+      ],
       "count": 3
     }
   ]

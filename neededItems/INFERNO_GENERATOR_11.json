@@ -16,11 +16,29 @@
   ],
   "simplifiedRecipes": [
     {
-      "MOLTEN_POWDER": 256,
-      "INFERNO_APEX": 1,
-      "INFERNO_VERTEX": 48,
-      "INFERNO_GENERATOR_10": 1,
-      "INFERNO_GENERATOR_8": 1,
+      "id": "INFERNO_GENERATOR_11#0",
+      "ingredients": [
+        {
+          "ingredient": "MOLTEN_POWDER",
+          "count": 256
+        },
+        {
+          "ingredient": "INFERNO_APEX",
+          "count": 1
+        },
+        {
+          "ingredient": "INFERNO_VERTEX",
+          "count": 48
+        },
+        {
+          "ingredient": "INFERNO_GENERATOR_10",
+          "count": 1
+        },
+        {
+          "ingredient": "INFERNO_GENERATOR_8",
+          "count": 1
+        }
+      ],
       "count": 1
     }
   ]

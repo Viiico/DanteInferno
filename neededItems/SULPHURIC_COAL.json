@@ -17,8 +17,17 @@
   ],
   "simplifiedRecipes": [
     {
-      "ENCHANTED_COAL": 16,
-      "ENCHANTED_SULPHUR": 1,
+      "id": "SULPHURIC_COAL#0",
+      "ingredients": [
+        {
+          "ingredient": "ENCHANTED_COAL",
+          "count": 16
+        },
+        {
+          "ingredient": "ENCHANTED_SULPHUR",
+          "count": 1
+        }
+      ],
       "count": 4
     }
   ]

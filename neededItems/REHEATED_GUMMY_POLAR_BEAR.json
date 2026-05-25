@@ -16,9 +16,21 @@
   ],
   "simplifiedRecipes": [
     {
-      "CHILI_PEPPER": 4,
-      "ENCHANTED_SLIME_BALL": 4,
-      "ENCHANTED_SNOW_BLOCK": 4,
+      "id": "REHEATED_GUMMY_POLAR_BEAR#0",
+      "ingredients": [
+        {
+          "ingredient": "CHILI_PEPPER",
+          "count": 4
+        },
+        {
+          "ingredient": "ENCHANTED_SLIME_BALL",
+          "count": 4
+        },
+        {
+          "ingredient": "ENCHANTED_SNOW_BLOCK",
+          "count": 4
+        }
+      ],
       "count": 1
     }
   ]

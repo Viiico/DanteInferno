@@ -16,8 +16,17 @@
   ],
   "simplifiedRecipes": [
     {
-      "MOLTEN_POWDER": 32,
-      "INFERNO_GENERATOR_4": 1,
+      "id": "INFERNO_GENERATOR_5#0",
+      "ingredients": [
+        {
+          "ingredient": "MOLTEN_POWDER",
+          "count": 32
+        },
+        {
+          "ingredient": "INFERNO_GENERATOR_4",
+          "count": 1
+        }
+      ],
       "count": 1
     }
   ]

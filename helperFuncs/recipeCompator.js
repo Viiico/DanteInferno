@@ -3,15 +3,29 @@ import { readdir } from "node:fs/promises";
 const recipePath = import.meta.dir + "\\..\\neededItems";
 const recipeFileNames = await readdir(recipePath);
 for(const recipeFilePath of recipeFileNames){
-    const recipeContent = await Bun.file(recipePath + "\\" + recipeFilePath).json();
-    const recipes = recipeContent?.recipe ? [recipeContent.recipe] : recipeContent.recipes;
-    let updatedFile = {
-        "source": "bazaar",
-        "recipeId": recipeFilePath.replace(".json", ""),
-        "recipes": recipes.map(({type, ...rest}) => rest),
-        "simplifiedRecipes": recipes.map(simplifyRecipe)
-    };
-    Bun.write(recipePath + "\\" + recipeFilePath, JSON.stringify(updatedFile, null, 2));
+    let recipeContent = await Bun.file(recipePath + "\\" + recipeFilePath).json();
+    if(!recipeContent.simplifiedRecipes) continue;
+    const updatedSimplifiedRecipes = recipeContent.simplifiedRecipes.map((simplifiedRecipe, i) => {
+        return ({
+        id: `${recipeContent.recipeId}#${i}`,
+        ingredients: Object.entries(simplifiedRecipe)
+            .filter(([key]) => key !== 'count')
+            .map(([ingredient, count]) => ({ ingredient, count })),
+        count: simplifiedRecipe.count
+    })});
+
+console.log(updatedSimplifiedRecipes)
+
+recipeContent.simplifiedRecipes = updatedSimplifiedRecipes
+
+    // const recipes = recipeContent?.recipe ? [recipeContent.recipe] : recipeContent.recipes;
+    // let updatedFile = {
+    //     "source": "bazaar",
+    //     "recipeId": recipeFilePath.replace(".json", ""),
+    //     "recipes": recipes.map(({type, ...rest}) => rest),
+    //     "simplifiedRecipes": recipes.map(simplifyRecipe)
+    // };
+    Bun.write(recipePath + "\\" + recipeFilePath, JSON.stringify(recipeContent, null, 2));
 }
 
 function simplifyRecipe(recipe){

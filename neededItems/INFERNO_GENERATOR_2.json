@@ -16,8 +16,17 @@
   ],
   "simplifiedRecipes": [
     {
-      "DERELICT_ASHE": 320,
-      "INFERNO_GENERATOR_1": 1,
+      "id": "INFERNO_GENERATOR_2#0",
+      "ingredients": [
+        {
+          "ingredient": "DERELICT_ASHE",
+          "count": 320
+        },
+        {
+          "ingredient": "INFERNO_GENERATOR_1",
+          "count": 1
+        }
+      ],
       "count": 1
     }
   ]

@@ -28,13 +28,31 @@
   ],
   "simplifiedRecipes": [
     {
-      "CRUDE_GABAGOOL": 24,
-      "SULPHURIC_COAL": 1,
+      "id": "FUEL_GABAGOOL#0",
+      "ingredients": [
+        {
+          "ingredient": "CRUDE_GABAGOOL",
+          "count": 24
+        },
+        {
+          "ingredient": "SULPHURIC_COAL",
+          "count": 1
+        }
+      ],
       "count": 1
     },
     {
-      "SULPHURIC_COAL": 8,
-      "VERY_CRUDE_GABAGOOL": 1,
+      "id": "FUEL_GABAGOOL#1",
+      "ingredients": [
+        {
+          "ingredient": "SULPHURIC_COAL",
+          "count": 8
+        },
+        {
+          "ingredient": "VERY_CRUDE_GABAGOOL",
+          "count": 1
+        }
+      ],
       "count": 8
     }
   ]

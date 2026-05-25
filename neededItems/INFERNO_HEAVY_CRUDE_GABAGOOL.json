@@ -16,9 +16,21 @@
   ],
   "simplifiedRecipes": [
     {
-      "CRUDE_GABAGOOL_DISTILLATE": 6,
-      "INFERNO_FUEL_BLOCK": 2,
-      "HEAVY_GABAGOOL": 1,
+      "id": "INFERNO_HEAVY_CRUDE_GABAGOOL#0",
+      "ingredients": [
+        {
+          "ingredient": "CRUDE_GABAGOOL_DISTILLATE",
+          "count": 6
+        },
+        {
+          "ingredient": "INFERNO_FUEL_BLOCK",
+          "count": 2
+        },
+        {
+          "ingredient": "HEAVY_GABAGOOL",
+          "count": 1
+        }
+      ],
       "count": 1
     }
   ]

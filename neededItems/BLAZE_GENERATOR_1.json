@@ -16,7 +16,13 @@
   ],
   "simplifiedRecipes": [
     {
-      "BLAZE_ROD": 80,
+      "id": "BLAZE_GENERATOR_1#0",
+      "ingredients": [
+        {
+          "ingredient": "BLAZE_ROD",
+          "count": 80
+        }
+      ],
       "count": 1
     }
   ]
