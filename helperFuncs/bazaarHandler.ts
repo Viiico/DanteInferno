@@ -1,17 +1,30 @@
-export async function fetchBazaarPrices(neededItems) {
+import type {BazaarPrice} from "../types/prices.ts";
+
+interface BazaarProduct {
+    product_id: string;
+    quick_status: {
+        buyPrice: number;
+        sellPrice: number;
+    };
+}
+
+interface BazaarResponse {
+    products: Record<string, BazaarProduct>;
+}
+
+export async function fetchBazaarPrices(neededItems: string[]) {
     const bazaarResponse = await fetch("https://api.hypixel.net/v2/skyblock/bazaar");
-    const bazaarProducts = (await bazaarResponse.json()).products;
+    const {products} = await bazaarResponse.json() as BazaarResponse;
 
-    const bazaarPrices = new Map();
+    const bazaarPrices = new Map<string, BazaarPrice>();
 
-    for(const product of Object.values(bazaarProducts)) {
+    for(const product of Object.values(products)) {
         if (!neededItems.includes(product["product_id"])) continue;
         const quickStatus = product["quick_status"];
         const instantBuyPrice = Math.floor(quickStatus["buyPrice"]);  // == sell order price
         const buyOrderPrice = Math.floor(quickStatus["sellPrice"]);   // instant sell price
         bazaarPrices.set(product["product_id"], { instantBuyPrice, buyOrderPrice });
     }
-
     return bazaarPrices;
 }
 

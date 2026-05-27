@@ -29,15 +29,17 @@ const bazaarPrices = await fetchBazaarPrices(neededBazaarItems);
 const auctionPrices = await fetchAuctionPrices(neededAuctionItems);
 const minionPrices = await fetchMinionPrices();
 
-for(const item of itemContent.keys()) {
-    if(!item.endsWith("GENERATOR_2")) continue;
-    console.log("Calculating prices for: " + item);
-    getBuyPrice(item);
-    calculateCraftPrice(item);
-    console.log(itemContent.get(item).prices);
-}
+console.log(bazaarPrices);
 
-calculateCraftPrice(bazaarPrices.get("AMALGAMATED_CRIMSONITE_NEW"), "AMALGAMATED_CRIMSONITE_NEW");
+// for(const item of itemContent.keys()) {
+//     if(!item.endsWith("GENERATOR_2")) continue;
+//     // console.log("Calculating prices for: " + item);
+//     getBuyPrice(item);
+//     calculateCraftPrice(item);
+//     // console.log(itemContent.get(item).prices);
+// }
+
+// calculateCraftPrice(bazaarPrices.get("AMALGAMATED_CRIMSONITE_NEW"), "AMALGAMATED_CRIMSONITE_NEW");
 
 function calculateCraftPrice(productId, instaBuy = false){
     const recipes = itemContent.get(productId).simplifiedRecipes;
