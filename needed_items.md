@@ -72,6 +72,7 @@ Check if current ah fetching can be optimized a bit, add caching - Double fetchi
 Depending on the amount of items, change ah prices to match or just use LBIN or some avg
 Optimize the checkPricing to not repeat calculations
 Figure out good object structure for nested recipes and alternative crafting routes - Fix current issues
-Migrate to TypeScript for easier handling of the structure
 Inferno Minion crafting prices are all wrong - it only takes buy price into consideration. Maybe crafting in prices should be a recursive tree
 Minion Upgrades
+Finish inferno minion price fetcher
+Migrate to TypeScript for easier handling of the structure

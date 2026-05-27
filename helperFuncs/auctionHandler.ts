@@ -1,5 +1,4 @@
-import os from "os";
-import type {AuctionResponse, AuctionProduct} from "../types/priceHandlers.ts";
+import type {AuctionResponse, AuctionProduct} from "../types/auction.ts";
 import type {AuctionWorkerInput, AuctionWorkerOutput} from "../types/workers.ts";
 
 function chunkInto(array: number[], numChunks: number = 1): number[][] {
@@ -17,7 +16,7 @@ export async function fetchAuctionPrices(neededItems: string[]) {
     const auctionPageContent = await auctionResponse.json() as AuctionResponse;
     if(!auctionPageContent.success) return new Map();
     const pageAmount = auctionPageContent["totalPages"];
-    const pageChunks = chunkInto(Array.from(Array(pageAmount), (_, i) => i), os.cpus().length);
+    const pageChunks = chunkInto(Array.from(Array(pageAmount), (_, i) => i), navigator.hardwareConcurrency);
     const scatteredPrices = await Promise.all(pageChunks.map(pages => {
         const worker = new Worker(new URL("./auctionWorker.js", import.meta.url));
 

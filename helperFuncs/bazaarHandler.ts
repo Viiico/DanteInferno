@@ -1,4 +1,4 @@
-import type {BazaarPrice, BazaarResponse} from "../types/priceHandlers.ts";
+import type {BazaarPrice, BazaarResponse} from "../types/bazaar.ts";
 
 export async function fetchBazaarPrices(neededItems: string[]) {
     const bazaarResponse = await fetch("https://api.hypixel.net/v2/skyblock/bazaar");
