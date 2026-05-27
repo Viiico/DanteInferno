@@ -1,16 +1,4 @@
-import type {BazaarPrice} from "../types/prices.ts";
-
-interface BazaarProduct {
-    product_id: string;
-    quick_status: {
-        buyPrice: number;
-        sellPrice: number;
-    };
-}
-
-interface BazaarResponse {
-    products: Record<string, BazaarProduct>;
-}
+import type {BazaarPrice, BazaarResponse} from "../types/priceHandlers.ts";
 
 export async function fetchBazaarPrices(neededItems: string[]) {
     const bazaarResponse = await fetch("https://api.hypixel.net/v2/skyblock/bazaar");
@@ -27,11 +15,3 @@ export async function fetchBazaarPrices(neededItems: string[]) {
     }
     return bazaarPrices;
 }
-
-/*
-        "itemName": {
-            "price" : Amount,
-            "craftingPrice": Amount,
-            "crafting": [recipe]
-        }
-*/
