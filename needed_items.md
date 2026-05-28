@@ -67,12 +67,34 @@ Gabagool the fish - A
 Reaper Pepper - B
 
 # TODO
-Handle the first page already in bazaarHandler, don't use it just for pageNumber
-Check if current ah fetching can be optimized a bit, add caching - Double fetching(0), thry without workers or at least don't sort in them, find is m*n
 Depending on the amount of items, change ah prices to match or just use LBIN or some avg
+Caching of auction house
 Optimize the checkPricing to not repeat calculations
 Figure out good object structure for nested recipes and alternative crafting routes - Fix current issues
 Inferno Minion crafting prices are all wrong - it only takes buy price into consideration. Maybe crafting in prices should be a recursive tree
 Minion Upgrades
 Finish inferno minion price fetcher
 Migrate to TypeScript for easier handling of the structure
+
+Example:
+{
+  itemId: "INFERNO_HYPERGOLIC_CRUDE_GABAGOOL",
+  cheapest: {
+    type: "craft",
+    recipeId: "INFERNO_HYPERGOLIC_CRUDE_GABAGOOL#0",
+    cost: 42000,
+    ingredients: {
+      "CRUDE_GABAGOOL_DISTILLATE": {
+        itemId: "CRUDE_GABAGOOL_DISTILLATE",
+        cheapest: { type: "buy_bazaar", cost: 1200 },
+        alternatives: [...]
+      },
+      "INFERNO_FUEL_BLOCK": { ... }, // nested
+      "HYPERGOLIC_GABAGOOL": { ... }
+    }
+  },
+  alternatives: [
+    { type: "buy_ah", cost: 55000 },
+    { type: "craft", recipeId: "...", cost: 42000, ingredients: {...} }
+  ]
+}
