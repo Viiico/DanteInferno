@@ -9,8 +9,8 @@ export async function fetchBazaarPrices(neededItems: string[]) {
     for(const product of Object.values(products)) {
         if (!neededItems.includes(product["product_id"])) continue;
         const quickStatus = product["quick_status"];
-        const instantBuyPrice = Math.floor(quickStatus["buyPrice"]);  // == sell order price
-        const buyOrderPrice = Math.floor(quickStatus["sellPrice"]);   // instant sell price
+        const instantBuyPrice = Math.floor(quickStatus.buyPrice);  // == sell order price
+        const buyOrderPrice = Math.floor(quickStatus.sellPrice);   // instant sell price
         bazaarPrices.set(product["product_id"], { instantBuyPrice, buyOrderPrice });
     }
     return bazaarPrices;

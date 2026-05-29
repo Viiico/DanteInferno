@@ -22,7 +22,7 @@ self.onmessage = async (event: MessageEvent<AuctionWorkerInput>) => {
 
     const joinedResults = results.reduce((acc, result) => {
         for(const [key, value] of Object.entries(result)){
-            acc[key] ? acc[key].push(...value) : (acc[key] = value);
+            acc[key] ? acc[key] = acc[key].concat(value) : (acc[key] = value);
         }
         return acc;
     }, {});

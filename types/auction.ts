@@ -1,7 +1,3 @@
-export interface Auctionprice {
-    
-}
-
 export interface AuctionResponse {
     success: boolean;
     totalPages: number;

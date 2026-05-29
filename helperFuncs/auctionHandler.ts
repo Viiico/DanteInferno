@@ -16,7 +16,7 @@ export async function fetchAuctionPrices(neededItems: string[]) {
     const auctionPageContent = await auctionResponse.json() as AuctionResponse;
     if(!auctionPageContent.success) return new Map<string, number[]>();
     const pageAmount = auctionPageContent["totalPages"];
-    const pageChunks = chunkInto(Array.from(Array(pageAmount), (_, i) => i), navigator.hardwareConcurrency);
+    const pageChunks = chunkInto(Array.from(Array(pageAmount), (_, i) => i), navigator.hardwareConcurrency ?? 8);
     const scatteredPrices = await Promise.all(pageChunks.map(pages => {
         const worker = new Worker(new URL("./auctionWorker.js", import.meta.url));
 

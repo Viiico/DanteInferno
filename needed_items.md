@@ -72,6 +72,9 @@ Caching of auction house
 Optimize the checkPricing to not repeat calculations
 Figure out good object structure for nested recipes and alternative crafting routes - Fix current issues
 Inferno Minion crafting prices are all wrong - it only takes buy price into consideration. Maybe crafting in prices should be a recursive tree
+Improve typing in index.ts, mainly on functions
+Seperate from index.ts: loading item definitions and price calculator
+Check up the filter in minion handler
 
 Example:
 {

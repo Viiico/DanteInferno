@@ -1,6 +1,6 @@
 import type { Minion, MinionResponse } from "../types/minion.ts";
 
-export async function fetchMinionPrices(minionName = "INFERNO"): Promise<Map<String, Minion[]>> {
+export async function fetchMinionPrices(minionName = "INFERNO"): Promise<Map<string, Minion[]>> {
     const BASE_URL = "https://minionah.com/api/internal/search/minions";
     const TAKE = 50;
 
