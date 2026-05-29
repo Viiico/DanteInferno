@@ -6,26 +6,26 @@ import type { ItemDef } from "./types/items.ts";
 
 const itemNames = await Array.fromAsync(new Bun.Glob("*").scan("./neededItems"));
 const itemContent = (await Promise.all(
-    itemNames.map(fileName => Bun.file(`neededItems/${fileName}`).json())
+    itemNames.map(fileName => Bun.file(`neededItems/${fileName}`).json() as Promise<ItemDef>)
 )).reduce((acc, item) => {
     const { recipes: _, ...rest } = item;
     acc.set(item.recipeId, rest);
     return acc;
 }, new Map<string, ItemDef>());
 
-console.log(itemContent)
-
 const neededBazaarItems = [];
 const neededAuctionItems = [];
 
 for (const item of itemContent.values()) {
     if (item.source === "bazaar") neededBazaarItems.push(item.recipeId);
-    else if (item.source === "auctionHouse")neededAuctionItems.push(snakeToTitle(item.recipeId));
+    else if (item.source === "auction_house")neededAuctionItems.push(snakeToTitle(item.recipeId));
 }
 
-const bazaarPrices = await fetchBazaarPrices(neededBazaarItems);
-const auctionPrices = await fetchAuctionPrices(neededAuctionItems);
+// const bazaarPrices = await fetchBazaarPrices(neededBazaarItems);
+// const auctionPrices = await fetchAuctionPrices(neededAuctionItems);
 const minionPrices = await fetchMinionPrices();
+
+console.log(minionPrices)
 
 
 // for(const item of itemContent.keys()) {
@@ -74,7 +74,7 @@ function getBuyPrice(productId, instaBuy = false){
         return price;
     }
 
-    if(product.source === "auctionHouse"){
+    if(product.source === "auction_house"){
         const auctionPrice = auctionPrices.get(productId);
         price = auctionPrice[0];
         itemContent.get(productId).prices.buying = price;

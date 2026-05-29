@@ -14,7 +14,7 @@ export async function fetchAuctionPrices(neededItems: string[]) {
     const auctionUrl = new URL("https://api.hypixel.net/v2/skyblock/auctions");
     const auctionResponse = await fetch(auctionUrl);
     const auctionPageContent = await auctionResponse.json() as AuctionResponse;
-    if(!auctionPageContent.success) return new Map();
+    if(!auctionPageContent.success) return new Map<string, number[]>();
     const pageAmount = auctionPageContent["totalPages"];
     const pageChunks = chunkInto(Array.from(Array(pageAmount), (_, i) => i), navigator.hardwareConcurrency);
     const scatteredPrices = await Promise.all(pageChunks.map(pages => {

@@ -16,6 +16,7 @@ export async function fetchMinionPrices(minionName = "INFERNO") {
         minion: { AND: [{ generator: minionName }, {}] }
     });
 
+    const minionPrices = new Map<string, Minion[]>();
     const allMinions = [];
     let skip = 0;
 
