@@ -21,8 +21,8 @@ for (const item of itemContent.values()) {
     else if (item.source === "auction_house")neededAuctionItems.push(snakeToTitle(item.recipeId));
 }
 
-// const bazaarPrices = await fetchBazaarPrices(neededBazaarItems);
-// const auctionPrices = await fetchAuctionPrices(neededAuctionItems);
+const bazaarPrices = await fetchBazaarPrices(neededBazaarItems);
+const auctionPrices = await fetchAuctionPrices(neededAuctionItems);
 const minionPrices = await fetchMinionPrices();
 
 console.log(minionPrices)

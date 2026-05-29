@@ -21,21 +21,20 @@ export interface ItemDef {
     simplifiedRecipes?: SimplifiedRecipe[],
 }
 
-// Purchase Methods
 export interface BazaarBuy {type: "buy_bazaar"; cost: number;}
 export interface AuctionHouseBuy {type: "buy_auction"; cost: number;}
 export interface MinionAuctionBuy {type: "buy_minion_auction"; cost: number;}
-
-export interface CraftMethod {
-    type: "craft";
-    recipe: SimplifiedRecipe;
-    cost: number;
-    ingredients: Record<string, PricedItem>;
-}
 
 // Result of cheapest price calculation
 export interface PricedItem {
     itemId: string;
     cheapest: BazaarBuy | AuctionHouseBuy | MinionAuctionBuy | CraftMethod;
     requiresManualApplication?: true;
+}
+
+export interface CraftMethod {
+    type: "craft";
+    recipe: SimplifiedRecipe;
+    cost: number;
+    ingredients: Record<string, PricedItem>;
 }
