@@ -1,13 +1,10 @@
-import {readdir} from "node:fs/promises";
 import {fetchBazaarPrices} from "./helperFuncs/bazaarHandler.js";
 import {fetchAuctionPrices} from "./helperFuncs/auctionHandler.js";
 import {fetchMinionPrices} from "./helperFuncs/minionAhHandler.js";
 
-
-const recipePath = `${import.meta.dir}\\neededItems`;
-const itemNames = (await readdir(recipePath)).map(fileName => fileName.replace(".json", ""));
+const itemNames = await Array.fromAsync(new Bun.Glob("*").scan("./neededItems"));
 const itemContent = (await Promise.all(
-    itemNames.map(fileName => Bun.file(recipePath + "\\" + `${fileName}.json`).json())
+    itemNames.map(fileName => Bun.file(`neededItems/${fileName}`).json())
 )).reduce((acc, item) => {
     acc.set(item.recipeId, {...item, prices: {
         "buying": 0,
@@ -25,11 +22,10 @@ for (const item of itemContent.values()) {
     else if (item.source === "auctionHouse")neededAuctionItems.push(snakeToTitle(item.recipeId));
 }
 
-// const bazaarPrices = await fetchBazaarPrices(neededBazaarItems);
+const bazaarPrices = await fetchBazaarPrices(neededBazaarItems);
 const auctionPrices = await fetchAuctionPrices(neededAuctionItems);
-// const minionPrices = await fetchMinionPrices();
+const minionPrices = await fetchMinionPrices();
 
-console.log(auctionPrices);
 
 // for(const item of itemContent.keys()) {
 //     if(!item.endsWith("GENERATOR_2")) continue;
@@ -39,7 +35,7 @@ console.log(auctionPrices);
 //     // console.log(itemContent.get(item).prices);
 // }
 
-// calculateCraftPrice(bazaarPrices.get("AMALGAMATED_CRIMSONITE_NEW"), "AMALGAMATED_CRIMSONITE_NEW");
+calculateCraftPrice(bazaarPrices.get("AMALGAMATED_CRIMSONITE_NEW"), "AMALGAMATED_CRIMSONITE_NEW");
 
 function calculateCraftPrice(productId, instaBuy = false){
     const recipes = itemContent.get(productId).simplifiedRecipes;

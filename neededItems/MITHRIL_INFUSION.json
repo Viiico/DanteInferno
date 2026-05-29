@@ -1,0 +1,34 @@
+{
+  "source": "bazaar",
+  "recipeId": "MITHRIL_INFUSION",
+  "recipes": [
+    {
+      "A1": "ENCHANTED_MITHRIL:64",
+      "A2": "ENCHANTED_MITHRIL:64",
+      "A3": "ENCHANTED_MITHRIL:64",
+      "B1": "ENCHANTED_MITHRIL:64",
+      "B2": "MAGMA_BUCKET:1",
+      "B3": "ENCHANTED_MITHRIL:64",
+      "C1": "ENCHANTED_MITHRIL:64",
+      "C2": "ENCHANTED_MITHRIL:64",
+      "C3": "ENCHANTED_MITHRIL:64",
+      "count": 1
+    }
+  ],
+  "simplifiedRecipes": [
+    {
+      "id": "MITHRIL_INFUSION#0",
+      "ingredients": [
+        {
+          "ingredient": "ENCHANTED_MITHRIL",
+          "count": 512
+        },
+        {
+          "ingredient": "MAGMA_BUCKET",
+          "count": 1
+        }
+      ],
+      "count": 1
+    }
+  ]
+}

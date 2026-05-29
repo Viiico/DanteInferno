@@ -1,0 +1,29 @@
+{
+  "source": "bazaar",
+  "recipeId": "ENCHANTED_LAVA_BUCKET",
+  "recipes": [
+    {
+      "A2": "ENCHANTED_IRON_INGOT:1",
+      "B2": "ENCHANTED_COAL_BLOCK:2",
+      "C2": "ENCHANTED_IRON_INGOT:1",
+      "B3": "ENCHANTED_IRON_INGOT:1",
+      "count": 1
+    }
+  ],
+  "simplifiedRecipes": [
+    {
+      "id": "ENCHANTED_LAVA_BUCKET#0",
+      "ingredients": [
+        {
+          "ingredient": "ENCHANTED_IRON_INGOT",
+          "count": 3
+        },
+        {
+          "ingredient": "ENCHANTED_COAL_BLOCK",
+          "count": 2
+        }
+      ],
+      "count": 1
+    }
+  ]
+}

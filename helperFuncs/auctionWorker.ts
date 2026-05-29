@@ -1,5 +1,5 @@
 import type {AuctionWorkerInput, AuctionWorkerOutput} from "../types/workers.ts";
-import type {AuctionResponse, AuctionProduct} from "../types/priceHandlers.ts";
+import type {AuctionResponse} from "../types/auction.ts";
 
 self.onmessage = async (event: MessageEvent<AuctionWorkerInput>) => {
     const {pages, neededItems} = event.data;

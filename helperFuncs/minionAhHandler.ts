@@ -1,3 +1,5 @@
+import type { Minion } from "../types/minion.ts";
+
 export async function fetchMinionPrices(minionName = "INFERNO") {
     const BASE_URL = "https://minionah.com/api/internal/search/minions";
     const TAKE = 50;
@@ -20,8 +22,8 @@ export async function fetchMinionPrices(minionName = "INFERNO") {
     while (true) {
         const url = new URL(BASE_URL);
         url.searchParams.set("where", where);
-        url.searchParams.set("take", TAKE);
-        url.searchParams.set("skip", skip);
+        url.searchParams.set("take", `${TAKE}`);
+        url.searchParams.set("skip", `${skip}`);
 
         const response = await fetch(url, { headers });
 
@@ -29,12 +31,12 @@ export async function fetchMinionPrices(minionName = "INFERNO") {
             throw new Error(`Request failed at skip=${skip}: ${response.status}`);
         }
 
-        const data = await response.json();
+        const data: Minion[] = await response.json();
 
         if (!data.length) break;
 
-        for(const {minion_id, hasInfusion, hasFreeWill, price, amount} of data){
-            allMinions.push({minion_id, hasInfusion, hasFreeWill, price, amount});
+        for(const {minion_id, hasInfusion, hasFreeWill, price, amount, user: {username}} of data){
+            allMinions.push({minion_id, hasInfusion, hasFreeWill, price, amount, username});
         }
 
         if (data.length < TAKE) break; // last page, no point fetching again

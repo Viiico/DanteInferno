@@ -1,4 +1,4 @@
-import type {AuctionResponse, AuctionProduct} from "../types/auction.ts";
+import type {AuctionResponse} from "../types/auction.ts";
 import type {AuctionWorkerInput, AuctionWorkerOutput} from "../types/workers.ts";
 
 function chunkInto(array: number[], numChunks: number = 1): number[][] {

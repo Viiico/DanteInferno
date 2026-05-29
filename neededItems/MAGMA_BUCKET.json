@@ -1,0 +1,28 @@
+{
+  "source": "bazaar",
+  "recipeId": "MAGMA_BUCKET",
+  "recipes": [
+    {
+      "A2": "ENCHANTED_LAVA_BUCKET:1",
+      "B2": "HEAT_CORE:1",
+      "C2": "ENCHANTED_LAVA_BUCKET:1",
+      "count": 1
+    }
+  ],
+  "simplifiedRecipes": [
+    {
+      "id": "MAGMA_BUCKET#0",
+      "ingredients": [
+        {
+          "ingredient": "ENCHANTED_LAVA_BUCKET",
+          "count": 2
+        },
+        {
+          "ingredient": "HEAT_CORE",
+          "count": 1
+        }
+      ],
+      "count": 1
+    }
+  ]
+}
