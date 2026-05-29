@@ -2,17 +2,18 @@ import {fetchBazaarPrices} from "./helperFuncs/bazaarHandler.js";
 import {fetchAuctionPrices} from "./helperFuncs/auctionHandler.js";
 import {fetchMinionPrices} from "./helperFuncs/minionAhHandler.js";
 
+import type { ItemDef } from "./types/items.ts";
+
 const itemNames = await Array.fromAsync(new Bun.Glob("*").scan("./neededItems"));
 const itemContent = (await Promise.all(
     itemNames.map(fileName => Bun.file(`neededItems/${fileName}`).json())
 )).reduce((acc, item) => {
-    acc.set(item.recipeId, {...item, prices: {
-        "buying": 0,
-        "crafting": 0,
-        "recipeId": -1
-    }});
+    const { recipes: _, ...rest } = item;
+    acc.set(item.recipeId, rest);
     return acc;
-}, new Map());
+}, new Map<string, ItemDef>());
+
+console.log(itemContent)
 
 const neededBazaarItems = [];
 const neededAuctionItems = [];
