@@ -1,6 +1,6 @@
-import type { Minion } from "../types/minion.ts";
+import type { Minion, MinionResponse } from "../types/minion.ts";
 
-export async function fetchMinionPrices(minionName = "INFERNO") {
+export async function fetchMinionPrices(minionName = "INFERNO"): Promise<Map<String, Minion[]>> {
     const BASE_URL = "https://minionah.com/api/internal/search/minions";
     const TAKE = 50;
 
@@ -16,8 +16,7 @@ export async function fetchMinionPrices(minionName = "INFERNO") {
         minion: { AND: [{ generator: minionName }, {}] }
     });
 
-    const minionPrices = new Map<string, Minion[]>();
-    const allMinions = [];
+    const allMinions: Minion[] = [];
     let skip = 0;
 
     while (true) {
@@ -32,7 +31,7 @@ export async function fetchMinionPrices(minionName = "INFERNO") {
             throw new Error(`Request failed at skip=${skip}: ${response.status}`);
         }
 
-        const data: Minion[] = await response.json();
+        const data = await response.json() as MinionResponse[];
 
         if (!data.length) break;
 
@@ -41,9 +40,13 @@ export async function fetchMinionPrices(minionName = "INFERNO") {
         }
 
         if (data.length < TAKE) break; // last page, no point fetching again
-
         skip += TAKE;
     }
 
-    return allMinions;
+    return allMinions.reduce((acc, minion) => {
+        const existing = acc.get(minion["minion_id"]);
+        existing ? existing.push(minion) : acc.set(minion["minion_id"], [minion]);
+        return acc;
+    }, new Map<string, Minion[]>());
+
 }
