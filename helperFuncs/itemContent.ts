@@ -9,7 +9,11 @@ interface NeededItems {
 export async function prepareItemContent(): Promise<Map<string, ItemDef>> {
     const itemNames = await Array.fromAsync(new Bun.Glob("*").scan("./neededItems"));
     const itemContent = (await Promise.all(
-        itemNames.map(fileName => Bun.file(`neededItems/${fileName}`).json() as Promise<ItemDef>)
+        itemNames.map(fileName => 
+            Bun.file(`neededItems/${fileName}`).json().catch(err => {
+                throw new Error(`Failed to parse ${fileName}: ${err.message}`);
+            }) as Promise<ItemDef>
+        )
     )).reduce((acc, item) => {
         const { recipes: _, ...rest } = item;
         acc.set(item.recipeId, rest);
@@ -20,9 +24,9 @@ export async function prepareItemContent(): Promise<Map<string, ItemDef>> {
 }
 
 export function prepareNeededItems(itemContent: Map<string, ItemDef>): NeededItems {
-    let neededBazaarItems = [];
-    let neededAuctionItems = [];
-    let neededMinions = [];
+    const neededBazaarItems: string[] = [];
+    const neededAuctionItems: string[] = [];
+    const neededMinions: string[] = [];
 
     for (const item of itemContent.values()) {
         switch(item.source) {
@@ -35,7 +39,7 @@ export function prepareNeededItems(itemContent: Map<string, ItemDef>): NeededIte
     return { neededBazaarItems, neededAuctionItems, neededMinions };
 }
 
-function snakeToTitle(str: string) {
+function snakeToTitle(str: string): string {
   return str
     .toLowerCase()
     .split('_')

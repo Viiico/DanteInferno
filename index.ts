@@ -11,9 +11,6 @@ const bazaarPrices = await fetchBazaarPrices(neededBazaarItems);
 const auctionPrices = await fetchAuctionPrices(neededAuctionItems);
 const minionPrices = await fetchMinionPrices();
 
-console.log(neededBazaarItems, neededAuctionItems, neededMinions);
-
-
 // for(const item of itemContent.keys()) {
 //     if(!item.endsWith("GENERATOR_2")) continue;
 //     // console.log("Calculating prices for: " + item);
