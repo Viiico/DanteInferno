@@ -21,9 +21,9 @@ export interface ItemDef {
     simplifiedRecipes?: SimplifiedRecipe[],
 }
 
-export interface BazaarBuy {type: "buy_bazaar"; cost: number;}
-export interface AuctionHouseBuy {type: "buy_auction"; cost: number;}
-export interface MinionAuctionBuy {type: "buy_minion_auction"; cost: number;}
+export interface BazaarBuy {type: Extract<Source, "bazaar">; cost: number;}
+export interface AuctionHouseBuy {type: Extract<Source, "auction_house">; cost: number;}
+export interface MinionAuctionBuy {type: Extract<Source, "minion_auction">; cost: number;}
 
 // Result of cheapest price calculation
 export interface PricedItem {
