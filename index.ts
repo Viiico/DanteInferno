@@ -35,7 +35,6 @@ function establishObtaining(productId: string): PricedItem | undefined{
             const buyPrice = auctionItemPrice(productId);
             const useCraft = craftingPrice && craftingPrice.cost < buyPrice.cost;
             result = {
-                itemId: productId,
                 ...(useCraft && { flatCost: buyPrice.cost}),
                 cheapest: (!craftingPrice || craftingPrice.cost > buyPrice.cost) ? buyPrice : craftingPrice,
             };
@@ -46,7 +45,6 @@ function establishObtaining(productId: string): PricedItem | undefined{
             const useCraft = craftingPrice && craftingPrice.cost < buyPrice.cost;
             console.log(`Item ${productId} has bazaar price ${buyPrice.cost} and crafting price ${craftingPrice?.cost}`);
             result = {
-                itemId: productId,
                 ...(useCraft && { flatCost: buyPrice.cost}),
                 cheapest: (!craftingPrice || craftingPrice.cost > buyPrice.cost) ? buyPrice : craftingPrice,
             };
