@@ -1,0 +1,85 @@
+[
+  [
+    "ENCHANTED_IRON",
+    {
+      "itemId": "ENCHANTED_IRON",
+      "cheapest": {
+        "type": "bazaar",
+        "cost": 801
+      }
+    }
+  ],
+  [
+    "ENCHANTED_COAL_BLOCK",
+    {
+      "itemId": "ENCHANTED_COAL_BLOCK",
+      "cheapest": {
+        "type": "bazaar",
+        "cost": 31842
+      }
+    }
+  ],
+  [
+    "ENCHANTED_LAVA_BUCKET",
+    {
+      "itemId": "ENCHANTED_LAVA_BUCKET",
+      "cheapest": {
+        "type": "craft",
+        "recipeId": "ENCHANTED_LAVA_BUCKET#0",
+        "cost": 66087,
+        "ingredients": {
+          "ENCHANTED_IRON": {
+            "type": "bazaar",
+            "cost": 801
+          },
+          "ENCHANTED_COAL_BLOCK": {
+            "type": "bazaar",
+            "cost": 31842
+          }
+        }
+      }
+    }
+  ],
+  [
+    "HEAT_CORE",
+    {
+      "itemId": "HEAT_CORE",
+      "cheapest": {
+        "type": "auction_house",
+        "cost": 3400000
+      }
+    }
+  ],
+  [
+    "MAGMA_BUCKET",
+    {
+      "itemId": "MAGMA_BUCKET",
+      "cheapest": {
+        "type": "craft",
+        "recipeId": "MAGMA_BUCKET#0",
+        "cost": 3532174,
+        "ingredients": {
+          "ENCHANTED_LAVA_BUCKET": {
+            "type": "craft",
+            "recipeId": "ENCHANTED_LAVA_BUCKET#0",
+            "cost": 66087,
+            "ingredients": {
+              "ENCHANTED_IRON": {
+                "type": "bazaar",
+                "cost": 801
+              },
+              "ENCHANTED_COAL_BLOCK": {
+                "type": "bazaar",
+                "cost": 31842
+              }
+            }
+          },
+          "HEAT_CORE": {
+            "type": "auction_house",
+            "cost": 3400000
+          }
+        }
+      }
+    }
+  ]
+]

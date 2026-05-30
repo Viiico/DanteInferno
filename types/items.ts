@@ -25,16 +25,18 @@ export interface BazaarBuy {type: Extract<Source, "bazaar">; cost: number;}
 export interface AuctionHouseBuy {type: Extract<Source, "auction_house">; cost: number;}
 export interface MinionAuctionBuy {type: Extract<Source, "minion_auction">; cost: number;}
 
+export type ObtainMethod = BazaarBuy | AuctionHouseBuy | MinionAuctionBuy | CraftMethod;
+
 // Result of cheapest price calculation
 export interface PricedItem {
     itemId: string;
-    cheapest: BazaarBuy | AuctionHouseBuy | MinionAuctionBuy | CraftMethod;
+    cheapest: ObtainMethod;
     requiresManualApplication?: true;
 }
 
 export interface CraftMethod {
     type: "craft";
-    recipe: SimplifiedRecipe;
+    recipeId: string;
     cost: number;
-    ingredients: Record<string, PricedItem>;
+    ingredients: Record<string, ObtainMethod>;
 }

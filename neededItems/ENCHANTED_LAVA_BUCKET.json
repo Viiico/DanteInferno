@@ -3,10 +3,10 @@
   "recipeId": "ENCHANTED_LAVA_BUCKET",
   "recipes": [
     {
-      "A2": "ENCHANTED_IRON_INGOT:1",
+      "A2": "ENCHANTED_IRON:1",
       "B2": "ENCHANTED_COAL_BLOCK:2",
-      "C2": "ENCHANTED_IRON_INGOT:1",
-      "B3": "ENCHANTED_IRON_INGOT:1",
+      "C2": "ENCHANTED_IRON:1",
+      "B3": "ENCHANTED_IRON:1",
       "count": 1
     }
   ],
@@ -15,7 +15,7 @@
       "id": "ENCHANTED_LAVA_BUCKET#0",
       "ingredients": [
         {
-          "ingredient": "ENCHANTED_IRON_INGOT",
+          "ingredient": "ENCHANTED_IRON",
           "count": 3
         },
         {

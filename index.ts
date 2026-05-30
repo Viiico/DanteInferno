@@ -3,7 +3,7 @@ import {fetchBazaarPrices} from "./helperFuncs/bazaarHandler.js";
 import {fetchAuctionPrices} from "./helperFuncs/auctionHandler.js";
 import {fetchMinionPrices} from "./helperFuncs/minionAhHandler.js";
 
-import type { AuctionHouseBuy, CraftMethod, PricedItem } from "./types/items.js";
+import type { AuctionHouseBuy, BazaarBuy, CraftMethod, ObtainMethod, PricedItem, SimplifiedRecipe } from "./types/items.js";
 
 const itemContent = await prepareItemContent();
 const { neededBazaarItems, neededAuctionItems, neededMinions } = prepareNeededItems(itemContent);
@@ -14,18 +14,19 @@ const minionPrices = await fetchMinionPrices();
 
 const pricedItems = new Map<string, PricedItem>();
 
-establishObtaining("WATER_HYDRA_HEAD");
+establishObtaining("MAGMA_BUCKET");
 
 console.log(pricedItems);
+Bun.write("./pricedItems.json", JSON.stringify([...pricedItems], null, 2));
 
 function establishObtaining(productId: string): PricedItem | undefined{
     const cached = pricedItems.get(productId);
     if(cached) return cached;
 
     const product = itemContent.get(productId);
-    if(!product) return undefined;
+    if(!product) throw new Error(`No product found with id ${productId}`);
 
-    const craftingPrice = product?.recipes ? calculateCraftPrice(productId) : null;
+    const craftingPrice = calculateCraftPrice(productId, product?.simplifiedRecipes);
 
     let result: PricedItem | undefined;
 
@@ -38,12 +39,43 @@ function establishObtaining(productId: string): PricedItem | undefined{
             };
             break;
         }
+        case "bazaar": {
+            const buyPrice = bazaarItemPrice(productId);
+            console.log(`Item ${productId} has bazaar price ${buyPrice.cost} and crafting price ${craftingPrice?.cost}`);
+            result = {
+                itemId: productId,
+                cheapest: (!craftingPrice || craftingPrice.cost > buyPrice.cost) ? buyPrice : craftingPrice
+            };
+            break;
+        }
     }
+
+    console.log(productId, result)
 
     if(result) pricedItems.set(productId, result);
     return result;
 }
 
+function calculateCraftPrice(productId: string, simplifiedRecipes: SimplifiedRecipe[] | undefined): CraftMethod | undefined {
+    if(!simplifiedRecipes) return undefined;
+    let crafts: CraftMethod[] = [];
+
+    for(const simplifiedRecipe of simplifiedRecipes){
+        const { id, ingredients } = simplifiedRecipe;
+        const ingredientPrices: Record<string, ObtainMethod> = {};
+
+        const craftPrice = ingredients.reduce((acc, { ingredient, count }) => {
+            const ingredientPrice = establishObtaining(ingredient);
+            if (ingredientPrice) ingredientPrices[ingredient] = ingredientPrice.cheapest; // ← .cheapest zamiast całego PricedItem
+            return acc + (ingredientPrice ? ingredientPrice.cheapest.cost * count : Infinity);
+        }, 0);
+
+        crafts.push({ type: "craft", recipeId: simplifiedRecipe.id, cost: craftPrice, ingredients: ingredientPrices });
+    }
+
+    if(crafts.length === 0) return undefined;
+    return crafts.reduce((cheapest, craft) => craft.cost < cheapest.cost ? craft : cheapest);
+}
 
 function auctionItemPrice(productId: string): AuctionHouseBuy {
     const productPrices = auctionPrices.get(productId);
@@ -54,10 +86,10 @@ function auctionItemPrice(productId: string): AuctionHouseBuy {
 
 }
 
-function calculateCraftPrice(productId: string): CraftMethod{
-
+function bazaarItemPrice(productId: string): BazaarBuy {
+    const productPrice = bazaarPrices.get(productId);
+    return { type: "bazaar", cost: productPrice ? productPrice.instantBuyPrice : Infinity };
 }
-
 
 // function calculateCraftPrice(productId, instaBuy = false){
 //     const recipes = itemContent.get(productId).simplifiedRecipes;
