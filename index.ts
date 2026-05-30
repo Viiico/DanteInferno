@@ -26,7 +26,7 @@ function establishObtaining(productId: string): PricedItem | undefined{
     const product = itemContent.get(productId);
     if(!product) throw new Error(`No product found with id ${productId}`);
 
-    const craftingPrice = calculateCraftPrice(productId, product?.simplifiedRecipes);
+    const craftingPrice = calculateCraftPrice(productId, product.simplifiedRecipes);
 
     let result: PricedItem | undefined;
 
@@ -35,8 +35,8 @@ function establishObtaining(productId: string): PricedItem | undefined{
             const buyPrice = auctionItemPrice(productId);
             const useCraft = craftingPrice && craftingPrice.cost < buyPrice.cost;
             result = {
-                ...(useCraft && { flatCost: buyPrice.cost}),
-                cheapest: (!craftingPrice || craftingPrice.cost > buyPrice.cost) ? buyPrice : craftingPrice,
+                ...(useCraft && { directBuyCost: buyPrice.cost}),
+                cheapest: (!craftingPrice || craftingPrice.cost >= buyPrice.cost) ? buyPrice : craftingPrice,
             };
             break;
         }
@@ -45,8 +45,8 @@ function establishObtaining(productId: string): PricedItem | undefined{
             const useCraft = craftingPrice && craftingPrice.cost < buyPrice.cost;
             console.log(`Item ${productId} has bazaar price ${buyPrice.cost} and crafting price ${craftingPrice?.cost}`);
             result = {
-                ...(useCraft && { flatCost: buyPrice.cost}),
-                cheapest: (!craftingPrice || craftingPrice.cost > buyPrice.cost) ? buyPrice : craftingPrice,
+                ...(useCraft && { directBuyCost: buyPrice.cost}),
+                cheapest: (!craftingPrice || craftingPrice.cost >= buyPrice.cost) ? buyPrice : craftingPrice,
             };
             break;
         }
@@ -68,11 +68,11 @@ function calculateCraftPrice(productId: string, simplifiedRecipes: SimplifiedRec
 
         const craftPrice = ingredients.reduce((acc, { ingredient, count }) => {
             const ingredientPrice = establishObtaining(ingredient);
-            if (ingredientPrice) ingredientPrices[ingredient] = ingredientPrice; // ← bez .cheapest
+            if (ingredientPrice) ingredientPrices[ingredient] = ingredientPrice;
             return acc + (ingredientPrice ? ingredientPrice.cheapest.cost * count : Infinity);
-        }, 0);
+        }, 0) / simplifiedRecipe.count;
 
-        crafts.push({ type: "craft", recipeId: simplifiedRecipe.id, cost: craftPrice, ingredients: ingredientPrices } as CraftMethod);
+        crafts.push({ type: "craft", recipeId: simplifiedRecipe.id, cost: craftPrice, ingredients: ingredientPrices });
     }
 
     if(crafts.length === 0) return undefined;
@@ -80,10 +80,7 @@ function calculateCraftPrice(productId: string, simplifiedRecipes: SimplifiedRec
 }
 
 function auctionItemPrice(productId: string): AuctionHouseBuy {
-    const productPrices = auctionPrices.get(productId);
-    let price = 0;
-    if(!productPrices || productPrices.length === 0) price = Infinity;
-    price = productPrices?.[0] ?? Infinity;
+    const price = auctionPrices.get(productId)?.[0] ?? Infinity;
     return { type: "auction_house", cost: price };
 
 }

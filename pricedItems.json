@@ -4,7 +4,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 2098
+        "cost": 2062
       }
     }
   ],
@@ -13,7 +13,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 806
+        "cost": 802
       }
     }
   ],
@@ -29,16 +29,16 @@
   [
     "ENCHANTED_LAVA_BUCKET",
     {
-      "flatCost": 82323,
+      "directBuyCost": 82323,
       "cheapest": {
         "type": "craft",
         "recipeId": "ENCHANTED_LAVA_BUCKET#0",
-        "cost": 72392,
+        "cost": 72380,
         "ingredients": {
           "ENCHANTED_IRON": {
             "cheapest": {
               "type": "bazaar",
-              "cost": 806
+              "cost": 802
             }
           },
           "ENCHANTED_COAL_BLOCK": {
@@ -63,23 +63,23 @@
   [
     "MAGMA_BUCKET",
     {
-      "flatCost": 4221163,
+      "directBuyCost": 4221163,
       "cheapest": {
         "type": "craft",
         "recipeId": "MAGMA_BUCKET#0",
-        "cost": 3843783,
+        "cost": 3843759,
         "ingredients": {
           "ENCHANTED_LAVA_BUCKET": {
-            "flatCost": 82323,
+            "directBuyCost": 82323,
             "cheapest": {
               "type": "craft",
               "recipeId": "ENCHANTED_LAVA_BUCKET#0",
-              "cost": 72392,
+              "cost": 72380,
               "ingredients": {
                 "ENCHANTED_IRON": {
                   "cheapest": {
                     "type": "bazaar",
-                    "cost": 806
+                    "cost": 802
                   }
                 },
                 "ENCHANTED_COAL_BLOCK": {
@@ -104,36 +104,36 @@
   [
     "MITHRIL_INFUSION",
     {
-      "flatCost": 7111569,
+      "directBuyCost": 7111569,
       "cheapest": {
         "type": "craft",
         "recipeId": "MITHRIL_INFUSION#0",
-        "cost": 4917959,
+        "cost": 4899503,
         "ingredients": {
           "ENCHANTED_MITHRIL": {
             "cheapest": {
               "type": "bazaar",
-              "cost": 2098
+              "cost": 2062
             }
           },
           "MAGMA_BUCKET": {
-            "flatCost": 4221163,
+            "directBuyCost": 4221163,
             "cheapest": {
               "type": "craft",
               "recipeId": "MAGMA_BUCKET#0",
-              "cost": 3843783,
+              "cost": 3843759,
               "ingredients": {
                 "ENCHANTED_LAVA_BUCKET": {
-                  "flatCost": 82323,
+                  "directBuyCost": 82323,
                   "cheapest": {
                     "type": "craft",
                     "recipeId": "ENCHANTED_LAVA_BUCKET#0",
-                    "cost": 72392,
+                    "cost": 72380,
                     "ingredients": {
                       "ENCHANTED_IRON": {
                         "cheapest": {
                           "type": "bazaar",
-                          "cost": 806
+                          "cost": 802
                         }
                       },
                       "ENCHANTED_COAL_BLOCK": {

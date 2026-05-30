@@ -29,7 +29,7 @@ export type ObtainMethod = BazaarBuy | AuctionHouseBuy | MinionAuctionBuy | Craf
 
 // Result of cheapest price calculation
 export interface PricedItem {
-    flatCost?: number,
+    directBuyCost?: number,
     cheapest: ObtainMethod;
     requiresManualApplication?: true;
 }
