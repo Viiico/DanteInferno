@@ -1,31 +1,17 @@
+import { prepareItemContent, prepareNeededItems } from "./helperFuncs/itemContent.js";
 import {fetchBazaarPrices} from "./helperFuncs/bazaarHandler.js";
 import {fetchAuctionPrices} from "./helperFuncs/auctionHandler.js";
 import {fetchMinionPrices} from "./helperFuncs/minionAhHandler.js";
 
-import type { ItemDef } from "./types/items.ts";
+const itemContent = await prepareItemContent();
+const { neededBazaarItems, neededAuctionItems, neededMinions } = prepareNeededItems(itemContent);
 
-const itemNames = await Array.fromAsync(new Bun.Glob("*").scan("./neededItems"));
-const itemContent = (await Promise.all(
-    itemNames.map(fileName => Bun.file(`neededItems/${fileName}`).json() as Promise<ItemDef>)
-)).reduce((acc, item) => {
-    const { recipes: _, ...rest } = item;
-    acc.set(item.recipeId, rest);
-    return acc;
-}, new Map<string, ItemDef>());
-
-const neededBazaarItems = [];
-const neededAuctionItems = [];
-
-for (const item of itemContent.values()) {
-    if (item.source === "bazaar") neededBazaarItems.push(item.recipeId);
-    else if (item.source === "auction_house")neededAuctionItems.push(snakeToTitle(item.recipeId));
-}
 
 const bazaarPrices = await fetchBazaarPrices(neededBazaarItems);
 const auctionPrices = await fetchAuctionPrices(neededAuctionItems);
 const minionPrices = await fetchMinionPrices();
 
-console.log(minionPrices)
+console.log(neededBazaarItems, neededAuctionItems, neededMinions);
 
 
 // for(const item of itemContent.keys()) {
@@ -82,12 +68,4 @@ function getBuyPrice(productId, instaBuy = false){
     }
 
     return 0; // Minion Auctions for later implementation
-}
-
-function snakeToTitle(str) {
-  return str
-    .toLowerCase()
-    .split('_')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
 }
