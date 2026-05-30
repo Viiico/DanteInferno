@@ -14,7 +14,7 @@ const minionPrices = await fetchMinionPrices();
 
 const pricedItems = new Map<string, PricedItem>();
 
-establishObtaining("MAGMA_BUCKET");
+establishObtaining("MITHRIL_INFUSION");
 
 console.log(pricedItems);
 Bun.write("./pricedItems.json", JSON.stringify([...pricedItems], null, 2));
@@ -33,18 +33,22 @@ function establishObtaining(productId: string): PricedItem | undefined{
     switch(product.source) {
         case "auction_house": {
             const buyPrice = auctionItemPrice(productId);
+            const useCraft = craftingPrice && craftingPrice.cost < buyPrice.cost;
             result = {
                 itemId: productId,
-                cheapest: (!craftingPrice || craftingPrice.cost > buyPrice.cost) ? buyPrice : craftingPrice
+                ...(useCraft && { flatCost: buyPrice.cost}),
+                cheapest: (!craftingPrice || craftingPrice.cost > buyPrice.cost) ? buyPrice : craftingPrice,
             };
             break;
         }
         case "bazaar": {
             const buyPrice = bazaarItemPrice(productId);
+            const useCraft = craftingPrice && craftingPrice.cost < buyPrice.cost;
             console.log(`Item ${productId} has bazaar price ${buyPrice.cost} and crafting price ${craftingPrice?.cost}`);
             result = {
                 itemId: productId,
-                cheapest: (!craftingPrice || craftingPrice.cost > buyPrice.cost) ? buyPrice : craftingPrice
+                ...(useCraft && { flatCost: buyPrice.cost}),
+                cheapest: (!craftingPrice || craftingPrice.cost > buyPrice.cost) ? buyPrice : craftingPrice,
             };
             break;
         }
@@ -61,16 +65,16 @@ function calculateCraftPrice(productId: string, simplifiedRecipes: SimplifiedRec
     let crafts: CraftMethod[] = [];
 
     for(const simplifiedRecipe of simplifiedRecipes){
-        const { id, ingredients } = simplifiedRecipe;
-        const ingredientPrices: Record<string, ObtainMethod> = {};
+        const { ingredients } = simplifiedRecipe;
+        const ingredientPrices: Record<string, PricedItem> = {};
 
         const craftPrice = ingredients.reduce((acc, { ingredient, count }) => {
             const ingredientPrice = establishObtaining(ingredient);
-            if (ingredientPrice) ingredientPrices[ingredient] = ingredientPrice.cheapest; // ← .cheapest zamiast całego PricedItem
+            if (ingredientPrice) ingredientPrices[ingredient] = ingredientPrice; // ← bez .cheapest
             return acc + (ingredientPrice ? ingredientPrice.cheapest.cost * count : Infinity);
         }, 0);
 
-        crafts.push({ type: "craft", recipeId: simplifiedRecipe.id, cost: craftPrice, ingredients: ingredientPrices });
+        crafts.push({ type: "craft", recipeId: simplifiedRecipe.id, cost: craftPrice, ingredients: ingredientPrices } as CraftMethod);
     }
 
     if(crafts.length === 0) return undefined;

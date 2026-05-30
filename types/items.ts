@@ -30,6 +30,7 @@ export type ObtainMethod = BazaarBuy | AuctionHouseBuy | MinionAuctionBuy | Craf
 // Result of cheapest price calculation
 export interface PricedItem {
     itemId: string;
+    flatCost?: number,
     cheapest: ObtainMethod;
     requiresManualApplication?: true;
 }
@@ -38,5 +39,5 @@ export interface CraftMethod {
     type: "craft";
     recipeId: string;
     cost: number;
-    ingredients: Record<string, ObtainMethod>;
+    ingredients: Record<string, PricedItem>;
 }
