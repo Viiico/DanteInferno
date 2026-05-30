@@ -14,12 +14,12 @@ const minionPrices = await fetchMinionPrices();
 
 const pricedItems = new Map<string, PricedItem>();
 
-establishObtaining("MITHRIL_INFUSION");
+resolveItemPrice("MITHRIL_INFUSION");
 
 console.log(pricedItems);
 Bun.write("./pricedItems.json", JSON.stringify([...pricedItems], null, 2));
 
-function establishObtaining(productId: string): PricedItem | undefined{
+function resolveItemPrice(productId: string): PricedItem | undefined{
     const cached = pricedItems.get(productId);
     if(cached) return cached;
 
@@ -36,7 +36,7 @@ function establishObtaining(productId: string): PricedItem | undefined{
             const useCraft = craftingPrice && craftingPrice.cost < buyPrice.cost;
             result = {
                 ...(useCraft && { directBuyCost: buyPrice.cost}),
-                cheapest: (!craftingPrice || craftingPrice.cost >= buyPrice.cost) ? buyPrice : craftingPrice,
+                cheapest: useCraft ? craftingPrice : buyPrice,
             };
             break;
         }
@@ -46,7 +46,7 @@ function establishObtaining(productId: string): PricedItem | undefined{
             console.log(`Item ${productId} has bazaar price ${buyPrice.cost} and crafting price ${craftingPrice?.cost}`);
             result = {
                 ...(useCraft && { directBuyCost: buyPrice.cost}),
-                cheapest: (!craftingPrice || craftingPrice.cost >= buyPrice.cost) ? buyPrice : craftingPrice,
+                cheapest: useCraft ? craftingPrice : buyPrice,
             };
             break;
         }
@@ -67,7 +67,7 @@ function calculateCraftPrice(productId: string, simplifiedRecipes: SimplifiedRec
         const ingredientPrices: Record<string, PricedItem> = {};
 
         const craftPrice = ingredients.reduce((acc, { ingredient, count }) => {
-            const ingredientPrice = establishObtaining(ingredient);
+            const ingredientPrice = resolveItemPrice(ingredient);
             if (ingredientPrice) ingredientPrices[ingredient] = ingredientPrice;
             return acc + (ingredientPrice ? ingredientPrice.cheapest.cost * count : Infinity);
         }, 0) / simplifiedRecipe.count;
@@ -89,49 +89,3 @@ function bazaarItemPrice(productId: string): BazaarBuy {
     const productPrice = bazaarPrices.get(productId);
     return { type: "bazaar", cost: productPrice ? productPrice.instantBuyPrice : Infinity };
 }
-
-// function calculateCraftPrice(productId, instaBuy = false){
-//     const recipes = itemContent.get(productId).simplifiedRecipes;
-//     if(!recipes) return Infinity;
-//     let recipePrices = [];
-//     for(const recipeId in recipes){
-//         const recipe = recipes[recipeId];
-//         const subIngredientsPrices = Object.entries(recipe).reduce((acc, [subIngredient, amount]) => {
-//             if(subIngredient === "count") return acc;
-//             const subIngredientPrice = getBuyPrice(subIngredient, instaBuy)
-//             return acc + subIngredientPrice * amount;
-//         }, 0);
-
-//         const count = recipe["count"];
-//         recipePrices.push(subIngredientsPrices / count);
-//     }
-
-//     const cheapestRecipeId = recipePrices.indexOf(Math.min(...recipePrices));
-//     itemContent.get(productId).prices.recipeId = cheapestRecipeId;
-//     itemContent.get(productId).prices.crafting = Math.ceil(recipePrices[cheapestRecipeId]);
-
-// }
-
-// function getBuyPrice(productId, instaBuy = false){
-//     const product = itemContent.get(productId);
-//     if(!product){
-//         throw new Error("No product with id: " + productId);
-//     }
-//     let price = product.prices.buying;
-//     if(price !== 0)return price; // Using 0 as marker for not setting this yet
-//     if(product.source === "bazaar"){
-//         const bazaarPrice = bazaarPrices.get(productId);
-//         price = instaBuy ? bazaarPrice.instantBuyPrice : bazaarPrice.buyOrderPrice;
-//         itemContent.get(productId).prices.buying = price;
-//         return price;
-//     }
-
-//     if(product.source === "auction_house"){
-//         const auctionPrice = auctionPrices.get(productId);
-//         price = auctionPrice[0];
-//         itemContent.get(productId).prices.buying = price;
-//         return price;
-//     }
-
-//     return 0; // Minion Auctions for later implementation
-// }
