@@ -1,160 +1,333 @@
 [
   [
-    "ENCHANTED_MITHRIL",
+    "DERELICT_ASHE",
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 1998
+        "cost": 2194
       }
     }
   ],
   [
-    "ENCHANTED_IRON",
+    "ENCHANTED_GLOWSTONE_DUST",
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 800
+        "cost": 1509
       }
     }
   ],
   [
-    "ENCHANTED_COAL_BLOCK",
+    "ENCHANTED_MYCELIUM",
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 34987
+        "cost": 2879
       }
     }
   ],
   [
-    "ENCHANTED_LAVA_BUCKET",
+    "ENCHANTED_MAGMA_CREAM",
     {
-      "directBuyCost": 82323,
+      "cheapest": {
+        "type": "bazaar",
+        "cost": 2694
+      }
+    }
+  ],
+  [
+    "ENCHANTED_BLAZE_POWDER",
+    {
+      "cheapest": {
+        "type": "bazaar",
+        "cost": 2541
+      }
+    }
+  ],
+  [
+    "ENCHANTED_RED_SAND",
+    {
+      "cheapest": {
+        "type": "bazaar",
+        "cost": 2428
+      }
+    }
+  ],
+  [
+    "ENCHANTED_NETHER_STALK",
+    {
+      "cheapest": {
+        "type": "bazaar",
+        "cost": 669
+      }
+    }
+  ],
+  [
+    "ENCHANTED_GLOWSTONE",
+    {
+      "cheapest": {
+        "type": "bazaar",
+        "cost": 59151
+      }
+    }
+  ],
+  [
+    "ENCHANTED_MYCELIUM_CUBE",
+    {
+      "cheapest": {
+        "type": "bazaar",
+        "cost": 147232
+      }
+    }
+  ],
+  [
+    "WHIPPED_MAGMA_CREAM",
+    {
+      "cheapest": {
+        "type": "bazaar",
+        "cost": 204386
+      }
+    }
+  ],
+  [
+    "ENCHANTED_BLAZE_ROD",
+    {
+      "cheapest": {
+        "type": "bazaar",
+        "cost": 259999
+      }
+    }
+  ],
+  [
+    "ENCHANTED_RED_SAND_CUBE",
+    {
+      "cheapest": {
+        "type": "bazaar",
+        "cost": 468468
+      }
+    }
+  ],
+  [
+    "MUTANT_NETHER_STALK",
+    {
+      "cheapest": {
+        "type": "bazaar",
+        "cost": 102030
+      }
+    }
+  ],
+  [
+    "AMALGAMATED_CRIMSONITE_NEW",
+    {
+      "directBuyCost": 94530,
       "cheapest": {
         "type": "craft",
-        "recipeId": "ENCHANTED_LAVA_BUCKET#0",
-        "cost": 72374,
-        "ingredients": {
-          "ENCHANTED_IRON": {
-            "cheapest": {
-              "type": "bazaar",
-              "cost": 800
-            }
-          },
-          "ENCHANTED_COAL_BLOCK": {
-            "cheapest": {
-              "type": "bazaar",
-              "cost": 34987
-            }
-          }
-        }
+        "recipeId": "AMALGAMATED_CRIMSONITE_NEW#1",
+        "cost": 77949.1,
+        "ingredients": [
+          "ENCHANTED_GLOWSTONE",
+          "ENCHANTED_MYCELIUM_CUBE",
+          "WHIPPED_MAGMA_CREAM",
+          "ENCHANTED_BLAZE_ROD",
+          "ENCHANTED_RED_SAND_CUBE",
+          "MUTANT_NETHER_STALK"
+        ]
       }
     }
   ],
   [
-    "HEAT_CORE",
+    "MOLTEN_POWDER",
     {
-      "cheapest": {
-        "type": "auction_house",
-        "cost": 3699990
-      }
-    }
-  ],
-  [
-    "MAGMA_BUCKET",
-    {
-      "directBuyCost": 4221163,
+      "directBuyCost": 364442,
       "cheapest": {
         "type": "craft",
-        "recipeId": "MAGMA_BUCKET#0",
-        "cost": 3844738,
-        "ingredients": {
-          "ENCHANTED_LAVA_BUCKET": {
-            "directBuyCost": 82323,
-            "cheapest": {
-              "type": "craft",
-              "recipeId": "ENCHANTED_LAVA_BUCKET#0",
-              "cost": 72374,
-              "ingredients": {
-                "ENCHANTED_IRON": {
-                  "cheapest": {
-                    "type": "bazaar",
-                    "cost": 800
-                  }
-                },
-                "ENCHANTED_COAL_BLOCK": {
-                  "cheapest": {
-                    "type": "bazaar",
-                    "cost": 34987
-                  }
-                }
-              }
-            }
-          },
-          "HEAT_CORE": {
-            "cheapest": {
-              "type": "auction_house",
-              "cost": 3699990
-            }
-          }
-        }
+        "recipeId": "MOLTEN_POWDER#0",
+        "cost": 358781.1,
+        "ingredients": [
+          "DERELICT_ASHE",
+          "AMALGAMATED_CRIMSONITE_NEW"
+        ]
       }
     }
   ],
   [
-    "MITHRIL_INFUSION",
+    "INFERNO_APEX",
     {
-      "directBuyCost": 7111569,
+      "cheapest": {
+        "type": "bazaar",
+        "cost": 18925741
+      }
+    }
+  ],
+  [
+    "INFERNO_VERTEX",
+    {
+      "cheapest": {
+        "type": "bazaar",
+        "cost": 408932
+      }
+    }
+  ],
+  [
+    "BLAZE_ROD",
+    {
+      "cheapest": {
+        "type": "bazaar",
+        "cost": 19
+      }
+    }
+  ],
+  [
+    "BLAZE_GENERATOR_1",
+    {
+      "directBuyCost": null,
       "cheapest": {
         "type": "craft",
-        "recipeId": "MITHRIL_INFUSION#0",
-        "cost": 4867714,
-        "ingredients": {
-          "ENCHANTED_MITHRIL": {
-            "cheapest": {
-              "type": "bazaar",
-              "cost": 1998
-            }
-          },
-          "MAGMA_BUCKET": {
-            "directBuyCost": 4221163,
-            "cheapest": {
-              "type": "craft",
-              "recipeId": "MAGMA_BUCKET#0",
-              "cost": 3844738,
-              "ingredients": {
-                "ENCHANTED_LAVA_BUCKET": {
-                  "directBuyCost": 82323,
-                  "cheapest": {
-                    "type": "craft",
-                    "recipeId": "ENCHANTED_LAVA_BUCKET#0",
-                    "cost": 72374,
-                    "ingredients": {
-                      "ENCHANTED_IRON": {
-                        "cheapest": {
-                          "type": "bazaar",
-                          "cost": 800
-                        }
-                      },
-                      "ENCHANTED_COAL_BLOCK": {
-                        "cheapest": {
-                          "type": "bazaar",
-                          "cost": 34987
-                        }
-                      }
-                    }
-                  }
-                },
-                "HEAT_CORE": {
-                  "cheapest": {
-                    "type": "auction_house",
-                    "cost": 3699990
-                  }
-                }
-              }
-            }
-          }
-        }
+        "recipeId": "BLAZE_GENERATOR_1#0",
+        "cost": 1520,
+        "ingredients": [
+          "BLAZE_ROD"
+        ]
+      }
+    }
+  ],
+  [
+    "INFERNO_GENERATOR_1",
+    {
+      "directBuyCost": 1000000,
+      "cheapest": {
+        "type": "craft",
+        "recipeId": "INFERNO_GENERATOR_1#0",
+        "cost": 177040,
+        "ingredients": [
+          "DERELICT_ASHE",
+          "BLAZE_GENERATOR_1"
+        ]
+      }
+    }
+  ],
+  [
+    "INFERNO_GENERATOR_2",
+    {
+      "directBuyCost": 900000,
+      "cheapest": {
+        "type": "craft",
+        "recipeId": "INFERNO_GENERATOR_2#0",
+        "cost": 879120,
+        "ingredients": [
+          "DERELICT_ASHE",
+          "INFERNO_GENERATOR_1"
+        ]
+      }
+    }
+  ],
+  [
+    "INFERNO_GENERATOR_3",
+    {
+      "cheapest": {
+        "type": "minion_auction",
+        "cost": 2000000
+      }
+    }
+  ],
+  [
+    "INFERNO_GENERATOR_4",
+    {
+      "cheapest": {
+        "type": "minion_auction",
+        "cost": 6000000
+      }
+    }
+  ],
+  [
+    "INFERNO_GENERATOR_5",
+    {
+      "cheapest": {
+        "type": "minion_auction",
+        "cost": 13000000
+      }
+    }
+  ],
+  [
+    "INFERNO_GENERATOR_6",
+    {
+      "cheapest": {
+        "type": "minion_auction",
+        "cost": 33000000
+      }
+    }
+  ],
+  [
+    "INFERNO_GENERATOR_7",
+    {
+      "directBuyCost": null,
+      "cheapest": {
+        "type": "craft",
+        "recipeId": "INFERNO_GENERATOR_7#0",
+        "cost": 78923980.8,
+        "ingredients": [
+          "MOLTEN_POWDER",
+          "INFERNO_GENERATOR_6"
+        ]
+      }
+    }
+  ],
+  [
+    "INFERNO_GENERATOR_8",
+    {
+      "cheapest": {
+        "type": "minion_auction",
+        "cost": 80000000
+      }
+    }
+  ],
+  [
+    "INFERNO_GENERATOR_9",
+    {
+      "directBuyCost": null,
+      "cheapest": {
+        "type": "craft",
+        "recipeId": "INFERNO_GENERATOR_9#0",
+        "cost": 178390873.6,
+        "ingredients": [
+          "MOLTEN_POWDER",
+          "INFERNO_VERTEX",
+          "INFERNO_GENERATOR_8"
+        ]
+      }
+    }
+  ],
+  [
+    "INFERNO_GENERATOR_10",
+    {
+      "directBuyCost": 350000000,
+      "cheapest": {
+        "type": "craft",
+        "recipeId": "INFERNO_GENERATOR_10#0",
+        "cost": 289867571.2,
+        "ingredients": [
+          "MOLTEN_POWDER",
+          "INFERNO_VERTEX",
+          "INFERNO_GENERATOR_9"
+        ]
+      }
+    }
+  ],
+  [
+    "INFERNO_GENERATOR_11",
+    {
+      "directBuyCost": 585000000,
+      "cheapest": {
+        "type": "craft",
+        "recipeId": "INFERNO_GENERATOR_11#0",
+        "cost": 500270009.79999995,
+        "ingredients": [
+          "MOLTEN_POWDER",
+          "INFERNO_APEX",
+          "INFERNO_VERTEX",
+          "INFERNO_GENERATOR_10",
+          "INFERNO_GENERATOR_8"
+        ]
       }
     }
   ]

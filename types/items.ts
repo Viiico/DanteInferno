@@ -38,5 +38,5 @@ export interface CraftMethod {
     type: "craft";
     recipeId: string;
     cost: number;
-    ingredients: Record<string, PricedItem>;
+    ingredients: string[];
 }

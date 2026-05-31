@@ -3,7 +3,7 @@ import {fetchBazaarPrices} from "./helperFuncs/bazaarHandler.js";
 import {fetchAuctionPrices} from "./helperFuncs/auctionHandler.js";
 import {fetchMinionPrices} from "./helperFuncs/minionAhHandler.js";
 
-import type { AuctionHouseBuy, BazaarBuy, CraftMethod, ObtainMethod, PricedItem, SimplifiedRecipe } from "./types/items.js";
+import type { AuctionHouseBuy, BazaarBuy, CraftMethod, MinionAuctionBuy, ObtainMethod, PricedItem, SimplifiedRecipe } from "./types/items.js";
 
 const itemContent = await prepareItemContent();
 const { neededBazaarItems, neededAuctionItems, neededMinions } = prepareNeededItems(itemContent);
@@ -14,7 +14,7 @@ const minionPrices = await fetchMinionPrices();
 
 const pricedItems = new Map<string, PricedItem>();
 
-resolveItemPrice("MITHRIL_INFUSION");
+resolveItemPrice("INFERNO_GENERATOR_11");
 
 console.log(pricedItems);
 Bun.write("./pricedItems.json", JSON.stringify([...pricedItems], null, 2));
@@ -27,6 +27,7 @@ function resolveItemPrice(productId: string): PricedItem | undefined{
     if(!product) throw new Error(`No product found with id ${productId}`);
 
     const craftingPrice = calculateCraftPrice(productId, product.simplifiedRecipes);
+    console.log(craftingPrice + "crafted");
 
     let result: PricedItem | undefined;
 
@@ -50,6 +51,16 @@ function resolveItemPrice(productId: string): PricedItem | undefined{
             };
             break;
         }
+        case "minion_auction": {
+            const buyPrice = minionItemPrice(productId);
+            const useCraft = craftingPrice && craftingPrice.cost < buyPrice.cost;
+            console.log(`Item ${productId} has minion price ${buyPrice.cost} and crafting price ${craftingPrice?.cost}`);
+            result = {
+                ...(useCraft && { directBuyCost: buyPrice.cost}),
+                cheapest: useCraft ? craftingPrice : buyPrice,
+            };
+            break;
+        }
     }
 
     console.log(productId, result)
@@ -64,15 +75,18 @@ function calculateCraftPrice(productId: string, simplifiedRecipes: SimplifiedRec
 
     for(const simplifiedRecipe of simplifiedRecipes){
         const { ingredients } = simplifiedRecipe;
+
         const ingredientPrices: Record<string, PricedItem> = {};
+        const ingredientNames: string[] = [];
 
         const craftPrice = ingredients.reduce((acc, { ingredient, count }) => {
             const ingredientPrice = resolveItemPrice(ingredient);
             if (ingredientPrice) ingredientPrices[ingredient] = ingredientPrice;
+            if (ingredientPrice) ingredientNames.push(ingredient);
             return acc + (ingredientPrice ? ingredientPrice.cheapest.cost * count : Infinity);
         }, 0) / simplifiedRecipe.count;
 
-        crafts.push({ type: "craft", recipeId: simplifiedRecipe.id, cost: craftPrice, ingredients: ingredientPrices });
+        crafts.push({ type: "craft", recipeId: simplifiedRecipe.id, cost: craftPrice, ingredients: ingredientNames });
     }
 
     if(crafts.length === 0) return undefined;
@@ -86,6 +100,11 @@ function auctionItemPrice(productId: string): AuctionHouseBuy {
 }
 
 function bazaarItemPrice(productId: string): BazaarBuy {
-    const productPrice = bazaarPrices.get(productId);
-    return { type: "bazaar", cost: productPrice ? productPrice.instantBuyPrice : Infinity };
+    const price = bazaarPrices.get(productId);
+    return { type: "bazaar", cost: price ? price.instantBuyPrice : Infinity };
+}
+
+function minionItemPrice(productId: string): MinionAuctionBuy {
+    const minionPrice = minionPrices.get(productId)?.[0]?.price ?? Infinity;
+    return { type: "minion_auction", cost: minionPrice };
 }

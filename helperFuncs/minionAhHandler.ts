@@ -43,10 +43,15 @@ export async function fetchMinionPrices(minionName = "INFERNO"): Promise<Map<str
         skip += TAKE;
     }
 
-    return allMinions.reduce((acc, minion) => {
+    const grouped = allMinions.reduce((acc, minion) => {
         const existing = acc.get(minion["minion_id"]);
-        existing ? existing.push(minion) : acc.set(minion["minion_id"], [minion]);
+        existing ? existing.push(minion) : acc.set(minion.minion_id, [minion]);
         return acc;
     }, new Map<string, Minion[]>());
 
+    for (const minions of grouped.values()) {
+        minions.sort((a, b) => a.price - b.price);
+    }
+
+    return grouped;
 }
