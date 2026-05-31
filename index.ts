@@ -16,7 +16,6 @@ const pricedItems = new Map<string, PricedItem>();
 
 resolveItemPrice("INFERNO_GENERATOR_11");
 
-console.log(pricedItems);
 Bun.write("./pricedItems.json", JSON.stringify([...pricedItems], null, 2));
 
 function resolveItemPrice(productId: string): PricedItem | undefined{
@@ -27,7 +26,6 @@ function resolveItemPrice(productId: string): PricedItem | undefined{
     if(!product) throw new Error(`No product found with id ${productId}`);
 
     const craftingPrice = calculateCraftPrice(productId, product.simplifiedRecipes);
-    console.log(craftingPrice + "crafted");
 
     const buyPrice = getBuyPrice(productId, product.source);
     const useCraft = craftingPrice && craftingPrice.cost < (buyPrice ?? Infinity);
@@ -35,8 +33,6 @@ function resolveItemPrice(productId: string): PricedItem | undefined{
         ...(useCraft && { directBuyCost: buyPrice ?? Infinity}),
         cheapest: useCraft ? craftingPrice : { type: product.source, cost: buyPrice ?? Infinity },
     }
-
-    console.log(productId, result)
 
     pricedItems.set(productId, result);
     return result;
@@ -48,15 +44,15 @@ function calculateCraftPrice(productId: string, simplifiedRecipes: SimplifiedRec
 
     for(const simplifiedRecipe of simplifiedRecipes){
         const { ingredients } = simplifiedRecipe;
-        const ingredientNames: string[] = [];
+        const mappedIngredients: Record<string, number> = {};
 
         const craftPrice = ingredients.reduce((acc, { ingredient, count }) => {
             const ingredientPrice = resolveItemPrice(ingredient);
-            if (ingredientPrice) ingredientNames.push(ingredient);
+            if(ingredientPrice) mappedIngredients[ingredient] = count;
             return acc + (ingredientPrice ? ingredientPrice.cheapest.cost * count : Infinity);
         }, 0) / simplifiedRecipe.count;
 
-        crafts.push({ type: "craft", recipeId: simplifiedRecipe.id, cost: Math.floor(craftPrice), ingredients: ingredientNames });
+        crafts.push({ type: "craft", recipeId: simplifiedRecipe.id, cost: Math.floor(craftPrice), ingredients: mappedIngredients });
     }
 
     if(crafts.length === 0) return undefined;

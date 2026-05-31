@@ -5,6 +5,9 @@ const CACHE_TTL_MS = 5 * 60 * 1000;
 const CACHE_PATH = "./auctionPricesCache.json";
 
 export async function fetchAuctionPrices(neededItems: string[]) {
+    const cached = await loadCache();
+    if(cached) return cached;
+
     const auctionUrl = new URL("https://api.hypixel.net/v2/skyblock/auctions");
     const auctionResponse = await fetch(auctionUrl);
     const auctionPageContent = await auctionResponse.json() as AuctionResponse;
@@ -12,7 +15,7 @@ export async function fetchAuctionPrices(neededItems: string[]) {
     const pageAmount = auctionPageContent["totalPages"];
     const pageChunks = chunkInto(Array.from(Array(pageAmount), (_, i) => i), navigator.hardwareConcurrency ?? 8);
     const scatteredPrices = await Promise.all(pageChunks.map(pages => {
-        const worker = new Worker(new URL("./auctionWorker.js", import.meta.url));
+        const worker = new Worker(new URL("./auctionWorker.ts", import.meta.url));
 
         return new Promise<AuctionWorkerOutput>((resolve, reject) => {
             worker.postMessage({pages, neededItems} satisfies AuctionWorkerInput);
@@ -38,6 +41,23 @@ export async function fetchAuctionPrices(neededItems: string[]) {
     return auctionItemsPrices;
 }
 
+async function loadCache(): Promise<Map<string, number[]> | null> {
+    try {
+        const cacheFile = Bun.file(CACHE_PATH);
+        if(!await cacheFile.exists()) return null;
+
+        const cache: AuctionPriceCache = await cacheFile.json();
+        if(Date.now() - cache.fetchedAt > CACHE_TTL_MS){
+            console.log("Cache is outdated, downloading fresh data");
+            return null;
+        }
+
+        return new Map(cache.prices);
+    } catch (err) {
+        console.error("Failed to load auction cache:", err);
+        return null;
+    }
+}
 
 async function saveCache(prices: Map<string, number[]>): Promise<void> {
     const cache: AuctionPriceCache = {
@@ -45,7 +65,6 @@ async function saveCache(prices: Map<string, number[]>): Promise<void> {
         prices: [...prices],
     };
     await Bun.write(CACHE_PATH, JSON.stringify(cache));
-    console.log("Auction cache saved");
 }
 
 function chunkInto(array: number[], numChunks: number = 1): number[][] {
