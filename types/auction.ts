@@ -10,3 +10,8 @@ export interface AuctionProduct {
     claimed: boolean;
     starting_bid: number;
 }
+
+export interface AuctionPriceCache {
+    fetchedAt: number;
+    prices: [string, number[]][];
+}

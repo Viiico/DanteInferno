@@ -1,14 +1,8 @@
-import type {AuctionResponse} from "../types/auction.ts";
+import type {AuctionPriceCache, AuctionResponse} from "../types/auction.ts";
 import type {AuctionWorkerInput, AuctionWorkerOutput} from "../types/workers.ts";
 
-function chunkInto(array: number[], numChunks: number = 1): number[][] {
-    const chunkSize = Math.ceil(array.length / numChunks);
-    const pageChunks = [];
-    for (let i = 0; i < array.length; i += chunkSize) {
-        pageChunks.push(array.slice(i, i + chunkSize));
-    }
-    return pageChunks;
-}
+const CACHE_TTL_MS = 5 * 60 * 1000;
+const CACHE_PATH = "./auctionPricesCache.json";
 
 export async function fetchAuctionPrices(neededItems: string[]) {
     const auctionUrl = new URL("https://api.hypixel.net/v2/skyblock/auctions");
@@ -40,5 +34,25 @@ export async function fetchAuctionPrices(neededItems: string[]) {
         auctionItemsPrices.set(key, value.sort((a, b) => a - b));
     }
 
+    await saveCache(auctionItemsPrices);
     return auctionItemsPrices;
+}
+
+
+async function saveCache(prices: Map<string, number[]>): Promise<void> {
+    const cache: AuctionPriceCache = {
+        fetchedAt: Date.now(),
+        prices: [...prices],
+    };
+    await Bun.write(CACHE_PATH, JSON.stringify(cache));
+    console.log("Auction cache saved");
+}
+
+function chunkInto(array: number[], numChunks: number = 1): number[][] {
+    const chunkSize = Math.ceil(array.length / numChunks);
+    const pageChunks = [];
+    for (let i = 0; i < array.length; i += chunkSize) {
+        pageChunks.push(array.slice(i, i + chunkSize));
+    }
+    return pageChunks;
 }

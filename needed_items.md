@@ -69,5 +69,4 @@ Reaper Pepper - B
 # TODO
 Caching of auction house
 Work on minion structures and price obtaining - especially applying missing upgrades from minionAH.
-Add missing recipes like inferno apex
-Maybe still too much redundant data, like molten powder in inferno minions and AMALGAMATED_CRIMSONITE_NEW
+Simplfiy structure in simplifiedRecipes
