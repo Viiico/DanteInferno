@@ -3,7 +3,7 @@ import {fetchBazaarPrices} from "./helperFuncs/bazaarHandler.js";
 import {fetchAuctionPrices} from "./helperFuncs/auctionHandler.js";
 import {fetchMinionPrices} from "./helperFuncs/minionAhHandler.js";
 
-import type { AuctionHouseBuy, BazaarBuy, CraftMethod, MinionAuctionBuy, ObtainMethod, PricedItem, SimplifiedRecipe } from "./types/items.js";
+import type { AuctionHouseBuy, BazaarBuy, CraftMethod, MinionAuctionBuy, ObtainMethod, PricedItem, SimplifiedRecipe, Source } from "./types/items.js";
 
 const itemContent = await prepareItemContent();
 const { neededBazaarItems, neededAuctionItems, neededMinions } = prepareNeededItems(itemContent);
@@ -29,43 +29,16 @@ function resolveItemPrice(productId: string): PricedItem | undefined{
     const craftingPrice = calculateCraftPrice(productId, product.simplifiedRecipes);
     console.log(craftingPrice + "crafted");
 
-    let result: PricedItem | undefined;
-
-    switch(product.source) {
-        case "auction_house": {
-            const buyPrice = auctionItemPrice(productId);
-            const useCraft = craftingPrice && craftingPrice.cost < buyPrice.cost;
-            result = {
-                ...(useCraft && { directBuyCost: buyPrice.cost}),
-                cheapest: useCraft ? craftingPrice : buyPrice,
-            };
-            break;
-        }
-        case "bazaar": {
-            const buyPrice = bazaarItemPrice(productId);
-            const useCraft = craftingPrice && craftingPrice.cost < buyPrice.cost;
-            console.log(`Item ${productId} has bazaar price ${buyPrice.cost} and crafting price ${craftingPrice?.cost}`);
-            result = {
-                ...(useCraft && { directBuyCost: buyPrice.cost}),
-                cheapest: useCraft ? craftingPrice : buyPrice,
-            };
-            break;
-        }
-        case "minion_auction": {
-            const buyPrice = minionItemPrice(productId);
-            const useCraft = craftingPrice && craftingPrice.cost < buyPrice.cost;
-            console.log(`Item ${productId} has minion price ${buyPrice.cost} and crafting price ${craftingPrice?.cost}`);
-            result = {
-                ...(useCraft && { directBuyCost: buyPrice.cost}),
-                cheapest: useCraft ? craftingPrice : buyPrice,
-            };
-            break;
-        }
+    const buyPrice = getBuyPrice(productId, product.source);
+    const useCraft = craftingPrice && craftingPrice.cost < (buyPrice ?? Infinity);
+    const result = {
+        ...(useCraft && { directBuyCost: buyPrice ?? Infinity}),
+        cheapest: useCraft ? craftingPrice : { type: product.source, cost: buyPrice ?? Infinity },
     }
 
     console.log(productId, result)
 
-    if(result) pricedItems.set(productId, result);
+    pricedItems.set(productId, result);
     return result;
 }
 
@@ -75,22 +48,28 @@ function calculateCraftPrice(productId: string, simplifiedRecipes: SimplifiedRec
 
     for(const simplifiedRecipe of simplifiedRecipes){
         const { ingredients } = simplifiedRecipe;
-
-        const ingredientPrices: Record<string, PricedItem> = {};
         const ingredientNames: string[] = [];
 
         const craftPrice = ingredients.reduce((acc, { ingredient, count }) => {
             const ingredientPrice = resolveItemPrice(ingredient);
-            if (ingredientPrice) ingredientPrices[ingredient] = ingredientPrice;
             if (ingredientPrice) ingredientNames.push(ingredient);
             return acc + (ingredientPrice ? ingredientPrice.cheapest.cost * count : Infinity);
         }, 0) / simplifiedRecipe.count;
 
-        crafts.push({ type: "craft", recipeId: simplifiedRecipe.id, cost: craftPrice, ingredients: ingredientNames });
+        crafts.push({ type: "craft", recipeId: simplifiedRecipe.id, cost: Math.floor(craftPrice), ingredients: ingredientNames });
     }
 
     if(crafts.length === 0) return undefined;
     return crafts.reduce((cheapest, craft) => craft.cost < cheapest.cost ? craft : cheapest);
+}
+
+function getBuyPrice(productId: string, source: Source): number | undefined {
+    switch(source){
+        case "auction_house": return auctionItemPrice(productId).cost;
+        case "bazaar": return bazaarItemPrice(productId).cost;
+        case "minion_auction": return minionItemPrice(productId).cost;
+        default: throw new Error(`Unsupported source ${source}`);
+    }
 }
 
 function auctionItemPrice(productId: string): AuctionHouseBuy {

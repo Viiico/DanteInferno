@@ -4,7 +4,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 2194
+        "cost": 2193
       }
     }
   ],
@@ -13,7 +13,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 1509
+        "cost": 1515
       }
     }
   ],
@@ -22,7 +22,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 2879
+        "cost": 2837
       }
     }
   ],
@@ -31,7 +31,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 2694
+        "cost": 2678
       }
     }
   ],
@@ -40,7 +40,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 2541
+        "cost": 2542
       }
     }
   ],
@@ -67,7 +67,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 59151
+        "cost": 59162
       }
     }
   ],
@@ -76,7 +76,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 147232
+        "cost": 147231
       }
     }
   ],
@@ -103,7 +103,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 468468
+        "cost": 461154
       }
     }
   ],
@@ -123,7 +123,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "AMALGAMATED_CRIMSONITE_NEW#1",
-        "cost": 77949.1,
+        "cost": 77767,
         "ingredients": [
           "ENCHANTED_GLOWSTONE",
           "ENCHANTED_MYCELIUM_CUBE",
@@ -142,7 +142,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "MOLTEN_POWDER#0",
-        "cost": 358781.1,
+        "cost": 358471,
         "ingredients": [
           "DERELICT_ASHE",
           "AMALGAMATED_CRIMSONITE_NEW"
@@ -198,7 +198,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "INFERNO_GENERATOR_1#0",
-        "cost": 177040,
+        "cost": 176960,
         "ingredients": [
           "DERELICT_ASHE",
           "BLAZE_GENERATOR_1"
@@ -213,7 +213,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "INFERNO_GENERATOR_2#0",
-        "cost": 879120,
+        "cost": 878720,
         "ingredients": [
           "DERELICT_ASHE",
           "INFERNO_GENERATOR_1"
@@ -264,7 +264,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "INFERNO_GENERATOR_7#0",
-        "cost": 78923980.8,
+        "cost": 78884288,
         "ingredients": [
           "MOLTEN_POWDER",
           "INFERNO_GENERATOR_6"
@@ -288,7 +288,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "INFERNO_GENERATOR_9#0",
-        "cost": 178390873.6,
+        "cost": 178311488,
         "ingredients": [
           "MOLTEN_POWDER",
           "INFERNO_VERTEX",
@@ -304,7 +304,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "INFERNO_GENERATOR_10#0",
-        "cost": 289867571.2,
+        "cost": 289708800,
         "ingredients": [
           "MOLTEN_POWDER",
           "INFERNO_VERTEX",
@@ -320,7 +320,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "INFERNO_GENERATOR_11#0",
-        "cost": 500270009.79999995,
+        "cost": 500031853,
         "ingredients": [
           "MOLTEN_POWDER",
           "INFERNO_APEX",
