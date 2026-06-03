@@ -74,3 +74,10 @@ Profit calculator
 Predict output using CTG
 Incorporate bonus effects from upgrades
 Include bonus items, finish structure as needed from cost calculator
+For tier X,XI - include the doubling effect
+Calculations for sustainability of eyedrops
+At first assume legendary fuel, add possibility of secondary tiers and theirs effect too
+
+Cost of slots unlocking
+Predicted xp
+required collections
