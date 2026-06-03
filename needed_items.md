@@ -67,6 +67,10 @@ Gabagool the fish - A
 Reaper Pepper - B
 
 # TODO
-Caching of auction house
 Work on minion structures and price obtaining - especially applying missing upgrades from minionAH.
 Simplfiy structure in simplifiedRecipes
+
+Profit calculator
+Predict output using CTG
+Incorporate bonus effects from upgrades
+Include bonus items, finish structure as needed from cost calculator

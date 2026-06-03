@@ -14,7 +14,13 @@ const minionPrices = await fetchMinionPrices();
 
 const pricedItems = new Map<string, PricedItem>();
 
-resolveItemPrice("INFERNO_GENERATOR_11");
+// resolveItemPrice("INFERNO_GENERATOR_11");
+for(const itemId of itemContent.keys()){
+    console.log(`Resolving ${itemId}`);
+    resolveItemPrice(itemId);
+}
+
+console.log(itemContent.size)
 
 Bun.write("./pricedItems.json", JSON.stringify([...pricedItems], null, 2));
 
