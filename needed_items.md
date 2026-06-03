@@ -81,3 +81,18 @@ At first assume legendary fuel, add possibility of secondary tiers and theirs ef
 Cost of slots unlocking
 Predicted xp
 required collections
+
+Fueling calculations - Already have prices
+Calculate fastest way to make more based off amount
+Predicted fill up time
+
+Based of costs and profit differences calculate most optimal upgrade path
+Add providing current setup
+Think wether it is linear or is there some minmaxing to do
+First assume already having minimal amounts of minions for full speed bonus
+Calculator for estimated time till upgrade - include checking only once per certain period
+
+Start making a website
+Perhaps add some database with drizzle for different users
+Optimize for SEO
+Maximize lighthouse etc
