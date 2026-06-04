@@ -8,10 +8,14 @@ for(const recipeFilePath of recipeFileNames){
     const updatedSimplifiedRecipes = recipeContent.simplifiedRecipes.map((simplifiedRecipe, i) => {
         const ingredients = {};
         for(const {ingredient, count} of simplifiedRecipe.ingredients){
-            ingredients[ingredient] =  count;
+            ingredients[ingredient] = count;
         }
-        return { id: `${recipeContent.recipeId}#${i}`, ingredients};
-    })
+        return ({
+            id: `${recipeContent.recipeId}#${i}`,
+            ingredients,
+            count: simplifiedRecipe.count
+        });
+    });
     // const updatedSimplifiedRecipes = recipeContent.simplifiedRecipes.map((simplifiedRecipe, i) => {
     //     return ({
     //     id: `${recipeContent.recipeId}#${i}`,
@@ -21,9 +25,9 @@ for(const recipeFilePath of recipeFileNames){
     //     count: simplifiedRecipe.count
     // })});
 
-    console.log(updatedSimplifiedRecipes, recipeContent.simplifiedRecipes)
-    console.log("-------------------")
-    recipeContent.simplifiedRecipes = updatedSimplifiedRecipes      
+console.log(updatedSimplifiedRecipes)
+
+recipeContent.simplifiedRecipes = updatedSimplifiedRecipes
 
     // const recipes = recipeContent?.recipe ? [recipeContent.recipe] : recipeContent.recipes;
     // let updatedFile = {

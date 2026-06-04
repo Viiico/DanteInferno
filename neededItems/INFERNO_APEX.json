@@ -21,7 +21,8 @@
         "INFERNO_VERTEX": 64,
         "MOLTEN_POWDER": 64,
         "HYPERGOLIC_IONIZED_CERAMICS": 16
-      }
+      },
+      "count": 1
     }
   ]
 }

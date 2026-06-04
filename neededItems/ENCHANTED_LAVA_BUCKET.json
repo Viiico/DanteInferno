@@ -16,7 +16,8 @@
       "ingredients": {
         "ENCHANTED_IRON": 3,
         "ENCHANTED_COAL_BLOCK": 2
-      }
+      },
+      "count": 1
     }
   ]
 }

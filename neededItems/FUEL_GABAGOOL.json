@@ -32,14 +32,16 @@
       "ingredients": {
         "CRUDE_GABAGOOL": 24,
         "SULPHURIC_COAL": 1
-      }
+      },
+      "count": 1
     },
     {
       "id": "FUEL_GABAGOOL#1",
       "ingredients": {
         "SULPHURIC_COAL": 8,
         "VERY_CRUDE_GABAGOOL": 1
-      }
+      },
+      "count": 8
     }
   ]
 }

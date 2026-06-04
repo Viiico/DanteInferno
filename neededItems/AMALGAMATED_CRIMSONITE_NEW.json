@@ -37,7 +37,8 @@
         "ENCHANTED_BLAZE_POWDER": 32,
         "ENCHANTED_RED_SAND": 8,
         "ENCHANTED_NETHER_STALK": 32
-      }
+      },
+      "count": 2
     },
     {
       "id": "AMALGAMATED_CRIMSONITE_NEW#1",
@@ -48,7 +49,8 @@
         "ENCHANTED_BLAZE_ROD": 4,
         "ENCHANTED_RED_SAND_CUBE": 1,
         "MUTANT_NETHER_STALK": 4
-      }
+      },
+      "count": 40
     }
   ]
 }

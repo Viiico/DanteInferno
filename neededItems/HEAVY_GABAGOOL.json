@@ -20,7 +20,8 @@
       "ingredients": {
         "FUEL_GABAGOOL": 24,
         "SULPHURIC_COAL": 1
-      }
+      },
+      "count": 1
     }
   ]
 }

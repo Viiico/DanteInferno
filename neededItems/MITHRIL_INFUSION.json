@@ -21,7 +21,8 @@
       "ingredients": {
         "ENCHANTED_MITHRIL": 512,
         "MAGMA_BUCKET": 1
-      }
+      },
+      "count": 1
     }
   ]
 }

@@ -21,7 +21,8 @@
       "ingredients": {
         "ENCHANTED_COAL": 16,
         "ENCHANTED_SULPHUR": 1
-      }
+      },
+      "count": 4
     }
   ]
 }

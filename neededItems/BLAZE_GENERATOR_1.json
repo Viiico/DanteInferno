@@ -19,7 +19,8 @@
       "id": "BLAZE_GENERATOR_1#0",
       "ingredients": {
         "BLAZE_ROD": 80
-      }
+      },
+      "count": 1
     }
   ]
 }
