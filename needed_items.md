@@ -96,3 +96,5 @@ Start making a website
 Perhaps add some database with drizzle for different users
 Optimize for SEO
 Maximize lighthouse etc
+
+Optimize everything, even like storage of neededItems.

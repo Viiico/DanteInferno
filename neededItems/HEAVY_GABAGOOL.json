@@ -17,17 +17,10 @@
   "simplifiedRecipes": [
     {
       "id": "HEAVY_GABAGOOL#0",
-      "ingredients": [
-        {
-          "ingredient": "FUEL_GABAGOOL",
-          "count": 24
-        },
-        {
-          "ingredient": "SULPHURIC_COAL",
-          "count": 1
-        }
-      ],
-      "count": 1
+      "ingredients": {
+        "FUEL_GABAGOOL": 24,
+        "SULPHURIC_COAL": 1
+      }
     }
   ]
 }

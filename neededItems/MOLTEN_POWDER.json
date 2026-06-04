@@ -17,17 +17,10 @@
   "simplifiedRecipes": [
     {
       "id": "MOLTEN_POWDER#0",
-      "ingredients": [
-        {
-          "ingredient": "DERELICT_ASHE",
-          "count": 128
-        },
-        {
-          "ingredient": "AMALGAMATED_CRIMSONITE_NEW",
-          "count": 1
-        }
-      ],
-      "count": 1
+      "ingredients": {
+        "DERELICT_ASHE": 128,
+        "AMALGAMATED_CRIMSONITE_NEW": 1
+      }
     }
   ]
 }
