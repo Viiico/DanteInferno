@@ -1,4 +1,26 @@
 {
   "source": "bazaar",
-  "recipeId": "VERY_CRUDE_GABAGOOL"
+  "recipeId": "VERY_CRUDE_GABAGOOL",
+  "recipes": [
+  {
+    "A1": "CRUDE_GABAGOOL:24",
+    "A2": "CRUDE_GABAGOOL:24",
+    "A3": "CRUDE_GABAGOOL:24",
+    "B1": "CRUDE_GABAGOOL:24",
+    "B2": "",
+    "B3": "CRUDE_GABAGOOL:24",
+    "C1": "CRUDE_GABAGOOL:24",
+    "C2": "CRUDE_GABAGOOL:24",
+    "C3": "CRUDE_GABAGOOL:24"
+  }
+],
+"simplifiedRecipes": [
+  {
+    "id": "INFERNO_GENERATOR_11#0",
+    "ingredients": {
+      "CRUDE_GABAGOOL": 192
+    },
+    "count": 1
+  }
+]
 }

@@ -68,8 +68,8 @@ Reaper Pepper - B
 
 # TODO
 Work on minion structures and price obtaining - especially applying missing upgrades from minionAH.
-Simplfiy structure in simplifiedRecipes
 
+Calculator for free will
 Profit calculator
 Predict output using CTG
 Incorporate bonus effects from upgrades
