@@ -18,16 +18,10 @@
   "simplifiedRecipes": [
     {
       "id": "MITHRIL_INFUSION#0",
-      "ingredients": [
-        {
-          "ingredient": "ENCHANTED_MITHRIL",
-          "count": 512
-        },
-        {
-          "ingredient": "MAGMA_BUCKET",
-          "count": 1
-        }
-      ],
+      "ingredients": {
+        "ENCHANTED_MITHRIL": 512,
+        "MAGMA_BUCKET": 1
+      },
       "count": 1
     }
   ]

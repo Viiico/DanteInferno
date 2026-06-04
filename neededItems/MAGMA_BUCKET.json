@@ -12,16 +12,10 @@
   "simplifiedRecipes": [
     {
       "id": "MAGMA_BUCKET#0",
-      "ingredients": [
-        {
-          "ingredient": "ENCHANTED_LAVA_BUCKET",
-          "count": 2
-        },
-        {
-          "ingredient": "HEAT_CORE",
-          "count": 1
-        }
-      ],
+      "ingredients": {
+        "ENCHANTED_LAVA_BUCKET": 2,
+        "HEAT_CORE": 1
+      },
       "count": 1
     }
   ]

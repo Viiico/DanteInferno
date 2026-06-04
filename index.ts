@@ -31,7 +31,7 @@ function resolveItemPrice(productId: string): PricedItem | undefined{
     const product = itemContent.get(productId);
     if(!product) throw new Error(`No product found with id ${productId}`);
 
-    const craftingPrice = calculateCraftPrice(productId, product.simplifiedRecipes);
+    const craftingPrice = calculateCraftPrice(product.simplifiedRecipes);
 
     const buyPrice = getBuyPrice(productId, product.source);
     const useCraft = craftingPrice && craftingPrice.cost < (buyPrice ?? Infinity);
@@ -44,7 +44,7 @@ function resolveItemPrice(productId: string): PricedItem | undefined{
     return result;
 }
 
-function calculateCraftPrice(productId: string, simplifiedRecipes: SimplifiedRecipe[] | undefined): CraftMethod | undefined {
+function calculateCraftPrice(simplifiedRecipes: SimplifiedRecipe[] | undefined): CraftMethod | undefined {
     if(!simplifiedRecipes) return undefined;
     let crafts: CraftMethod[] = [];
 
@@ -52,7 +52,7 @@ function calculateCraftPrice(productId: string, simplifiedRecipes: SimplifiedRec
         const { ingredients } = simplifiedRecipe;
         const mappedIngredients: Record<string, number> = {};
 
-        const craftPrice = ingredients.reduce((acc, { ingredient, count }) => {
+        const craftPrice = Object.entries(ingredients).reduce((acc, [ingredient, count]) => {
             const ingredientPrice = resolveItemPrice(ingredient);
             if(ingredientPrice) mappedIngredients[ingredient] = count;
             return acc + (ingredientPrice ? ingredientPrice.cheapest.cost * count : Infinity);

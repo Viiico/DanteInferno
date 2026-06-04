@@ -10,7 +10,7 @@ export interface RawRecipeGrid {
 
 export interface SimplifiedRecipe {
     id: string,
-    ingredients: {ingredient: string, count: number}[],
+    ingredients: Record<string, number>;
     count: number;
 }
 

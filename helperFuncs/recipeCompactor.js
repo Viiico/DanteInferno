@@ -6,13 +6,24 @@ for(const recipeFilePath of recipeFileNames){
     let recipeContent = await Bun.file(recipePath + "\\" + recipeFilePath).json();
     if(!recipeContent.simplifiedRecipes) continue;
     const updatedSimplifiedRecipes = recipeContent.simplifiedRecipes.map((simplifiedRecipe, i) => {
+        const ingredients = {};
+        for(const {ingredient, count} of simplifiedRecipe.ingredients){
+            ingredients[ingredient] = count;
+        }
         return ({
-        id: `${recipeContent.recipeId}#${i}`,
-        ingredients: Object.entries(simplifiedRecipe)
-            .filter(([key]) => key !== 'count')
-            .map(([ingredient, count]) => ({ ingredient, count })),
-        count: simplifiedRecipe.count
-    })});
+            id: `${recipeContent.recipeId}#${i}`,
+            ingredients,
+            count: simplifiedRecipe.count
+        });
+    });
+    // const updatedSimplifiedRecipes = recipeContent.simplifiedRecipes.map((simplifiedRecipe, i) => {
+    //     return ({
+    //     id: `${recipeContent.recipeId}#${i}`,
+    //     ingredients: Object.entries(simplifiedRecipe)
+    //         .filter(([key]) => key !== 'count')
+    //         .map(([ingredient, count]) => ({ ingredient, count })),
+    //     count: simplifiedRecipe.count
+    // })});
 
 console.log(updatedSimplifiedRecipes)
 

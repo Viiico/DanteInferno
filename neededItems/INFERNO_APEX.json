@@ -17,20 +17,11 @@
   "simplifiedRecipes": [
     {
       "id": "INFERNO_APEX#0",
-      "ingredients": [
-        {
-          "ingredient": "INFERNO_VERTEX",
-          "count": 64
-        },
-        {
-          "ingredient": "MOLTEN_POWDER",
-          "count": 64
-        },
-        {
-          "ingredient": "HYPERGOLIC_IONIZED_CERAMICS",
-          "count": 16
-        }
-      ],
+      "ingredients": {
+        "INFERNO_VERTEX": 64,
+        "MOLTEN_POWDER": 64,
+        "HYPERGOLIC_IONIZED_CERAMICS": 16
+      },
       "count": 1
     }
   ]

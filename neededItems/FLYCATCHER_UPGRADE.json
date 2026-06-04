@@ -17,16 +17,10 @@
   "simplifiedRecipes": [
     {
       "id": "FLYCATCHER_UPGRADE#0",
-      "ingredients": [
-        {
-          "ingredient": "TARANTULA_SILK",
-          "count": 102
-        },
-        {
-          "ingredient": "FLY_SWATTER",
-          "count": 1
-        }
-      ],
+      "ingredients": {
+        "TARANTULA_SILK": 102,
+        "FLY_SWATTER": 1
+      },
       "count": 1
     }
   ]

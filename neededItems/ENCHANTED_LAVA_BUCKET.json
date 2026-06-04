@@ -13,16 +13,10 @@
   "simplifiedRecipes": [
     {
       "id": "ENCHANTED_LAVA_BUCKET#0",
-      "ingredients": [
-        {
-          "ingredient": "ENCHANTED_IRON",
-          "count": 3
-        },
-        {
-          "ingredient": "ENCHANTED_COAL_BLOCK",
-          "count": 2
-        }
-      ],
+      "ingredients": {
+        "ENCHANTED_IRON": 3,
+        "ENCHANTED_COAL_BLOCK": 2
+      },
       "count": 1
     }
   ]
