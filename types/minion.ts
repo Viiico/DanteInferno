@@ -27,34 +27,16 @@ export interface MinionSetup {
   externalIncomeCoinsPerDay: number;
 
   globalBonuses: {
-    postcardActive: boolean; // +5% global speed
+    postcardActive: boolean;
     beaconTier: 0 | 1 | 2 | 3 | 4 | 5;
-    beaconSpeedBonus: number; // e.g. 0.10 for Beacon V
-    scorchedPowerCrystalActive: boolean; // extra +1% beacon speed
-    otherGlobalSpeedBonus: number; // mayor/events/etc, additive
+    scorchedPowerCrystalActive: boolean;
+    otherGlobalSpeedBonus: number;
   };
 
   prices: {
     crudeGabagool: number;
     hypergolicIonizedCeramic: number;
-
-    uniqueDrops: {
-      chiliPepper: number;
-      infernoVertex: number;
-      infernoApex: number;
-      reaperPepper: number;
-      gabagoolTheFish: number;
-    };
-  };
-
-  dropRates: {
-    uniqueDrops: {
-      chiliPepper: number;
-      infernoVertex: number;
-      infernoApex: number;
-      reaperPepper: number;
-      gabagoolTheFish: number;
-    };
+    uniqueDrops: Record<InfernoUniqueDropKey, number>;
   };
 
   recurringCosts: {
@@ -112,3 +94,69 @@ export const INFERNO_FUEL = {
 } as const;
 
 export type InfernoFuelRarity = keyof typeof INFERNO_FUEL;
+
+export const INFERNO_DROP_TABLE = {
+  normalDrops: {
+    crudeGabagoolPerGeneratedItem: 1,
+  },
+
+  infernoFuelReplacement: {
+    replacedProductionShare: 4 / 5,
+    gabagoolDistillate: {
+      item: "crudeGabagool",
+      amountPerReplacedItem: 1,
+    },
+  },
+
+  legendaryFuel: {
+    uniqueRollsPerGeneratedItem: 1,
+    hypergolicIonizedCeramicPerExpiredFuel: 1,
+    capsaicinEyedropsMultiplier: 1.3,
+
+    uniqueDrops: {
+      chiliPepper: {
+        item: "CHILLI_PEPPER",
+        chancePerGeneratedItem: 1 / 136,
+        tierMultiplier: {
+          default: 1,
+        },
+      },
+
+      infernoVertex: {
+        item: "INFERNO_VERTEX",
+        chancePerGeneratedItem: 1 / 5_950,
+        tierMultiplier: {
+          default: 1,
+        },
+      },
+
+      infernoApex: {
+        item: "INFERNO_APEX",
+        chancePerGeneratedItem: 1 / 1_309_091,
+        tierMultiplier: {
+          default: 1,
+          tier10: 2,
+          tier11: 2,
+        },
+      },
+
+      reaperPepper: {
+        item: "REAPER_PEPPER",
+        chancePerGeneratedItem: 1 / 458_182,
+        tierMultiplier: {
+          default: 1,
+        },
+      },
+
+      gabagoolTheFish: {
+        item: "GABAGOOL_THE_FISH",
+        chancePerGeneratedItem: 1 / 3_927_273,
+        tierMultiplier: {
+          default: 1,
+        },
+      },
+    },
+  },
+} as const;
+
+export type InfernoUniqueDropKey = keyof typeof INFERNO_DROP_TABLE.legendaryFuel.uniqueDrops;
