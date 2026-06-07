@@ -6,3 +6,11 @@
 
   Create a baseline of possible drops, then just pick, choose and multiply based off effects
 */
+
+export function calculateSetupProfit() {
+
+}
+
+async function readMinionSetup() {
+  
+}

@@ -68,6 +68,7 @@ Reaper Pepper - B
 
 # TODO
 Work on minion structures and price obtaining - especially applying missing upgrades from minionAH.
+maybe add a tag for items I want to sell to include that infromation in pricedItems
 
 Calculator for free will
 Profit calculator
@@ -97,4 +98,5 @@ Perhaps add some database with drizzle for different users
 Optimize for SEO
 Maximize lighthouse etc
 
+Find a way to compact minion setup footprint
 Optimize everything, even like storage of neededItems.

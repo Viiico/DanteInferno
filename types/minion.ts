@@ -33,16 +33,20 @@ export interface MinionSetup {
     otherGlobalSpeedBonus: number;
   };
 
-  prices: {
-    crudeGabagool: number;
-    hypergolicIonizedCeramic: number;
-    uniqueDrops: Record<InfernoUniqueDropKey, number>;
-  };
-
   recurringCosts: {
     beaconFuelCoinsPerDay: number;
     otherGlobalCostsCoinsPerDay: number;
   };
+}
+
+export interface MarketPrices {
+  crudeGabagool: number;
+  hypergolicIonizedCeramic: number;
+
+  uniqueDrops: Record<InfernoUniqueDropKey, number>;
+
+  fuels: Record<InfernoFuelRarity, number>;
+  capsaicinEyedrops: number;
 }
 
 export interface Minion {
