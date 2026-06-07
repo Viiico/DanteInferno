@@ -1,6 +1,6 @@
-import type { Minion, MinionResponse } from "../types/minion.ts";
+import type { MinionProduct, MinionResponse } from "../types/minion.ts";
 
-export async function fetchMinionPrices(minionName = "INFERNO"): Promise<Map<string, Minion[]>> {
+export async function fetchMinionPrices(minionName = "INFERNO"): Promise<Map<string, MinionProduct[]>> {
     const BASE_URL = "https://minionah.com/api/internal/search/minions";
     const TAKE = 50;
 
@@ -16,7 +16,7 @@ export async function fetchMinionPrices(minionName = "INFERNO"): Promise<Map<str
         minion: { AND: [{ generator: minionName }, {}] }
     });
 
-    const allMinions: Minion[] = [];
+    const allMinions: MinionProduct[] = [];
     let skip = 0;
 
     while (true) {
@@ -47,7 +47,7 @@ export async function fetchMinionPrices(minionName = "INFERNO"): Promise<Map<str
         const existing = acc.get(minion["minion_id"]);
         existing ? existing.push(minion) : acc.set(minion.minion_id, [minion]);
         return acc;
-    }, new Map<string, Minion[]>());
+    }, new Map<string, MinionProduct[]>());
 
     for (const minions of grouped.values()) {
         minions.sort((a, b) => a.price - b.price);
