@@ -19,6 +19,32 @@ export interface MinionProduct {
     username: string;
 }
 
+export interface RawMinionSetupJson {
+  unlockedMinionSlots: number;
+  collectionIntervalHours: number;
+  externalIncomeCoinsPerDay: number;
+  globalBonuses: MinionSetup['globalBonuses'];
+  recurringCosts: MinionSetup['recurringCosts'];
+  minions: RawMinionJson[];
+}
+
+
+export interface RawMinionJson {
+  tier: InfernoMinionTier;
+  active: boolean;
+  fuel: {
+    rarity: InfernoFuelRarity;
+    usesGabagoolDistillate: boolean;
+    costCoinsPerDay: number;
+  };
+  upgrades: Minion['upgrades'];
+  recurringCosts: {
+    capsaicinEyedropsCoinsPerDay: number;
+    otherLocalCostsCoinsPerDay: number;
+  };
+}
+
+
 export interface MinionSetup {
   minions: Minion[];
 
