@@ -17,21 +17,34 @@ export function calculateSetupProfit(minionSetup: MinionSetup): number {
   const {postcardActive, beaconTier, scorchedPowerCrystalActive, otherGlobalSpeedBonus} = globalBonuses;
 
   const nonFuelGlobalBonuses = beaconTier * 0.02 + (postcardActive ? 0.05 : 0) + (scorchedPowerCrystalActive ? 0.01 : 0) + otherGlobalSpeedBonus;
-  const havestCount = calculateHarvestCount(minionSetup.minions[0]!, collectionIntervalHours, nonFuelGlobalBonuses);
 
-  const drops = calculateMinionDrops(minionSetup.minions[0]!, havestCount);
-  console.log(drops)
+  const setupDrops = {} as Record<InfernoUniqueDropKey, number>;
+
+  for(const minion of minionSetup.minions) {
+    const minionDrops = calculateMinionDrops(minion, collectionIntervalHours, nonFuelGlobalBonuses);
+    for(const [key, value] of Object.entries(minionDrops) as [InfernoUniqueDropKey, number][]) {
+      if(!setupDrops[key]) setupDrops[key] = value;
+      else setupDrops[key] += value;
+    }
+  }
+
+  console.log(setupDrops)
+
+  // const drops = calculateMinionDrops(minionSetup.minions[0]!, havestCount);
 }
 
-function calculateMinionDrops(minion: Minion, harvestCount: number): Partial<Record<InfernoUniqueDropKey, number>>  {
+function calculateMinionDrops(minion: Minion, collectionIntervalHours: number, nonFuelGlobalBonuses: number): Partial<Record<InfernoUniqueDropKey, number>>  {
+  const harvestCount = calculateHarvestCount(minion, collectionIntervalHours, nonFuelGlobalBonuses);
   const veryCrudeGabagoolDrops = harvestCount / 192;
 
   if(minion.fuel !== "legendary") return {"VERY_CRUDE_GABAGOOL": veryCrudeGabagoolDrops};
 
-  const legendaryDrops = Object.entries(INFERNO_DROP_TABLE.legendaryDrops.uniqueDrops).reduce((acc, [key, drop]) => {
-    acc[key as InfernoUniqueDropKey] = harvestCount * drop.chancePerGeneratedItem;
+  const legendaryDrops = (Object.entries(INFERNO_DROP_TABLE.legendaryDrops.uniqueDrops) as [InfernoUniqueDropKey, {chancePerGeneratedItem: number}][])
+  .reduce<Partial<Record<InfernoUniqueDropKey, number>>>((acc, [key, drop] ) => {
+    if(key === "INFERNO_APEX" && minion.tier >= 10) acc[key] = harvestCount * drop.chancePerGeneratedItem * 2;
+    else acc[key] = harvestCount * drop.chancePerGeneratedItem;
     return acc;
-  }, {} as Partial<Record<InfernoUniqueDropKey, number>>);
+  }, {});
 
   legendaryDrops["VERY_CRUDE_GABAGOOL"] = veryCrudeGabagoolDrops;
   return legendaryDrops;
