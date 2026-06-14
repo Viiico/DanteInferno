@@ -8,11 +8,29 @@ import type {
   RawMinionSetupJson,
   RawMinionJson,
 } from '../types/minion';
-import { INFERNO_MINION_TIERS } from '../types/minion'; 
+import { INFERNO_FUEL, INFERNO_MINION_TIERS } from '../types/minion'; 
 
 
 export function calculateSetupProfit() {
 
+}
+
+function calculateHarvestCount(minion: Minion, minionSetup: MinionSetup): number{
+  const {collectionIntervalHours, globalBonuses} = minionSetup;
+  const {postcardActive, beaconTier, scorchedPowerCrystalActive, otherGlobalSpeedBonus} = globalBonuses;
+  const {flycatchers, mithrilInfusion, freeWill} = minion.upgrades;
+
+  const risingCelsiusBonus = 0.18 * Math.min(minionSetup.minions.length, 10);
+  const nonFuelMinionBonuses = risingCelsiusBonus + 0.2 * flycatchers + (mithrilInfusion ? 0.1 : 0) + (freeWill ? 0.1 : 0);
+  const nonFuelGlobalBonuses = beaconTier * 0.02 + (postcardActive ? 0.05 : 0) + (scorchedPowerCrystalActive ? 0.01 : 0) + otherGlobalSpeedBonus;
+  const nonFuelBonuses = nonFuelMinionBonuses + nonFuelGlobalBonuses;
+
+  const baseMinionActionTime = INFERNO_MINION_TIERS[minion.tier].baseActionSeconds;
+  const infernoFuelMultiplier = INFERNO_FUEL[minion.fuel].speedMultiplier;
+
+  console.log(risingCelsiusBonus, nonFuelMinionBonuses, nonFuelGlobalBonuses, nonFuelBonuses, baseMinionActionTime, infernoFuelMultiplier);
+
+  return (3600 * collectionIntervalHours) / (2 * baseMinionActionTime) * infernoFuelMultiplier * (1 + nonFuelBonuses);
 }
 
 
@@ -41,7 +59,7 @@ function mapRawMinion(raw: RawMinionJson): Minion {
 }
 
 async function readMinionSetup(): Promise<MinionSetup> {
-  const filePath = resolve(__dirname, '../minionSetup.json');
+  const filePath = resolve(__dirname, '../minionSetup2.json');
   const raw: RawMinionSetupJson = JSON.parse(await readFile(filePath, 'utf-8'));
  
   return {
@@ -54,4 +72,5 @@ async function readMinionSetup(): Promise<MinionSetup> {
   };
 }
 
-console.log(await readMinionSetup());
+const minionSetup = await readMinionSetup();
+console.log(calculateHarvestCount(minionSetup.minions[0]!, minionSetup));

@@ -78,6 +78,7 @@ Include bonus items, finish structure as needed from cost calculator
 For tier X,XI - include the doubling effect
 Calculations for sustainability of eyedrops
 At first assume legendary fuel, add possibility of secondary tiers and theirs effect too
+Compress information in minionSetup - declare states so we can store information like mithrilInfusion, freeWill in single bits.
 
 Cost of slots unlocking
 Predicted xp
