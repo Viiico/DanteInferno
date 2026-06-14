@@ -3,9 +3,9 @@
   "collectionIntervalHours": 24,
   "externalIncomeCoinsPerDay": 10e7,
   "globalBonuses": {
-    "postcardActive": false,
-    "beaconTier": 0,
-    "scorchedPowerCrystalActive": false,
+    "postcardActive": true,
+    "beaconTier": 5,
+    "scorchedPowerCrystalActive": true,
     "otherGlobalSpeedBonus": 0
   },
   "prices": {
@@ -33,9 +33,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 0,
-        "mithrilInfusion": false,
-        "freeWill": false,
+        "flycatchers": 1,
+        "mithrilInfusion": true,
+        "freeWill": true,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -53,9 +53,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 0,
-        "mithrilInfusion": false,
-        "freeWill": false,
+        "flycatchers": 1,
+        "mithrilInfusion": true,
+        "freeWill": true,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -73,9 +73,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 0,
-        "mithrilInfusion": false,
-        "freeWill": false,
+        "flycatchers": 1,
+        "mithrilInfusion": true,
+        "freeWill": true,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -93,9 +93,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 0,
-        "mithrilInfusion": false,
-        "freeWill": false,
+        "flycatchers": 1,
+        "mithrilInfusion": true,
+        "freeWill": true,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -113,9 +113,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 0,
-        "mithrilInfusion": false,
-        "freeWill": false,
+        "flycatchers": 1,
+        "mithrilInfusion": true,
+        "freeWill": true,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -133,9 +133,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 0,
-        "mithrilInfusion": false,
-        "freeWill": false,
+        "flycatchers": 1,
+        "mithrilInfusion": true,
+        "freeWill": true,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -153,9 +153,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 0,
-        "mithrilInfusion": false,
-        "freeWill": false,
+        "flycatchers": 1,
+        "mithrilInfusion": true,
+        "freeWill": true,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -173,9 +173,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 0,
-        "mithrilInfusion": false,
-        "freeWill": false,
+        "flycatchers": 1,
+        "mithrilInfusion": true,
+        "freeWill": true,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -193,9 +193,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 0,
-        "mithrilInfusion": false,
-        "freeWill": false,
+        "flycatchers": 1,
+        "mithrilInfusion": true,
+        "freeWill": true,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -213,9 +213,209 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 0,
-        "mithrilInfusion": false,
-        "freeWill": false,
+        "flycatchers": 1,
+        "mithrilInfusion": true,
+        "freeWill": true,
+        "capsaicinEyedrops": false,
+        "otherLocalSpeedBonus": 0
+      },
+      "recurringCosts": {
+        "capsaicinEyedropsCoinsPerDay": 0,
+        "otherLocalCostsCoinsPerDay": 0
+      }
+    },
+       {
+      "tier": 11,
+      "active": true,
+      "fuel": {
+        "rarity": "legendary",
+        "usesGabagoolDistillate": true,
+        "costCoinsPerDay": 0
+      },
+      "upgrades": {
+        "flycatchers": 1,
+        "mithrilInfusion": true,
+        "freeWill": true,
+        "capsaicinEyedrops": false,
+        "otherLocalSpeedBonus": 0
+      },
+      "recurringCosts": {
+        "capsaicinEyedropsCoinsPerDay": 0,
+        "otherLocalCostsCoinsPerDay": 0
+      }
+    },
+        {
+      "tier": 11,
+      "active": true,
+      "fuel": {
+        "rarity": "legendary",
+        "usesGabagoolDistillate": true,
+        "costCoinsPerDay": 0
+      },
+      "upgrades": {
+        "flycatchers": 1,
+        "mithrilInfusion": true,
+        "freeWill": true,
+        "capsaicinEyedrops": false,
+        "otherLocalSpeedBonus": 0
+      },
+      "recurringCosts": {
+        "capsaicinEyedropsCoinsPerDay": 0,
+        "otherLocalCostsCoinsPerDay": 0
+      }
+    },
+        {
+      "tier": 11,
+      "active": true,
+      "fuel": {
+        "rarity": "legendary",
+        "usesGabagoolDistillate": true,
+        "costCoinsPerDay": 0
+      },
+      "upgrades": {
+        "flycatchers": 1,
+        "mithrilInfusion": true,
+        "freeWill": true,
+        "capsaicinEyedrops": false,
+        "otherLocalSpeedBonus": 0
+      },
+      "recurringCosts": {
+        "capsaicinEyedropsCoinsPerDay": 0,
+        "otherLocalCostsCoinsPerDay": 0
+      }
+    },
+        {
+      "tier": 11,
+      "active": true,
+      "fuel": {
+        "rarity": "legendary",
+        "usesGabagoolDistillate": true,
+        "costCoinsPerDay": 0
+      },
+      "upgrades": {
+        "flycatchers": 1,
+        "mithrilInfusion": true,
+        "freeWill": true,
+        "capsaicinEyedrops": false,
+        "otherLocalSpeedBonus": 0
+      },
+      "recurringCosts": {
+        "capsaicinEyedropsCoinsPerDay": 0,
+        "otherLocalCostsCoinsPerDay": 0
+      }
+    },
+        {
+      "tier": 11,
+      "active": true,
+      "fuel": {
+        "rarity": "legendary",
+        "usesGabagoolDistillate": true,
+        "costCoinsPerDay": 0
+      },
+      "upgrades": {
+        "flycatchers": 1,
+        "mithrilInfusion": true,
+        "freeWill": true,
+        "capsaicinEyedrops": false,
+        "otherLocalSpeedBonus": 0
+      },
+      "recurringCosts": {
+        "capsaicinEyedropsCoinsPerDay": 0,
+        "otherLocalCostsCoinsPerDay": 0
+      }
+    },
+        {
+      "tier": 11,
+      "active": true,
+      "fuel": {
+        "rarity": "legendary",
+        "usesGabagoolDistillate": true,
+        "costCoinsPerDay": 0
+      },
+      "upgrades": {
+        "flycatchers": 1,
+        "mithrilInfusion": true,
+        "freeWill": true,
+        "capsaicinEyedrops": false,
+        "otherLocalSpeedBonus": 0
+      },
+      "recurringCosts": {
+        "capsaicinEyedropsCoinsPerDay": 0,
+        "otherLocalCostsCoinsPerDay": 0
+      }
+    },
+        {
+      "tier": 11,
+      "active": true,
+      "fuel": {
+        "rarity": "legendary",
+        "usesGabagoolDistillate": true,
+        "costCoinsPerDay": 0
+      },
+      "upgrades": {
+        "flycatchers": 1,
+        "mithrilInfusion": true,
+        "freeWill": true,
+        "capsaicinEyedrops": false,
+        "otherLocalSpeedBonus": 0
+      },
+      "recurringCosts": {
+        "capsaicinEyedropsCoinsPerDay": 0,
+        "otherLocalCostsCoinsPerDay": 0
+      }
+    },
+        {
+      "tier": 11,
+      "active": true,
+      "fuel": {
+        "rarity": "legendary",
+        "usesGabagoolDistillate": true,
+        "costCoinsPerDay": 0
+      },
+      "upgrades": {
+        "flycatchers": 1,
+        "mithrilInfusion": true,
+        "freeWill": true,
+        "capsaicinEyedrops": false,
+        "otherLocalSpeedBonus": 0
+      },
+      "recurringCosts": {
+        "capsaicinEyedropsCoinsPerDay": 0,
+        "otherLocalCostsCoinsPerDay": 0
+      }
+    },
+        {
+      "tier": 11,
+      "active": true,
+      "fuel": {
+        "rarity": "legendary",
+        "usesGabagoolDistillate": true,
+        "costCoinsPerDay": 0
+      },
+      "upgrades": {
+        "flycatchers": 1,
+        "mithrilInfusion": true,
+        "freeWill": true,
+        "capsaicinEyedrops": false,
+        "otherLocalSpeedBonus": 0
+      },
+      "recurringCosts": {
+        "capsaicinEyedropsCoinsPerDay": 0,
+        "otherLocalCostsCoinsPerDay": 0
+      }
+    },
+        {
+      "tier": 11,
+      "active": true,
+      "fuel": {
+        "rarity": "legendary",
+        "usesGabagoolDistillate": true,
+        "costCoinsPerDay": 0
+      },
+      "upgrades": {
+        "flycatchers": 1,
+        "mithrilInfusion": true,
+        "freeWill": true,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },

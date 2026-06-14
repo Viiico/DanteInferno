@@ -29,8 +29,6 @@ export function calculateSetupProfit(minionSetup: MinionSetup): number {
   }
 
   console.log(setupDrops)
-
-  // const drops = calculateMinionDrops(minionSetup.minions[0]!, havestCount);
 }
 
 function calculateMinionDrops(minion: Minion, collectionIntervalHours: number, nonFuelGlobalBonuses: number): Partial<Record<InfernoUniqueDropKey, number>>  {
@@ -41,7 +39,7 @@ function calculateMinionDrops(minion: Minion, collectionIntervalHours: number, n
 
   const legendaryDrops = (Object.entries(INFERNO_DROP_TABLE.legendaryDrops.uniqueDrops) as [InfernoUniqueDropKey, {chancePerGeneratedItem: number}][])
   .reduce<Partial<Record<InfernoUniqueDropKey, number>>>((acc, [key, drop] ) => {
-    if(key === "INFERNO_APEX" && minion.tier >= 10) acc[key] = harvestCount * drop.chancePerGeneratedItem * 2;
+    if(key === "INFERNO_APEX" && INFERNO_FUEL[minion.fuel].enablesUniqueDrops) acc[key] = harvestCount * drop.chancePerGeneratedItem * 2;
     else acc[key] = harvestCount * drop.chancePerGeneratedItem;
     return acc;
   }, {});
@@ -54,7 +52,7 @@ function calculateHarvestCount(minion: Minion, collectionIntervalHours: number, 
   const {flycatchers, mithrilInfusion, freeWill} = minion.upgrades;
 
   const risingCelsiusBonus = 0.18 * Math.min(minionSetup.minions.length, 10);
-  const nonFuelMinionBonuses = risingCelsiusBonus + 0.2 * flycatchers + (mithrilInfusion ? 0.1 : 0) + (freeWill ? 0.1 : 0);
+  const nonFuelMinionBonuses = risingCelsiusBonus + flycatchers * 0.2 + (mithrilInfusion ? 0.1 : 0) + (freeWill ? 0.1 : 0);
   const nonFuelBonuses = nonFuelMinionBonuses + nonFuelGlobalBonuses;
 
   const baseMinionActionTime = INFERNO_MINION_TIERS[minion.tier].baseActionSeconds;
