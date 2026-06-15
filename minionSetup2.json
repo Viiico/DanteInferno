@@ -3,9 +3,9 @@
   "collectionIntervalHours": 24,
   "externalIncomeCoinsPerDay": 10e7,
   "globalBonuses": {
-    "postcardActive": true,
-    "beaconTier": 5,
-    "scorchedPowerCrystalActive": true,
+    "postcardActive": false,
+    "beaconTier": 0,
+    "scorchedPowerCrystalActive": false,
     "otherGlobalSpeedBonus": 0
   },
   "prices": {
@@ -33,9 +33,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 1,
-        "mithrilInfusion": true,
-        "freeWill": true,
+        "flycatchers": 0,
+        "mithrilInfusion": false,
+        "freeWill": false,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -53,9 +53,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 1,
-        "mithrilInfusion": true,
-        "freeWill": true,
+        "flycatchers": 0,
+        "mithrilInfusion": false,
+        "freeWill": false,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -73,9 +73,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 1,
-        "mithrilInfusion": true,
-        "freeWill": true,
+        "flycatchers": 0,
+        "mithrilInfusion": false,
+        "freeWill": false,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -93,9 +93,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 1,
-        "mithrilInfusion": true,
-        "freeWill": true,
+        "flycatchers": 0,
+        "mithrilInfusion": false,
+        "freeWill": false,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -113,9 +113,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 1,
-        "mithrilInfusion": true,
-        "freeWill": true,
+        "flycatchers": 0,
+        "mithrilInfusion": false,
+        "freeWill": false,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -133,9 +133,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 1,
-        "mithrilInfusion": true,
-        "freeWill": true,
+        "flycatchers": 0,
+        "mithrilInfusion": false,
+        "freeWill": false,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -153,9 +153,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 1,
-        "mithrilInfusion": true,
-        "freeWill": true,
+        "flycatchers": 0,
+        "mithrilInfusion": false,
+        "freeWill": false,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -173,9 +173,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 1,
-        "mithrilInfusion": true,
-        "freeWill": true,
+        "flycatchers": 0,
+        "mithrilInfusion": false,
+        "freeWill": false,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -193,9 +193,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 1,
-        "mithrilInfusion": true,
-        "freeWill": true,
+        "flycatchers": 0,
+        "mithrilInfusion": false,
+        "freeWill": false,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -213,9 +213,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 1,
-        "mithrilInfusion": true,
-        "freeWill": true,
+        "flycatchers": 0,
+        "mithrilInfusion": false,
+        "freeWill": false,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -233,9 +233,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 1,
-        "mithrilInfusion": true,
-        "freeWill": true,
+        "flycatchers": 0,
+        "mithrilInfusion": false,
+        "freeWill": false,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -253,9 +253,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 1,
-        "mithrilInfusion": true,
-        "freeWill": true,
+        "flycatchers": 0,
+        "mithrilInfusion": false,
+        "freeWill": false,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -273,9 +273,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 1,
-        "mithrilInfusion": true,
-        "freeWill": true,
+        "flycatchers": 0,
+        "mithrilInfusion": false,
+        "freeWill": false,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -293,9 +293,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 1,
-        "mithrilInfusion": true,
-        "freeWill": true,
+        "flycatchers": 0,
+        "mithrilInfusion": false,
+        "freeWill": false,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -313,9 +313,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 1,
-        "mithrilInfusion": true,
-        "freeWill": true,
+        "flycatchers": 0,
+        "mithrilInfusion": false,
+        "freeWill": false,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -333,9 +333,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 1,
-        "mithrilInfusion": true,
-        "freeWill": true,
+        "flycatchers": 0,
+        "mithrilInfusion": false,
+        "freeWill": false,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -353,9 +353,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 1,
-        "mithrilInfusion": true,
-        "freeWill": true,
+        "flycatchers": 0,
+        "mithrilInfusion": false,
+        "freeWill": false,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -373,9 +373,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 1,
-        "mithrilInfusion": true,
-        "freeWill": true,
+        "flycatchers": 0,
+        "mithrilInfusion": false,
+        "freeWill": false,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -393,9 +393,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 1,
-        "mithrilInfusion": true,
-        "freeWill": true,
+        "flycatchers": 0,
+        "mithrilInfusion": false,
+        "freeWill": false,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },
@@ -413,9 +413,9 @@
         "costCoinsPerDay": 0
       },
       "upgrades": {
-        "flycatchers": 1,
-        "mithrilInfusion": true,
-        "freeWill": true,
+        "flycatchers": 0,
+        "mithrilInfusion": false,
+        "freeWill": false,
         "capsaicinEyedrops": false,
         "otherLocalSpeedBonus": 0
       },

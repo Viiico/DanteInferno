@@ -144,7 +144,7 @@ export const INFERNO_DROP_TABLE = {
     capsaicinEyedropsMultiplier: 1.3,
 
     uniqueDrops: {
-      CHILLI_PEPPER: {
+      CHILI_PEPPER: {
         chancePerGeneratedItem: 1 / 136,
         tierMultiplier: {
           default: 1,
