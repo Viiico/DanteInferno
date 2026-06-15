@@ -52,8 +52,9 @@ function calculateMinionDrops(minion: Minion, collectionIntervalHours: number, n
 
   const legendaryDrops = (Object.entries(INFERNO_DROP_TABLE.legendaryDrops.uniqueDrops) as [BaseUniqueDropKey, { chancePerGeneratedItem: number }][])
     .reduce<Partial<Record<InfernoUniqueDropKey, number>>>((acc, [key, drop]) => {
-      if (INFERNO_FUEL[minion.fuel].enablesUniqueDrops && INFERNO_DROP_TABLE.legendaryDrops.uniqueDrops[key].tierMultiplier) acc[key] = harvestCount * drop.chancePerGeneratedItem * 2;
-      else acc[key] = harvestCount * drop.chancePerGeneratedItem;
+      const baseDropAmount = harvestCount * drop.chancePerGeneratedItem * (minion.upgrades.capsaicinEyedrops ? 1.3 : 0);
+      if (INFERNO_FUEL[minion.fuel].enablesUniqueDrops && INFERNO_DROP_TABLE.legendaryDrops.uniqueDrops[key].tierMultiplier) acc[key] = baseDropAmount * 2;
+      else acc[key] = baseDropAmount;
       return acc;
     }, {});
 
@@ -79,8 +80,6 @@ function mapRawMinion(raw: RawMinionJson): Minion {
 
   return {
     tier: raw.tier,
-    active: raw.active,
-
     fuel: raw.fuel.rarity,
 
     upgrades: raw.upgrades,

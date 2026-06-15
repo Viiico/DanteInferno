@@ -31,7 +31,6 @@ export interface RawMinionSetupJson {
 
 export interface RawMinionJson {
   tier: InfernoMinionTier;
-  active: boolean;
   fuel: {
     rarity: InfernoFuelRarity;
     usesGabagoolDistillate: boolean;
@@ -77,8 +76,6 @@ export interface MarketPrices {
 
 export interface Minion {
     tier: InfernoMinionTier;
-    active: boolean;
-
     fuel: InfernoFuelRarity;
 
     upgrades: {
