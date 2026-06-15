@@ -8,16 +8,17 @@ import type {
   RawMinionSetupJson,
   RawMinionJson,
   InfernoUniqueDropKey,
+  BaseUniqueDropKey,
 } from '../types/minion';
 import { INFERNO_DROP_TABLE, INFERNO_FUEL, INFERNO_MINION_TIERS } from '../types/minion';
-import { resolveItemPrices } from '../resolveItemPrices';
+import { resolveItemPrices } from './resolveItemPrices';
 
 export async function calculateSetupProfit(): Promise<number> {
   const pricedItems = await resolveItemPrices();
   const minionSetup = await readMinionSetup();
   const setupDrops = calculateSetupDrops(minionSetup);
   const setupProfit = Object.entries(setupDrops).reduce((acc, [productName, productAmount]) => {
-    const itemPrice = pricedItems.get(productName)!?.cheapest.cost;
+    const itemPrice = pricedItems.get(productName)?.cheapest.cost ?? 0;
     return acc + itemPrice * productAmount;
   }, 0);
   return Math.ceil(setupProfit);
@@ -49,9 +50,9 @@ function calculateMinionDrops(minion: Minion, collectionIntervalHours: number, n
 
   if (minion.fuel !== "legendary") return { "VERY_CRUDE_GABAGOOL": veryCrudeGabagoolDrops };
 
-  const legendaryDrops = (Object.entries(INFERNO_DROP_TABLE.legendaryDrops.uniqueDrops) as [InfernoUniqueDropKey, { chancePerGeneratedItem: number }][])
+  const legendaryDrops = (Object.entries(INFERNO_DROP_TABLE.legendaryDrops.uniqueDrops) as [BaseUniqueDropKey, { chancePerGeneratedItem: number }][])
     .reduce<Partial<Record<InfernoUniqueDropKey, number>>>((acc, [key, drop]) => {
-      if (key === "INFERNO_APEX" && INFERNO_FUEL[minion.fuel].enablesUniqueDrops) acc[key] = harvestCount * drop.chancePerGeneratedItem * 2;
+      if (INFERNO_FUEL[minion.fuel].enablesUniqueDrops && INFERNO_DROP_TABLE.legendaryDrops.uniqueDrops[key].tierMultiplier) acc[key] = harvestCount * drop.chancePerGeneratedItem * 2;
       else acc[key] = harvestCount * drop.chancePerGeneratedItem;
       return acc;
     }, {});
@@ -98,7 +99,7 @@ function mapRawMinion(raw: RawMinionJson): Minion {
 }
 
 export async function readMinionSetup(): Promise<MinionSetup> {
-  const filePath = resolve(__dirname, '../minionSetup2.json');
+  const filePath = resolve(__dirname, '../minionSetup.json');
   const raw: RawMinionSetupJson = JSON.parse(await readFile(filePath, 'utf-8'));
 
   return {

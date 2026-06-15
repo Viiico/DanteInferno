@@ -86,7 +86,6 @@ export interface Minion {
         mithrilInfusion: boolean; // +10% speed
         freeWill: boolean; // +10% speed if successful
         capsaicinEyedrops: boolean; // +30% unique-drop rates, no speed
-        otherLocalSpeedBonus: number;
     };
 
     outputModifiers: {
@@ -146,42 +145,31 @@ export const INFERNO_DROP_TABLE = {
     uniqueDrops: {
       CHILI_PEPPER: {
         chancePerGeneratedItem: 1 / 136,
-        tierMultiplier: {
-          default: 1,
-        },
+        tierMultiplier: false
       },
 
       INFERNO_VERTEX: {
         chancePerGeneratedItem: 1 / 5_950,
-        tierMultiplier: {
-          default: 1,
-        },
+        tierMultiplier: false
       },
 
       INFERNO_APEX: {
         chancePerGeneratedItem: 1 / 1_309_091,
-        tierMultiplier: {
-          default: 1,
-          tier10: 2,
-          tier11: 2,
-        },
+        tierMultiplier: true
       },
 
       REAPER_PEPPER: {
         chancePerGeneratedItem: 1 / 458_182,
-        tierMultiplier: {
-          default: 1,
-        },
+        tierMultiplier: false
       },
 
       GABAGOOL_THE_FISH: {
         chancePerGeneratedItem: 1 / 3_927_273,
-        tierMultiplier: {
-          default: 1,
-        },
+        tierMultiplier: false
       },
     },
   },
 } as const;
 
 export type InfernoUniqueDropKey = keyof typeof INFERNO_DROP_TABLE.legendaryDrops.uniqueDrops | "VERY_CRUDE_GABAGOOL";
+export type BaseUniqueDropKey = keyof typeof INFERNO_DROP_TABLE.legendaryDrops.uniqueDrops;

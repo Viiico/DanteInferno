@@ -69,13 +69,11 @@ Reaper Pepper - B
 # TODO
 Work on minion structures and price obtaining - especially applying missing upgrades from minionAH.
 maybe add a tag for items I want to sell to include that infromation in pricedItems
+resolveItemPrice has no circular prevention
+
+
 
 Calculator for free will
-Profit calculator
-Predict output using CTG
-Incorporate bonus effects from upgrades
-Include bonus items, finish structure as needed from cost calculator
-For tier X,XI - include the doubling effect
 Calculations for sustainability of eyedrops
 At first assume legendary fuel, add possibility of secondary tiers and theirs effect too
 Compress information in minionSetup - declare states so we can store information like mithrilInfusion, freeWill in single bits.

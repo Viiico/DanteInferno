@@ -1,9 +1,9 @@
-import { prepareItemContent, prepareNeededItems } from "./helperFuncs/itemPreparation.js";
-import { fetchBazaarPrices } from "./helperFuncs/bazaarHandler.js";
-import { fetchAuctionPrices } from "./helperFuncs/auctionHandler.js";
-import { fetchMinionPrices } from "./helperFuncs/minionAhHandler.js";
+import { prepareItemContent, prepareNeededItems } from "./itemPreparation.js";
+import { fetchBazaarPrices } from "./bazaarHandler.js";
+import { fetchAuctionPrices } from "./auctionHandler.js";
+import { fetchMinionPrices } from "./minionAhHandler.js";
 
-import type { AuctionHouseBuy, BazaarBuy, CraftMethod, ItemDef, MinionAuctionBuy, PricedItem, SimplifiedRecipe, Source } from "./types/items.js";
+import type { AuctionHouseBuy, BazaarBuy, CraftMethod, ItemDef, MinionAuctionBuy, PricedItem, SimplifiedRecipe, Source } from "../types/items.js";
 
 export async function resolveItemPrices(saveResults: boolean = false): Promise<Map<string, PricedItem>> {
     const itemContent = await prepareItemContent();
