@@ -71,19 +71,19 @@ Work on minion structures and price obtaining - especially applying missing upgr
 maybe add a tag for items I want to sell to include that infromation in pricedItems
 resolveItemPrice has no circular prevention
 resolveItemPrices should be extracted to seperate functions with state parameters.
-
+maybe cache resolveItemPrices
+ceramic into profit calculations or just ignore them
 
 Calculator for free will
 Calculations for sustainability of eyedrops
-At first assume legendary fuel, add possibility of secondary tiers and theirs effect too
 Compress information in minionSetup - declare states so we can store information like mithrilInfusion, freeWill in single bits.
 
-Cost of slots unlocking
+Cost of slots unlocking - LATER after having base platform and already working setup optimizer, offered in base and linked to optimizer
 Predicted xp
 required collections
 
 Fueling calculations - Already have prices
-Calculate fastest way to make more based off amount
+Calculate fastest way to make more based off amount(crafting)
 Predicted fill up time
 
 Based of costs and profit differences calculate most optimal upgrade path
