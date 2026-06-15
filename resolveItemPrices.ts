@@ -2,97 +2,85 @@ import { prepareItemContent, prepareNeededItems } from "./helperFuncs/itemPrepar
 import { fetchBazaarPrices } from "./helperFuncs/bazaarHandler.js";
 import { fetchAuctionPrices } from "./helperFuncs/auctionHandler.js";
 import { fetchMinionPrices } from "./helperFuncs/minionAhHandler.js";
-import { calculateSetupDrops, readMinionSetup } from "./helperFuncs/minionSetupHandler.js";
 
-import type { AuctionHouseBuy, BazaarBuy, CraftMethod, ItemDef, MinionAuctionBuy, ObtainMethod, PricedItem, SimplifiedRecipe, Source } from "./types/items.js";
+import type { AuctionHouseBuy, BazaarBuy, CraftMethod, ItemDef, MinionAuctionBuy, PricedItem, SimplifiedRecipe, Source } from "./types/items.js";
 
-const itemContent = await prepareItemContent();
-const { neededBazaarItems, neededAuctionItems, neededMinions } = prepareNeededItems(itemContent);
+export async function resolveItemPrices(saveResults: boolean = false): Promise<Map<string, PricedItem>> {
+    const itemContent = await prepareItemContent();
+    const { neededBazaarItems, neededAuctionItems } = prepareNeededItems(itemContent);
 
-const bazaarPrices = await fetchBazaarPrices(neededBazaarItems);
-const auctionPrices = await fetchAuctionPrices(neededAuctionItems);
-const minionPrices = await fetchMinionPrices();
+    const [bazaarPrices, auctionPrices, minionPrices] = await Promise.all([
+        fetchBazaarPrices(neededBazaarItems),
+        fetchAuctionPrices(neededAuctionItems),
+        fetchMinionPrices(),
+    ]);
 
-const pricedItems = resolveItemPrices(itemContent);
-
-// const minionSetup = await readMinionSetup();
-// const setupDrops = calculateSetupDrops(minionSetup);
-// const setupProfit = Object.entries(setupDrops).reduce((acc, [productName, productAmount]) => {
-//     const itemPrice = pricedItems.get(productName)!?.cheapest.cost;
-//     return acc + itemPrice * productAmount;
-// }, 0).toFixed(0);
-// console.log(setupProfit)
-
-export function resolveItemPrices(itemContent: Map<string, ItemDef>, forceCalculation: boolean = false, saveResults: boolean = false): Map<string, PricedItem> {
     const pricedItems = new Map<string, PricedItem>();
-    for (const productId of itemContent.keys()) resolveItemPrice(productId, itemContent, pricedItems);
+    for (const productId of itemContent.keys()) resolveItemPrice(productId);
 
-    if (saveResults) Bun.write("./pricedItems.json", JSON.stringify([...pricedItems], null, 2));
+    if (saveResults) await Bun.write("./pricedItems.json", JSON.stringify([...pricedItems], null, 2));
     return pricedItems;
-}
 
-function resolveItemPrice(productId: string, itemContent: Map<string, ItemDef>, pricedItems: Map<string, PricedItem>): PricedItem | undefined {
-    const cached = pricedItems.get(productId);
-    if (cached) return cached;
+    function resolveItemPrice(productId: string): PricedItem | undefined {
+        const cached = pricedItems.get(productId);
+        if (cached) return cached;
 
-    const product = itemContent.get(productId);
-    if (!product) throw new Error(`No product found with id ${productId}`);
+        const product = itemContent.get(productId);
+        if (!product) throw new Error(`No product found with id ${productId}`);
 
-    const craftingPrice = calculateCraftPrice(product.simplifiedRecipes);
+        const craftingPrice = calculateCraftPrice(product.simplifiedRecipes);
+        const buyPrice = getBuyPrice(productId, product.source);
+        const useCraft = craftingPrice && craftingPrice.cost < (buyPrice ?? Infinity);
 
-    const buyPrice = getBuyPrice(productId, product.source);
-    const useCraft = craftingPrice && craftingPrice.cost < (buyPrice ?? Infinity);
-    const result = {
-        ...(useCraft && { directBuyCost: buyPrice ?? Infinity }),
-        cheapest: useCraft ? craftingPrice : { type: product.source, cost: buyPrice ?? Infinity },
+        const result: PricedItem = {
+            ...(useCraft && { directBuyCost: buyPrice ?? Infinity }),
+            cheapest: useCraft ? craftingPrice : { type: product.source, cost: buyPrice ?? Infinity },
+        };
+
+        pricedItems.set(productId, result);
+        return result;
     }
 
-    pricedItems.set(productId, result);
-    return result;
-}
+    function calculateCraftPrice(simplifiedRecipes: SimplifiedRecipe[] | undefined): CraftMethod | undefined {
+        if (!simplifiedRecipes) return undefined;
 
-function calculateCraftPrice(simplifiedRecipes: SimplifiedRecipe[] | undefined): CraftMethod | undefined {
-    if (!simplifiedRecipes) return undefined;
-    let crafts: CraftMethod[] = [];
+        const crafts: CraftMethod[] = simplifiedRecipes.map((simplifiedRecipe) => {
+            const mappedIngredients: Record<string, number> = {};
 
-    for (const simplifiedRecipe of simplifiedRecipes) {
-        const { ingredients } = simplifiedRecipe;
-        const mappedIngredients: Record<string, number> = {};
+            const craftPrice = Object.entries(simplifiedRecipe.ingredients).reduce((acc, [ingredient, count]) => {
+                const ingredientPrice = resolveItemPrice(ingredient);
+                if (ingredientPrice) mappedIngredients[ingredient] = count;
+                return acc + (ingredientPrice ? ingredientPrice.cheapest.cost * count : Infinity);
+            }, 0) / simplifiedRecipe.count;
 
-        const craftPrice = Object.entries(ingredients).reduce((acc, [ingredient, count]) => {
-            const ingredientPrice = resolveItemPrice(ingredient, itemContent, pricedItems);
-            if (ingredientPrice) mappedIngredients[ingredient] = count;
-            return acc + (ingredientPrice ? ingredientPrice.cheapest.cost * count : Infinity);
-        }, 0) / simplifiedRecipe.count;
+            return { type: "craft", recipeId: simplifiedRecipe.id, cost: Math.floor(craftPrice), ingredients: mappedIngredients };
+        });
 
-        crafts.push({ type: "craft", recipeId: simplifiedRecipe.id, cost: Math.floor(craftPrice), ingredients: mappedIngredients });
+        if (crafts.length === 0) return undefined;
+        return crafts.reduce((cheapest, craft) => craft.cost < cheapest.cost ? craft : cheapest);
     }
 
-    if (crafts.length === 0) return undefined;
-    return crafts.reduce((cheapest, craft) => craft.cost < cheapest.cost ? craft : cheapest);
-}
-
-function getBuyPrice(productId: string, source: Source): number | undefined {
-    switch (source) {
-        case "auction_house": return auctionItemPrice(productId).cost;
-        case "bazaar": return bazaarItemPrice(productId).cost;
-        case "minion_auction": return minionItemPrice(productId).cost;
-        default: throw new Error(`Unsupported source ${source}`);
+    function getBuyPrice(productId: string, source: Source): number | undefined {
+        switch (source) {
+            case "auction_house": return auctionItemPrice(productId).cost;
+            case "bazaar": return bazaarItemPrice(productId).cost;
+            case "minion_auction": return minionItemPrice(productId).cost;
+            default: throw new Error(`Unsupported source: ${source}`);
+        }
     }
-}
 
-function auctionItemPrice(productId: string): AuctionHouseBuy {
-    const price = auctionPrices.get(productId)?.[0] ?? 0; // If it can't be found on ah then it's almost worthless anyway
-    return { type: "auction_house", cost: price };
+    function auctionItemPrice(productId: string): AuctionHouseBuy {
+        const price = auctionPrices.get(productId)?.[0] ?? 0; // Missing AH items are nearly worthless
+        return { type: "auction_house", cost: price };
+    }
 
-}
+    function bazaarItemPrice(productId: string): BazaarBuy {
+        const price = bazaarPrices.get(productId);
+        return { type: "bazaar", cost: price ? price.instantBuyPrice : Infinity };
+    }
 
-function bazaarItemPrice(productId: string): BazaarBuy {
-    const price = bazaarPrices.get(productId);
-    return { type: "bazaar", cost: price ? price.instantBuyPrice : Infinity };
-}
-
-function minionItemPrice(productId: string): MinionAuctionBuy {
-    const minionPrice = minionPrices.get(productId)?.[0]?.price ?? Infinity;
-    return { type: "minion_auction", cost: minionPrice };
+    function minionItemPrice(productId: string): MinionAuctionBuy {
+        const minionPrice = minionPrices.get(productId)?.[0]?.price ?? Infinity;
+        return { type: "minion_auction", cost: minionPrice };
+    }
 }
