@@ -10,9 +10,20 @@ import type {
   InfernoUniqueDropKey,
 } from '../types/minion';
 import { INFERNO_DROP_TABLE, INFERNO_FUEL, INFERNO_MINION_TIERS } from '../types/minion';
+import { resolveItemPrices } from '../resolveItemPrices';
 
+export async function calculateSetupProfit(): Promise<number> {
+  const pricedItems = await resolveItemPrices();
+  const minionSetup = await readMinionSetup();
+  const setupDrops = calculateSetupDrops(minionSetup);
+  const setupProfit = Object.entries(setupDrops).reduce((acc, [productName, productAmount]) => {
+    const itemPrice = pricedItems.get(productName)!?.cheapest.cost;
+    return acc + itemPrice * productAmount;
+  }, 0);
+  return Math.ceil(setupProfit);
+}
 
-export function calculateSetupDrops(minionSetup: MinionSetup): Record<InfernoUniqueDropKey, number> {
+function calculateSetupDrops(minionSetup: MinionSetup): Record<InfernoUniqueDropKey, number> {
   const { collectionIntervalHours, globalBonuses } = minionSetup;
   const { postcardActive, beaconTier, scorchedPowerCrystalActive, otherGlobalSpeedBonus } = globalBonuses;
 
