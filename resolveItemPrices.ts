@@ -15,8 +15,6 @@ const minionPrices = await fetchMinionPrices();
 
 const pricedItems = resolveItemPrices(itemContent);
 
-
-
 // const minionSetup = await readMinionSetup();
 // const setupDrops = calculateSetupDrops(minionSetup);
 // const setupProfit = Object.entries(setupDrops).reduce((acc, [productName, productAmount]) => {
@@ -62,7 +60,7 @@ function calculateCraftPrice(simplifiedRecipes: SimplifiedRecipe[] | undefined):
         const mappedIngredients: Record<string, number> = {};
 
         const craftPrice = Object.entries(ingredients).reduce((acc, [ingredient, count]) => {
-            const ingredientPrice = resolveItemPrice(ingredient);
+            const ingredientPrice = resolveItemPrice(ingredient, itemContent, pricedItems);
             if (ingredientPrice) mappedIngredients[ingredient] = count;
             return acc + (ingredientPrice ? ingredientPrice.cheapest.cost * count : Infinity);
         }, 0) / simplifiedRecipe.count;
