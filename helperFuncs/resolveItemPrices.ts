@@ -84,3 +84,7 @@ export async function resolveItemPrices(saveResults: boolean = false): Promise<M
         return { type: "minion_auction", cost: minionPrice };
     }
 }
+
+export function expandRecipeTree(pricedItems: Map<string, PricedItem>, recipeId: string) {
+
+}

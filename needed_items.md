@@ -82,9 +82,10 @@ Cost of slots unlocking - LATER after having base platform and already working s
 Predicted xp
 required collections
 
-Fueling calculations - Already have prices
-Calculate fastest way to make more based off amount(crafting)
+Calculate fastest way to make fuel based off amount(crafting)
 Predicted fill up time
+
+Function to destructure obtaining method from pricedItems
 
 Based of costs and profit differences calculate most optimal upgrade path
 Add providing current setup
