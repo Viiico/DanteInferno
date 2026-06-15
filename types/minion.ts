@@ -1,22 +1,22 @@
 export interface MinionResponse {
-    minion_id: string;
-    hasInfusion: boolean;
-    hasFreeWill: boolean;
-    price: number;
-    amount: number;
-    minion: {
-        generator_tier: number,
-    }
-    user: { username: string };
+  minion_id: string;
+  hasInfusion: boolean;
+  hasFreeWill: boolean;
+  price: number;
+  amount: number;
+  minion: {
+    generator_tier: number,
+  }
+  user: { username: string };
 }
 
 export interface MinionProduct {
-    minion_id: string;
-    hasInfusion: boolean;
-    hasFreeWill: boolean;
-    price: number;
-    amount: number;
-    username: string;
+  minion_id: string;
+  hasInfusion: boolean;
+  hasFreeWill: boolean;
+  price: number;
+  amount: number;
+  username: string;
 }
 
 export interface RawMinionSetupJson {
@@ -75,26 +75,43 @@ export interface MarketPrices {
 }
 
 export interface Minion {
-    tier: InfernoMinionTier;
-    fuel: InfernoFuelRarity;
+  tier: InfernoMinionTier;
+  fuel: InfernoFuelRarity;
 
-    upgrades: {
-        flycatchers: 0 | 1 | 2; // +20% speed each
-        mithrilInfusion: boolean; // +10% speed
-        freeWill: boolean; // +10% speed if successful
-        capsaicinEyedrops: boolean; // +30% unique-drop rates, no speed
-    };
+  upgrades: {
+    flycatchers: 0 | 1 | 2; // +20% speed each
+    mithrilInfusion: boolean; // +10% speed
+    freeWill: boolean; // +10% speed if successful
+    capsaicinEyedrops: boolean; // +30% unique-drop rates, no speed
+  };
 
-    outputModifiers: {
-        crudeGabagoolPerGeneratedItem: number; // 1 with Gabagool Distillate
-        apexDropMultiplier: number; // 2 for Tier X/XI, else 1
-    };
+  outputModifiers: {
+    crudeGabagoolPerGeneratedItem: number; // 1 with Gabagool Distillate
+    apexDropMultiplier: number; // 2 for Tier X/XI, else 1
+  };
 
-    recurringCosts: {
-        capsaicinEyedropsCoinsPerDay: number;
-        otherLocalCostsCoinsPerDay: number;
-    };
+  recurringCosts: {
+    capsaicinEyedropsCoinsPerDay: number;
+    otherLocalCostsCoinsPerDay: number;
+  };
 }
+
+export const SPEED_BONUSES = {
+  global: {
+    postcard: 0.05,
+    beaconPerTier: 0.02,
+    scorchedPowerCrystal: 0.01,
+    risingCelsius: {
+      perMinion: 0.18,
+      maxStack: 10,
+    },
+  },
+  local: {
+    perFlycatcherBonus: 0.2,
+    mithrilInfusionBonus: 0.1,
+    freeWillBonus: 0.1,
+  },
+} as const;
 
 export const INFERNO_MINION_TIERS = {
   1: { baseActionSeconds: 1013, storageCapacityItems: 64, apexDropMultiplier: 1 },

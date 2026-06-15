@@ -1,14 +1,15 @@
 import { readFile } from 'fs/promises';
 import { resolve } from 'path';
-import type {
-  Minion,
-  MinionSetup,
-  InfernoMinionTier,
-  InfernoFuelRarity,
-  RawMinionSetupJson,
-  RawMinionJson,
-  InfernoUniqueDropKey,
-  BaseUniqueDropKey,
+import {
+  type Minion,
+  type MinionSetup,
+  type InfernoMinionTier,
+  type InfernoFuelRarity,
+  type RawMinionSetupJson,
+  type RawMinionJson,
+  type InfernoUniqueDropKey,
+  type BaseUniqueDropKey,
+  SPEED_BONUSES,
 } from '../types/minion';
 import { INFERNO_DROP_TABLE, INFERNO_FUEL, INFERNO_MINION_TIERS } from '../types/minion';
 import { resolveItemPrices } from './resolveItemPrices';
@@ -27,9 +28,10 @@ export async function calculateSetupProfit(): Promise<number> {
 function calculateSetupDrops(minionSetup: MinionSetup): Record<InfernoUniqueDropKey, number> {
   const { collectionIntervalHours, globalBonuses } = minionSetup;
   const { postcardActive, beaconTier, scorchedPowerCrystalActive, otherGlobalSpeedBonus } = globalBonuses;
+  const { beaconPerTier, postcard, scorchedPowerCrystal, risingCelsius } = SPEED_BONUSES.global;
 
-  const nonFuelGlobalBonuses = beaconTier * 0.02 + (postcardActive ? 0.05 : 0) + (scorchedPowerCrystalActive ? 0.01 : 0) + otherGlobalSpeedBonus;
-  const risingCelsiusBonus = 0.18 * Math.min(minionSetup.minions.length, 10);
+  const nonFuelGlobalBonuses = beaconTier * beaconPerTier + (postcardActive ? postcard : 0) + (scorchedPowerCrystalActive ? scorchedPowerCrystal : 0) + otherGlobalSpeedBonus;
+  const risingCelsiusBonus = risingCelsius.perMinion * Math.min(minionSetup.minions.length, risingCelsius.maxStack);
 
   const setupDrops = {} as Record<InfernoUniqueDropKey, number>;
 
@@ -64,8 +66,9 @@ function calculateMinionDrops(minion: Minion, collectionIntervalHours: number, n
 
 function calculateHarvestCount(minion: Minion, collectionIntervalHours: number, nonFuelGlobalBonuses: number, risingCelsiusBonus: number): number {
   const { flycatchers, mithrilInfusion, freeWill } = minion.upgrades;
+  const { perFlycatcherBonus, mithrilInfusionBonus, freeWillBonus } = SPEED_BONUSES.local;
 
-  const nonFuelMinionBonuses = risingCelsiusBonus + flycatchers * 0.2 + (mithrilInfusion ? 0.1 : 0) + (freeWill ? 0.1 : 0);
+  const nonFuelMinionBonuses = risingCelsiusBonus + flycatchers * perFlycatcherBonus + (mithrilInfusion ? mithrilInfusionBonus : 0) + (freeWill ? freeWillBonus : 0);
   const nonFuelBonuses = nonFuelMinionBonuses + nonFuelGlobalBonuses;
 
   const baseMinionActionTime = INFERNO_MINION_TIERS[minion.tier].baseActionSeconds;
