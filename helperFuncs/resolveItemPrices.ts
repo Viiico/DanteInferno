@@ -53,7 +53,7 @@ export async function resolveItemPrices(saveResults: boolean = false): Promise<M
                 return acc + (ingredientPrice ? ingredientPrice.cheapest.cost * count : Infinity);
             }, 0) / simplifiedRecipe.count;
 
-            return { type: "craft", recipeId: simplifiedRecipe.id, cost: Math.floor(craftPrice), ingredients: mappedIngredients };
+            return { type: "craft", recipeId: simplifiedRecipe.id, cost: Math.floor(craftPrice) };
         });
 
         if (crafts.length === 0) return undefined;
@@ -90,9 +90,17 @@ export function expandRecipeTree(pricedItems: Map<string, PricedItem>, itemConte
     if (!itemObtainMethod) throw new Error("Could not find item obtain method for recipeId: " + recipeId);
 
     if (itemObtainMethod.type !== "craft") return itemObtainMethod;
+    const item = itemContent.get(recipeId);
+    if(!item || !item.simplifiedRecipes)throw new Error("Could not find recipes for recipeId: " + recipeId);
+    const simplifiedRecipeIndex = itemObtainMethod.recipeId.split("#")[1]
+    if(!simplifiedRecipeIndex)throw new Error("Could not find simplified recipe index for recipeId: " + recipeId);
+    const recipe = item.simplifiedRecipes[parseInt(simplifiedRecipeIndex)];
+    if(!recipe)throw new Error("Could not find recipe for recipeId: " + recipeId);
+    // console.log(`${recipeId}\n ${JSON.stringify(ingredients, null, 2)}\n----------------------`);
+    // console.log(`${recipeId}\n ${JSON.stringify(recipe.ingredients, null, 2)}\n----------------------`);
 
     const expandedIngredients = Object.fromEntries(
-        Object.entries(itemObtainMethod.ingredients).map(([ingredient, count]) => [
+        Object.entries(recipe.ingredients).map(([ingredient, count]) => [
             ingredient,
             { count, obtainMethod: expandRecipeTree(pricedItems, itemContent, ingredient) },
         ])

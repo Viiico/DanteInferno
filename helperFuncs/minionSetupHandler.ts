@@ -12,11 +12,10 @@ import {
   SPEED_BONUSES,
 } from '../types/minion';
 import { INFERNO_DROP_TABLE, INFERNO_FUEL, INFERNO_MINION_TIERS } from '../types/minion';
-import type { PricedItem } from '../types/items';
+import type { ItemDef, PricedItem } from '../types/items';
 
 export async function calculateSetupProfit(pricedItems: Map<string, PricedItem>): Promise<number> {
   const minionSetup = await readMinionSetup();
-
   const { collectionIntervalHours, globalBonuses } = minionSetup;
   const { postcardActive, beaconTier, scorchedPowerCrystalActive, otherGlobalSpeedBonus } = globalBonuses;
   const { beaconPerTier, postcard, scorchedPowerCrystal, risingCelsius } = SPEED_BONUSES.global;
@@ -34,7 +33,7 @@ export async function calculateSetupProfit(pricedItems: Map<string, PricedItem>)
     }
 
     dailyFuelCost += fuelCost[minion.fuel];
-    if(minion.upgrades.capsaicinEyedrops)dailyFuelCost += pricedItems.get("CAPSAICIN_EYEDROPS_NO_CHARGES")?.cheapest.cost ?? 0;
+    if (minion.upgrades.capsaicinEyedrops) dailyFuelCost += pricedItems.get("CAPSAICIN_EYEDROPS_NO_CHARGES")?.cheapest.cost ?? 0;
   }
 
   const setupProfit = Object.entries(setupDrops).reduce((acc, [productName, productAmount]) => {
@@ -120,10 +119,10 @@ async function readMinionSetup(): Promise<MinionSetup> {
 }
 
 function prepareFuelCost(pricedItems: Map<string, PricedItem>): Record<InfernoFuelRarity, number> {
-    return {
-        "none": 0,
-        "rare": pricedItems.get("INFERNO_FUEL_CRUDE_GABAGOOL")?.cheapest.cost ?? 0,
-        "epic": pricedItems.get("INFERNO_HEAVY_CRUDE_GABAGOOL")?.cheapest.cost ?? 0,
-        "legendary": pricedItems.get("INFERNO_HYPERGOLIC_CRUDE_GABAGOOL")?.cheapest.cost ?? 0
-    }
+  return {
+    "none": 0,
+    "rare": pricedItems.get("INFERNO_FUEL_CRUDE_GABAGOOL")?.cheapest.cost ?? 0,
+    "epic": pricedItems.get("INFERNO_HEAVY_CRUDE_GABAGOOL")?.cheapest.cost ?? 0,
+    "legendary": pricedItems.get("INFERNO_HYPERGOLIC_CRUDE_GABAGOOL")?.cheapest.cost ?? 0
+  }
 }

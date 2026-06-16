@@ -67,8 +67,6 @@ Gabagool the fish - A
 Reaper Pepper - B
 
 # TODO
-Currently fuel price is not being deducted from profits
-Ingredients can be removed from pricedItems as they can be fetched by recipeId
 Work on minion structures and price obtaining - especially applying missing upgrades from minionAH.
 maybe add a tag for items I want to sell to include that infromation in pricedItems
 resolveItemPrice has no circular prevention
