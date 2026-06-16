@@ -3,7 +3,7 @@ import { fetchBazaarPrices } from "./bazaarHandler.ts";
 import { fetchAuctionPrices } from "./auctionHandler.ts";
 import { fetchMinionPrices } from "./minionAhHandler.ts";
 
-import type { AuctionHouseBuy, BazaarBuy, CraftMethod, ExpandedObtainMethod, ItemDef, MinionAuctionBuy, ObtainMethod, PricedItem, SimplifiedRecipe, Source } from "../types/items.ts";
+import type { AuctionHouseBuy, BazaarBuy, CraftMethod, ExpandedObtainMethod, ItemDef, MinionAuctionBuy, PricedItem, PriceContext, SimplifiedRecipe, Source } from "../types/items.ts";
 
 export async function resolveItemPrices(saveResults: boolean = false): Promise<Map<string, PricedItem>> {
     const itemContent = await prepareItemContent();
@@ -15,74 +15,81 @@ export async function resolveItemPrices(saveResults: boolean = false): Promise<M
         fetchMinionPrices(),
     ]);
 
-    const pricedItems = new Map<string, PricedItem>();
-    for (const productId of itemContent.keys()) resolveItemPrice(productId);
+    const ctx: PriceContext = {
+        itemContent,
+        bazaarPrices,
+        auctionPrices,
+        minionPrices,
+        pricedItems: new Map(),
+    };
 
-    if (saveResults) await Bun.write("./pricedItems.json", JSON.stringify([...pricedItems], null, 2));
-    return pricedItems;
+    for (const productId of itemContent.keys()) resolveItemPrice(ctx, productId);
 
-    function resolveItemPrice(productId: string): PricedItem | undefined {
-        const cached = pricedItems.get(productId);
-        if (cached) return cached;
+    if (saveResults) await Bun.write("./pricedItems.json", JSON.stringify([...ctx.pricedItems], null, 2));
+    return ctx.pricedItems;
+}
 
-        const product = itemContent.get(productId);
-        if (!product) throw new Error(`No product found with id ${productId}`);
+function resolveItemPrice(ctx: PriceContext, productId: string): PricedItem | undefined {
+    const cached = ctx.pricedItems.get(productId);
+    if (cached) return cached;
 
-        const craftingPrice = calculateCraftPrice(product.simplifiedRecipes);
-        const buyPrice = getBuyPrice(productId, product.source);
-        const useCraft = craftingPrice && craftingPrice.cost < (buyPrice ?? Infinity);
+    const product = ctx.itemContent.get(productId);
+    if (!product) throw new Error(`No product found with id ${productId}`);
 
-        const result: PricedItem = {
-            ...(useCraft && { directBuyCost: buyPrice ?? Infinity }),
-            cheapest: useCraft ? craftingPrice : { type: product.source, cost: buyPrice ?? Infinity },
-        };
+    const craftingPrice = calculateCraftPrice(ctx, product.simplifiedRecipes);
+    const buyPrice = getBuyPrice(ctx, productId, product.source);
+    const useCraft = craftingPrice && craftingPrice.cost < (buyPrice ?? Infinity);
 
-        pricedItems.set(productId, result);
-        return result;
+    const result: PricedItem = {
+        ...(useCraft && { directBuyCost: buyPrice ?? Infinity }),
+        cheapest: useCraft ? craftingPrice : { type: product.source, cost: buyPrice ?? Infinity },
+    };
+
+    ctx.pricedItems.set(productId, result);
+    return result;
+}
+
+function calculateCraftPrice(ctx: PriceContext, simplifiedRecipes: SimplifiedRecipe[] | undefined): CraftMethod | undefined {
+    if (!simplifiedRecipes) return undefined;
+
+    const crafts: CraftMethod[] = simplifiedRecipes.map((simplifiedRecipe) => {
+        const mappedIngredients: Record<string, number> = {};
+
+        const craftPrice = Object.entries(simplifiedRecipe.ingredients).reduce((acc, [ingredient, count]) => {
+            const ingredientPrice = resolveItemPrice(ctx, ingredient);
+            if (ingredientPrice) mappedIngredients[ingredient] = count;
+            return acc + (ingredientPrice ? ingredientPrice.cheapest.cost * count : Infinity);
+        }, 0) / simplifiedRecipe.count;
+
+        return { type: "craft", recipeId: simplifiedRecipe.id, cost: Math.floor(craftPrice) };
+    });
+
+    if (crafts.length === 0) return undefined;
+    return crafts.reduce((cheapest, craft) => craft.cost < cheapest.cost ? craft : cheapest);
+}
+
+function getBuyPrice(ctx: PriceContext, productId: string, source: Source): number | undefined {
+    switch (source) {
+        case "auction_house": return auctionItemPrice(ctx, productId).cost;
+        case "bazaar": return bazaarItemPrice(ctx, productId).cost;
+        case "minion_auction": return minionItemPrice(ctx, productId).cost;
+        default: throw new Error(`Unsupported source: ${source}`);
     }
+}
 
-    function calculateCraftPrice(simplifiedRecipes: SimplifiedRecipe[] | undefined): CraftMethod | undefined {
-        if (!simplifiedRecipes) return undefined;
+function auctionItemPrice(ctx: PriceContext, productId: string): AuctionHouseBuy {
+    const price = ctx.auctionPrices.get(productId)?.[0] ?? Infinity;
+    return { type: "auction_house", cost: price };
+}
 
-        const crafts: CraftMethod[] = simplifiedRecipes.map((simplifiedRecipe) => {
-            const mappedIngredients: Record<string, number> = {};
+function bazaarItemPrice(ctx: PriceContext, productId: string): BazaarBuy {
+    const price = ctx.bazaarPrices.get(productId);
+    return { type: "bazaar", cost: price ? price.instantBuyPrice : Infinity };
+}
 
-            const craftPrice = Object.entries(simplifiedRecipe.ingredients).reduce((acc, [ingredient, count]) => {
-                const ingredientPrice = resolveItemPrice(ingredient);
-                if (ingredientPrice) mappedIngredients[ingredient] = count;
-                return acc + (ingredientPrice ? ingredientPrice.cheapest.cost * count : Infinity);
-            }, 0) / simplifiedRecipe.count;
-
-            return { type: "craft", recipeId: simplifiedRecipe.id, cost: Math.floor(craftPrice) };
-        });
-
-        if (crafts.length === 0) return undefined;
-        return crafts.reduce((cheapest, craft) => craft.cost < cheapest.cost ? craft : cheapest);
-    }
-
-    function getBuyPrice(productId: string, source: Source): number | undefined {
-        switch (source) {
-            case "auction_house": return auctionItemPrice(productId).cost;
-            case "bazaar": return bazaarItemPrice(productId).cost;
-            case "minion_auction": return minionItemPrice(productId).cost;
-            default: throw new Error(`Unsupported source: ${source}`);
-        }
-    }
-
-    function auctionItemPrice(productId: string): AuctionHouseBuy {
-        const price = auctionPrices.get(productId)?.[0] ?? Infinity;
-        return { type: "auction_house", cost: price };
-    }
-
-    function bazaarItemPrice(productId: string): BazaarBuy {
-        const price = bazaarPrices.get(productId);
-        return { type: "bazaar", cost: price ? price.instantBuyPrice : Infinity };
-    }
-
-    function minionItemPrice(productId: string): MinionAuctionBuy {
-        const minionPrice = minionPrices.get(productId)?.[0]?.price ?? Infinity;
-        return { type: "minion_auction", cost: minionPrice };
-    }
+function minionItemPrice(ctx: PriceContext, productId: string): MinionAuctionBuy {
+    const minionPrice = ctx.minionPrices.get(productId)?.[0]?.price ?? Infinity;
+    return { type: "minion_auction", cost: minionPrice };
 }
 
 export function expandRecipeTree(pricedItems: Map<string, PricedItem>, itemContent: Map<string, ItemDef>, recipeId: string): ExpandedObtainMethod {
@@ -91,13 +98,11 @@ export function expandRecipeTree(pricedItems: Map<string, PricedItem>, itemConte
 
     if (itemObtainMethod.type !== "craft") return itemObtainMethod;
     const item = itemContent.get(recipeId);
-    if(!item || !item.simplifiedRecipes)throw new Error("Could not find recipes for recipeId: " + recipeId);
-    const simplifiedRecipeIndex = itemObtainMethod.recipeId.split("#")[1]
-    if(!simplifiedRecipeIndex)throw new Error("Could not find simplified recipe index for recipeId: " + recipeId);
+    if (!item || !item.simplifiedRecipes) throw new Error("Could not find recipes for recipeId: " + recipeId);
+    const simplifiedRecipeIndex = itemObtainMethod.recipeId.split("#")[1];
+    if (!simplifiedRecipeIndex) throw new Error("Could not find simplified recipe index for recipeId: " + recipeId);
     const recipe = item.simplifiedRecipes[parseInt(simplifiedRecipeIndex)];
-    if(!recipe)throw new Error("Could not find recipe for recipeId: " + recipeId);
-    // console.log(`${recipeId}\n ${JSON.stringify(ingredients, null, 2)}\n----------------------`);
-    // console.log(`${recipeId}\n ${JSON.stringify(recipe.ingredients, null, 2)}\n----------------------`);
+    if (!recipe) throw new Error("Could not find recipe for recipeId: " + recipeId);
 
     const expandedIngredients = Object.fromEntries(
         Object.entries(recipe.ingredients).map(([ingredient, count]) => [

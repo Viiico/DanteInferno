@@ -1,3 +1,6 @@
+import type { BazaarPrice } from "./bazaar";
+import type { MinionProduct } from "./minion";
+
 export type Source = "bazaar" | "auction_house" | "minion_auction";
 
 // Recipe Definitions (loaded from JSON files)
@@ -21,9 +24,9 @@ export interface ItemDef {
     simplifiedRecipes?: SimplifiedRecipe[],
 }
 
-export interface BazaarBuy {type: Extract<Source, "bazaar">; cost: number;}
-export interface AuctionHouseBuy {type: Extract<Source, "auction_house">; cost: number;}
-export interface MinionAuctionBuy {type: Extract<Source, "minion_auction">; cost: number;}
+export interface BazaarBuy { type: Extract<Source, "bazaar">; cost: number; }
+export interface AuctionHouseBuy { type: Extract<Source, "auction_house">; cost: number; }
+export interface MinionAuctionBuy { type: Extract<Source, "minion_auction">; cost: number; }
 
 export type ObtainMethod = BazaarBuy | AuctionHouseBuy | MinionAuctionBuy | CraftMethod;
 
@@ -44,4 +47,12 @@ export interface CraftMethod {
     type: "craft";
     recipeId: string;
     cost: number;
+}
+
+export interface PriceContext {
+    itemContent: Map<string, ItemDef>;
+    bazaarPrices: Map<string, BazaarPrice>;
+    auctionPrices: Map<string, number[]>;
+    minionPrices: Map<string, MinionProduct[]>;
+    pricedItems: Map<string, PricedItem>;
 }
