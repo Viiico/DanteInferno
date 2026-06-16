@@ -67,11 +67,10 @@ Gabagool the fish - A
 Reaper Pepper - B
 
 # TODO
+clear up minionSetup structure
 Work on minion structures and price obtaining - especially applying missing upgrades from minionAH.
-resolveItemPrice has no circular prevention
-resolveItemPrices should be extracted to seperate functions with state parameters.
-maybe cache resolveItemPrices
-ceramic into profit calculations or just ignore them
+resolveItemPrice has no circular prevention!!!
+add ceramic into profit calculations
 
 Calculator for free will
 Calculations for sustainability of eyedrops
@@ -83,8 +82,6 @@ required collections
 
 Calculate fastest way to make fuel based off amount(crafting)
 Predicted fill up time
-
-Function to destructure obtaining method from pricedItems
 
 Based of costs and profit differences calculate most optimal upgrade path
 Add providing current setup

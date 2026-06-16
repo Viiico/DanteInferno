@@ -87,20 +87,14 @@ function mapRawMinion(raw: RawMinionJson): Minion {
 
   return {
     tier: raw.tier,
-    fuel: raw.fuel.rarity,
+    fuel: raw.fuel,
 
     upgrades: raw.upgrades,
 
     outputModifiers: {
-      crudeGabagoolPerGeneratedItem: raw.fuel.usesGabagoolDistillate ? 1 : 0,
+      crudeGabagoolPerGeneratedItem: 1,
       apexDropMultiplier: tierData.apexDropMultiplier,
-    },
-
-    recurringCosts: {
-      capsaicinEyedropsCoinsPerDay: raw.recurringCosts.capsaicinEyedropsCoinsPerDay,
-      otherLocalCostsCoinsPerDay:
-        raw.recurringCosts.otherLocalCostsCoinsPerDay + raw.fuel.costCoinsPerDay,
-    },
+    }
   };
 }
 
@@ -113,7 +107,6 @@ async function readMinionSetup(): Promise<MinionSetup> {
     collectionIntervalHours: raw.collectionIntervalHours,
     externalIncomeCoinsPerDay: raw.externalIncomeCoinsPerDay,
     globalBonuses: raw.globalBonuses,
-    recurringCosts: raw.recurringCosts,
     minions: raw.minions.map(mapRawMinion),
   };
 }

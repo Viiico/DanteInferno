@@ -24,23 +24,14 @@ export interface RawMinionSetupJson {
   collectionIntervalHours: number;
   externalIncomeCoinsPerDay: number;
   globalBonuses: MinionSetup['globalBonuses'];
-  recurringCosts: MinionSetup['recurringCosts'];
   minions: RawMinionJson[];
 }
 
 
 export interface RawMinionJson {
   tier: InfernoMinionTier;
-  fuel: {
-    rarity: InfernoFuelRarity;
-    usesGabagoolDistillate: boolean;
-    costCoinsPerDay: number;
-  };
+  fuel: InfernoFuelRarity;
   upgrades: Minion['upgrades'];
-  recurringCosts: {
-    capsaicinEyedropsCoinsPerDay: number;
-    otherLocalCostsCoinsPerDay: number;
-  };
 }
 
 
@@ -56,11 +47,6 @@ export interface MinionSetup {
     beaconTier: 0 | 1 | 2 | 3 | 4 | 5;
     scorchedPowerCrystalActive: boolean;
     otherGlobalSpeedBonus: number;
-  };
-
-  recurringCosts: {
-    beaconFuelCoinsPerDay: number;
-    otherGlobalCostsCoinsPerDay: number;
   };
 }
 
@@ -85,14 +71,10 @@ export interface Minion {
     capsaicinEyedrops: boolean; // +30% unique-drop rates, no speed
   };
 
+  // TODO remove
   outputModifiers: {
     crudeGabagoolPerGeneratedItem: number; // 1 with Gabagool Distillate
     apexDropMultiplier: number; // 2 for Tier X/XI, else 1
-  };
-
-  recurringCosts: {
-    capsaicinEyedropsCoinsPerDay: number;
-    otherLocalCostsCoinsPerDay: number;
   };
 }
 

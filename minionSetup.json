@@ -19,441 +19,245 @@
       "gabagoolTheFish": 0
     }
   },
-  "recurringCosts": {
-    "beaconFuelCoinsPerDay": 0,
-    "otherGlobalCostsCoinsPerDay": 0
-  },
   "minions": [
     {
       "tier": 8,
-      "fuel": {
-        "rarity": "legendary",
-        "usesGabagoolDistillate": true,
-        "costCoinsPerDay": 0
-      },
+      "fuel": "legendary",
       "upgrades": {
         "flycatchers": 1,
         "mithrilInfusion": true,
         "freeWill": true,
-        "capsaicinEyedrops": true
-      },
-      "recurringCosts": {
-        "capsaicinEyedropsCoinsPerDay": 0,
-        "otherLocalCostsCoinsPerDay": 0
+        "capsaicinEyedrops": false
       }
     },
     {
       "tier": 8,
-      "fuel": {
-        "rarity": "legendary",
-        "usesGabagoolDistillate": true,
-        "costCoinsPerDay": 0
-      },
+      "fuel": "legendary",
       "upgrades": {
         "flycatchers": 1,
         "mithrilInfusion": true,
         "freeWill": true,
-        "capsaicinEyedrops": true
-      },
-      "recurringCosts": {
-        "capsaicinEyedropsCoinsPerDay": 0,
-        "otherLocalCostsCoinsPerDay": 0
+        "capsaicinEyedrops": false
       }
     },
     {
       "tier": 8,
-      "fuel": {
-        "rarity": "legendary",
-        "usesGabagoolDistillate": true,
-        "costCoinsPerDay": 0
-      },
+      "fuel": "legendary",
       "upgrades": {
         "flycatchers": 1,
         "mithrilInfusion": true,
         "freeWill": true,
-        "capsaicinEyedrops": true
-      },
-      "recurringCosts": {
-        "capsaicinEyedropsCoinsPerDay": 0,
-        "otherLocalCostsCoinsPerDay": 0
+        "capsaicinEyedrops": false
       }
     },
     {
       "tier": 8,
-      "fuel": {
-        "rarity": "legendary",
-        "usesGabagoolDistillate": true,
-        "costCoinsPerDay": 0
-      },
+      "fuel": "legendary",
       "upgrades": {
         "flycatchers": 1,
         "mithrilInfusion": true,
         "freeWill": true,
-        "capsaicinEyedrops": true
-      },
-      "recurringCosts": {
-        "capsaicinEyedropsCoinsPerDay": 0,
-        "otherLocalCostsCoinsPerDay": 0
+        "capsaicinEyedrops": false
       }
     },
     {
       "tier": 8,
-      "fuel": {
-        "rarity": "legendary",
-        "usesGabagoolDistillate": true,
-        "costCoinsPerDay": 0
-      },
+      "fuel": "legendary",
       "upgrades": {
         "flycatchers": 1,
         "mithrilInfusion": true,
         "freeWill": true,
-        "capsaicinEyedrops": true
-      },
-      "recurringCosts": {
-        "capsaicinEyedropsCoinsPerDay": 0,
-        "otherLocalCostsCoinsPerDay": 0
+        "capsaicinEyedrops": false
       }
     },
     {
       "tier": 8,
-      "fuel": {
-        "rarity": "legendary",
-        "usesGabagoolDistillate": true,
-        "costCoinsPerDay": 0
-      },
+      "fuel": "legendary",
       "upgrades": {
         "flycatchers": 1,
         "mithrilInfusion": true,
         "freeWill": true,
-        "capsaicinEyedrops": true
-      },
-      "recurringCosts": {
-        "capsaicinEyedropsCoinsPerDay": 0,
-        "otherLocalCostsCoinsPerDay": 0
+        "capsaicinEyedrops": false
       }
     },
     {
       "tier": 8,
-      "fuel": {
-        "rarity": "legendary",
-        "usesGabagoolDistillate": true,
-        "costCoinsPerDay": 0
-      },
+      "fuel": "legendary",
       "upgrades": {
         "flycatchers": 1,
         "mithrilInfusion": true,
         "freeWill": true,
-        "capsaicinEyedrops": true
-      },
-      "recurringCosts": {
-        "capsaicinEyedropsCoinsPerDay": 0,
-        "otherLocalCostsCoinsPerDay": 0
+        "capsaicinEyedrops": false
       }
     },
     {
       "tier": 8,
-      "fuel": {
-        "rarity": "legendary",
-        "usesGabagoolDistillate": true,
-        "costCoinsPerDay": 0
-      },
+      "fuel": "legendary",
       "upgrades": {
         "flycatchers": 1,
         "mithrilInfusion": true,
         "freeWill": true,
-        "capsaicinEyedrops": true
-      },
-      "recurringCosts": {
-        "capsaicinEyedropsCoinsPerDay": 0,
-        "otherLocalCostsCoinsPerDay": 0
+        "capsaicinEyedrops": false
       }
     },
     {
       "tier": 8,
-      "fuel": {
-        "rarity": "legendary",
-        "usesGabagoolDistillate": true,
-        "costCoinsPerDay": 0
-      },
+      "fuel": "legendary",
       "upgrades": {
         "flycatchers": 1,
         "mithrilInfusion": true,
         "freeWill": true,
-        "capsaicinEyedrops": true
-      },
-      "recurringCosts": {
-        "capsaicinEyedropsCoinsPerDay": 0,
-        "otherLocalCostsCoinsPerDay": 0
+        "capsaicinEyedrops": false
       }
     },
     {
       "tier": 8,
-      "fuel": {
-        "rarity": "legendary",
-        "usesGabagoolDistillate": true,
-        "costCoinsPerDay": 0
-      },
+      "fuel": "legendary",
       "upgrades": {
         "flycatchers": 1,
         "mithrilInfusion": true,
         "freeWill": true,
-        "capsaicinEyedrops": true
-      },
-      "recurringCosts": {
-        "capsaicinEyedropsCoinsPerDay": 0,
-        "otherLocalCostsCoinsPerDay": 0
+        "capsaicinEyedrops": false
       }
     },
     {
       "tier": 8,
-      "fuel": {
-        "rarity": "legendary",
-        "usesGabagoolDistillate": true,
-        "costCoinsPerDay": 0
-      },
+      "fuel": "legendary",
       "upgrades": {
         "flycatchers": 1,
         "mithrilInfusion": true,
         "freeWill": true,
-        "capsaicinEyedrops": true
-      },
-      "recurringCosts": {
-        "capsaicinEyedropsCoinsPerDay": 0,
-        "otherLocalCostsCoinsPerDay": 0
+        "capsaicinEyedrops": false
       }
     },
     {
       "tier": 8,
-      "fuel": {
-        "rarity": "legendary",
-        "usesGabagoolDistillate": true,
-        "costCoinsPerDay": 0
-      },
+      "fuel": "legendary",
       "upgrades": {
         "flycatchers": 1,
         "mithrilInfusion": true,
         "freeWill": true,
-        "capsaicinEyedrops": true
-      },
-      "recurringCosts": {
-        "capsaicinEyedropsCoinsPerDay": 0,
-        "otherLocalCostsCoinsPerDay": 0
+        "capsaicinEyedrops": false
       }
     },
     {
       "tier": 8,
-      "fuel": {
-        "rarity": "legendary",
-        "usesGabagoolDistillate": true,
-        "costCoinsPerDay": 0
-      },
+      "fuel": "legendary",
       "upgrades": {
         "flycatchers": 1,
         "mithrilInfusion": true,
         "freeWill": true,
-        "capsaicinEyedrops": true
-      },
-      "recurringCosts": {
-        "capsaicinEyedropsCoinsPerDay": 0,
-        "otherLocalCostsCoinsPerDay": 0
+        "capsaicinEyedrops": false
       }
     },
     {
       "tier": 8,
-      "fuel": {
-        "rarity": "legendary",
-        "usesGabagoolDistillate": true,
-        "costCoinsPerDay": 0
-      },
+      "fuel": "legendary",
       "upgrades": {
         "flycatchers": 1,
         "mithrilInfusion": true,
         "freeWill": true,
-        "capsaicinEyedrops": true
-      },
-      "recurringCosts": {
-        "capsaicinEyedropsCoinsPerDay": 0,
-        "otherLocalCostsCoinsPerDay": 0
+        "capsaicinEyedrops": false
       }
     },
     {
       "tier": 8,
-      "fuel": {
-        "rarity": "legendary",
-        "usesGabagoolDistillate": true,
-        "costCoinsPerDay": 0
-      },
+      "fuel": "legendary",
       "upgrades": {
         "flycatchers": 1,
         "mithrilInfusion": true,
         "freeWill": true,
-        "capsaicinEyedrops": true
-      },
-      "recurringCosts": {
-        "capsaicinEyedropsCoinsPerDay": 0,
-        "otherLocalCostsCoinsPerDay": 0
+        "capsaicinEyedrops": false
       }
     },
     {
       "tier": 8,
-      "fuel": {
-        "rarity": "legendary",
-        "usesGabagoolDistillate": true,
-        "costCoinsPerDay": 0
-      },
+      "fuel": "legendary",
       "upgrades": {
         "flycatchers": 1,
         "mithrilInfusion": true,
         "freeWill": true,
-        "capsaicinEyedrops": true
-      },
-      "recurringCosts": {
-        "capsaicinEyedropsCoinsPerDay": 0,
-        "otherLocalCostsCoinsPerDay": 0
+        "capsaicinEyedrops": false
       }
     },
     {
       "tier": 8,
-      "fuel": {
-        "rarity": "legendary",
-        "usesGabagoolDistillate": true,
-        "costCoinsPerDay": 0
-      },
+      "fuel": "legendary",
       "upgrades": {
         "flycatchers": 1,
         "mithrilInfusion": true,
         "freeWill": true,
-        "capsaicinEyedrops": true
-      },
-      "recurringCosts": {
-        "capsaicinEyedropsCoinsPerDay": 0,
-        "otherLocalCostsCoinsPerDay": 0
+        "capsaicinEyedrops": false
       }
     },
     {
       "tier": 8,
-      "fuel": {
-        "rarity": "legendary",
-        "usesGabagoolDistillate": true,
-        "costCoinsPerDay": 0
-      },
+      "fuel": "legendary",
       "upgrades": {
         "flycatchers": 1,
         "mithrilInfusion": true,
         "freeWill": true,
-        "capsaicinEyedrops": true
-      },
-      "recurringCosts": {
-        "capsaicinEyedropsCoinsPerDay": 0,
-        "otherLocalCostsCoinsPerDay": 0
+        "capsaicinEyedrops": false
       }
     },
     {
       "tier": 8,
-      "fuel": {
-        "rarity": "legendary",
-        "usesGabagoolDistillate": true,
-        "costCoinsPerDay": 0
-      },
+      "fuel": "legendary",
       "upgrades": {
         "flycatchers": 1,
         "mithrilInfusion": true,
         "freeWill": true,
-        "capsaicinEyedrops": true
-      },
-      "recurringCosts": {
-        "capsaicinEyedropsCoinsPerDay": 0,
-        "otherLocalCostsCoinsPerDay": 0
+        "capsaicinEyedrops": false
       }
     },
     {
       "tier": 8,
-      "fuel": {
-        "rarity": "legendary",
-        "usesGabagoolDistillate": true,
-        "costCoinsPerDay": 0
-      },
+      "fuel": "legendary",
       "upgrades": {
         "flycatchers": 1,
         "mithrilInfusion": true,
         "freeWill": true,
-        "capsaicinEyedrops": true
-      },
-      "recurringCosts": {
-        "capsaicinEyedropsCoinsPerDay": 0,
-        "otherLocalCostsCoinsPerDay": 0
+        "capsaicinEyedrops": false
       }
     },
     {
       "tier": 8,
-      "fuel": {
-        "rarity": "legendary",
-        "usesGabagoolDistillate": true,
-        "costCoinsPerDay": 0
-      },
+      "fuel": "legendary",
       "upgrades": {
         "flycatchers": 1,
         "mithrilInfusion": true,
         "freeWill": true,
-        "capsaicinEyedrops": true
-      },
-      "recurringCosts": {
-        "capsaicinEyedropsCoinsPerDay": 0,
-        "otherLocalCostsCoinsPerDay": 0
+        "capsaicinEyedrops": false
       }
     },
     {
       "tier": 8,
-      "fuel": {
-        "rarity": "legendary",
-        "usesGabagoolDistillate": true,
-        "costCoinsPerDay": 0
-      },
+      "fuel": "legendary",
       "upgrades": {
         "flycatchers": 1,
         "mithrilInfusion": true,
         "freeWill": true,
-        "capsaicinEyedrops": true
-      },
-      "recurringCosts": {
-        "capsaicinEyedropsCoinsPerDay": 0,
-        "otherLocalCostsCoinsPerDay": 0
+        "capsaicinEyedrops": false
       }
     },
     {
       "tier": 8,
-      "fuel": {
-        "rarity": "legendary",
-        "usesGabagoolDistillate": true,
-        "costCoinsPerDay": 0
-      },
+      "fuel": "legendary",
       "upgrades": {
         "flycatchers": 1,
         "mithrilInfusion": true,
         "freeWill": true,
-        "capsaicinEyedrops": true
-      },
-      "recurringCosts": {
-        "capsaicinEyedropsCoinsPerDay": 0,
-        "otherLocalCostsCoinsPerDay": 0
+        "capsaicinEyedrops": false
       }
     },
     {
       "tier": 8,
-      "fuel": {
-        "rarity": "legendary",
-        "usesGabagoolDistillate": true,
-        "costCoinsPerDay": 0
-      },
+      "fuel": "legendary",
       "upgrades": {
         "flycatchers": 1,
         "mithrilInfusion": true,
         "freeWill": true,
-        "capsaicinEyedrops": true
-      },
-      "recurringCosts": {
-        "capsaicinEyedropsCoinsPerDay": 0,
-        "otherLocalCostsCoinsPerDay": 0
+        "capsaicinEyedrops": false
       }
     }
   ]
