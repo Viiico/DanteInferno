@@ -13,7 +13,6 @@ import {
 } from '../types/minion';
 import { INFERNO_DROP_TABLE, INFERNO_FUEL, INFERNO_MINION_TIERS } from '../types/minion';
 import type { PricedItem } from '../types/items';
-import { calculateFuelCost } from './operationCosts';
 
 export async function calculateSetupProfit(pricedItems: Map<string, PricedItem>): Promise<number> {
   const minionSetup = await readMinionSetup();
@@ -23,7 +22,7 @@ export async function calculateSetupProfit(pricedItems: Map<string, PricedItem>)
   const { beaconPerTier, postcard, scorchedPowerCrystal, risingCelsius } = SPEED_BONUSES.global;
   const nonFuelGlobalBonuses = beaconTier * beaconPerTier + (postcardActive ? postcard : 0) + (scorchedPowerCrystalActive ? scorchedPowerCrystal : 0) + otherGlobalSpeedBonus;
   const risingCelsiusBonus = risingCelsius.perMinion * Math.min(minionSetup.minions.length, risingCelsius.maxStack);
-  const fuelCost = await calculateFuelCost(pricedItems);
+  const fuelCost = prepareFuelCost(pricedItems);
 
   const setupDrops = {} as Record<InfernoUniqueDropKey, number>;
   let dailyFuelCost = 0;
@@ -35,12 +34,12 @@ export async function calculateSetupProfit(pricedItems: Map<string, PricedItem>)
     }
 
     dailyFuelCost += fuelCost[minion.fuel];
-    if(minion.upgrades.capsaicinEyedrops)dailyFuelCost += pricedItems.get("CAPSAICIN_EYEDROPS")?.cheapest.cost ?? 0;
+    if(minion.upgrades.capsaicinEyedrops)dailyFuelCost += pricedItems.get("CAPSAICIN_EYEDROPS_NO_CHARGES")?.cheapest.cost ?? 0;
   }
 
   const setupProfit = Object.entries(setupDrops).reduce((acc, [productName, productAmount]) => {
     const itemPrice = pricedItems.get(productName)?.cheapest.cost ?? 0;
-    return acc + itemPrice * productAmount;
+    return acc + (itemPrice === Infinity ? 0 : itemPrice) * productAmount;
   }, 0);
 
   // const setupDropsExtended = Object.entries(setupDrops).reduce((acc, [productName, productAmount]) => {
@@ -48,7 +47,7 @@ export async function calculateSetupProfit(pricedItems: Map<string, PricedItem>)
   //   acc[productName] = { amount: productAmount, price, profit: price * productAmount };
   //   return acc;
   // }, {})
-  
+
   return Math.ceil(setupProfit - dailyFuelCost);
 }
 
@@ -106,7 +105,7 @@ function mapRawMinion(raw: RawMinionJson): Minion {
   };
 }
 
-export async function readMinionSetup(): Promise<MinionSetup> {
+async function readMinionSetup(): Promise<MinionSetup> {
   const filePath = resolve(__dirname, '../minionSetup.json');
   const raw: RawMinionSetupJson = JSON.parse(await readFile(filePath, 'utf-8'));
 
@@ -118,4 +117,13 @@ export async function readMinionSetup(): Promise<MinionSetup> {
     recurringCosts: raw.recurringCosts,
     minions: raw.minions.map(mapRawMinion),
   };
+}
+
+function prepareFuelCost(pricedItems: Map<string, PricedItem>): Record<InfernoFuelRarity, number> {
+    return {
+        "none": 0,
+        "rare": pricedItems.get("INFERNO_FUEL_CRUDE_GABAGOOL")?.cheapest.cost ?? 0,
+        "epic": pricedItems.get("INFERNO_HEAVY_CRUDE_GABAGOOL")?.cheapest.cost ?? 0,
+        "legendary": pricedItems.get("INFERNO_HYPERGOLIC_CRUDE_GABAGOOL")?.cheapest.cost ?? 0
+    }
 }

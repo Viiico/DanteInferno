@@ -70,7 +70,7 @@ export async function resolveItemPrices(saveResults: boolean = false): Promise<M
     }
 
     function auctionItemPrice(productId: string): AuctionHouseBuy {
-        const price = auctionPrices.get(productId)?.[0] ?? 0; // Missing AH items are nearly worthless
+        const price = auctionPrices.get(productId)?.[0] ?? Infinity;
         return { type: "auction_house", cost: price };
     }
 
