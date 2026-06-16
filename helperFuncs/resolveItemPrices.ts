@@ -3,7 +3,7 @@ import { fetchBazaarPrices } from "./bazaarHandler.ts";
 import { fetchAuctionPrices } from "./auctionHandler.ts";
 import { fetchMinionPrices } from "./minionAhHandler.ts";
 
-import type { AuctionHouseBuy, BazaarBuy, CraftMethod, MinionAuctionBuy, PricedItem, SimplifiedRecipe, Source } from "../types/items.ts";
+import type { AuctionHouseBuy, BazaarBuy, CraftMethod, ExpandedObtainMethod, ItemDef, MinionAuctionBuy, ObtainMethod, PricedItem, SimplifiedRecipe, Source } from "../types/items.ts";
 
 export async function resolveItemPrices(saveResults: boolean = false): Promise<Map<string, PricedItem>> {
     const itemContent = await prepareItemContent();
@@ -85,6 +85,18 @@ export async function resolveItemPrices(saveResults: boolean = false): Promise<M
     }
 }
 
-export function expandRecipeTree(pricedItems: Map<string, PricedItem>, recipeId: string) {
+export function expandRecipeTree(pricedItems: Map<string, PricedItem>, itemContent: Map<string, ItemDef>, recipeId: string): ExpandedObtainMethod {
+    const itemObtainMethod = pricedItems.get(recipeId)?.cheapest;
+    if (!itemObtainMethod) throw new Error("Could not find item obtain method for recipeId: " + recipeId);
 
+    if (itemObtainMethod.type !== "craft") return itemObtainMethod;
+
+    const expandedIngredients = Object.fromEntries(
+        Object.entries(itemObtainMethod.ingredients).map(([ingredient, count]) => [
+            ingredient,
+            { count, obtainMethod: expandRecipeTree(pricedItems, itemContent, ingredient) },
+        ])
+    );
+
+    return { ...itemObtainMethod, ingredients: expandedIngredients };
 }

@@ -12,10 +12,9 @@ import {
   SPEED_BONUSES,
 } from '../types/minion';
 import { INFERNO_DROP_TABLE, INFERNO_FUEL, INFERNO_MINION_TIERS } from '../types/minion';
-import { resolveItemPrices } from './resolveItemPrices';
+import type { PricedItem } from '../types/items';
 
-export async function calculateSetupProfit(): Promise<number> {
-  const pricedItems = await resolveItemPrices();
+export async function calculateSetupProfit(pricedItems: Map<string, PricedItem>): Promise<number> {
   const minionSetup = await readMinionSetup();
   const setupDrops = calculateSetupDrops(minionSetup);
   const setupProfit = Object.entries(setupDrops).reduce((acc, [productName, productAmount]) => {

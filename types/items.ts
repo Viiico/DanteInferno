@@ -27,6 +27,12 @@ export interface MinionAuctionBuy {type: Extract<Source, "minion_auction">; cost
 
 export type ObtainMethod = BazaarBuy | AuctionHouseBuy | MinionAuctionBuy | CraftMethod;
 
+export interface ExpandedCraftMethod extends Omit<CraftMethod, "ingredients"> {
+    ingredients: Record<string, { count: number; obtainMethod: ExpandedObtainMethod }>;
+}
+
+export type ExpandedObtainMethod = BazaarBuy | AuctionHouseBuy | MinionAuctionBuy | ExpandedCraftMethod;
+
 // Result of cheapest price calculation
 export interface PricedItem {
     directBuyCost?: number,
