@@ -99,7 +99,7 @@ function mapRawMinion(raw: RawMinionJson): Minion {
 }
 
 async function readMinionSetup(): Promise<MinionSetup> {
-  const filePath = resolve(__dirname, '../minionSetup.json');
+  const filePath = resolve(import.meta.dir, '../minionSetup.json');
   const raw: RawMinionSetupJson = JSON.parse(await readFile(filePath, 'utf-8'));
 
   return {

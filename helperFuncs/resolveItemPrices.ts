@@ -53,11 +53,9 @@ function calculateCraftPrice(ctx: PriceContext, simplifiedRecipes: SimplifiedRec
     if (!simplifiedRecipes) return undefined;
 
     const crafts: CraftMethod[] = simplifiedRecipes.map((simplifiedRecipe) => {
-        const mappedIngredients: Record<string, number> = {};
-
         const craftPrice = Object.entries(simplifiedRecipe.ingredients).reduce((acc, [ingredient, count]) => {
             const ingredientPrice = resolveItemPrice(ctx, ingredient);
-            if (ingredientPrice) mappedIngredients[ingredient] = count;
+            if(count <= 0)throw new Error(`Invalid count ${count} for ingredient ${ingredient}`);
             return acc + (ingredientPrice ? ingredientPrice.cheapest.cost * count : Infinity);
         }, 0) / simplifiedRecipe.count;
 
