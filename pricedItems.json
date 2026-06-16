@@ -4,7 +4,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 1640
+        "cost": 1785
       }
     }
   ],
@@ -13,7 +13,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 1621
+        "cost": 1622
       }
     }
   ],
@@ -31,7 +31,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 2063
+        "cost": 2075
       }
     }
   ],
@@ -49,7 +49,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 641
+        "cost": 640
       }
     }
   ],
@@ -58,7 +58,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 65487
+        "cost": 64173
       }
     }
   ],
@@ -67,7 +67,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 128962
+        "cost": 128933
       }
     }
   ],
@@ -110,11 +110,11 @@
   [
     "AMALGAMATED_CRIMSONITE_NEW",
     {
-      "directBuyCost": 89790,
+      "directBuyCost": 90742,
       "cheapest": {
         "type": "craft",
         "recipeId": "AMALGAMATED_CRIMSONITE_NEW#1",
-        "cost": 71398,
+        "cost": 71265,
         "ingredients": {
           "ENCHANTED_GLOWSTONE": 4,
           "ENCHANTED_MYCELIUM_CUBE": 1,
@@ -131,7 +131,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 16
+        "cost": 15
       }
     }
   ],
@@ -142,7 +142,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "BLAZE_GENERATOR_1#0",
-        "cost": 1280,
+        "cost": 1200,
         "ingredients": {
           "BLAZE_ROD": 80
         }
@@ -154,7 +154,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 144960
+        "cost": 145180
       }
     }
   ],
@@ -163,7 +163,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 13639
+        "cost": 13640
       }
     }
   ],
@@ -172,7 +172,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 549
+        "cost": 554
       }
     }
   ],
@@ -181,7 +181,7 @@
     {
       "cheapest": {
         "type": "auction_house",
-        "cost": 2800000
+        "cost": 2700000
       }
     }
   ],
@@ -192,7 +192,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "CAPSAICIN_EYEDROPS_NO_CHARGES#0",
-        "cost": 1731968,
+        "cost": 1699184,
         "ingredients": {
           "CHILI_PEPPER": 4,
           "EXPORTABLE_CARROTS": 128,
@@ -207,7 +207,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 616
+        "cost": 999
       }
     }
   ],
@@ -225,7 +225,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 1793
+        "cost": 1871
       }
     }
   ],
@@ -234,7 +234,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 2038
+        "cost": 2031
       }
     }
   ],
@@ -259,7 +259,7 @@
   [
     "ENCHANTED_LAVA_BUCKET",
     {
-      "directBuyCost": 69981,
+      "directBuyCost": 69977,
       "cheapest": {
         "type": "craft",
         "recipeId": "ENCHANTED_LAVA_BUCKET#0",
@@ -276,7 +276,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 1379
+        "cost": 1375
       }
     }
   ],
@@ -285,7 +285,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 1872
+        "cost": 1879
       }
     }
   ],
@@ -294,7 +294,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 1032
+        "cost": 1031
       }
     }
   ],
@@ -312,7 +312,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 2366
+        "cost": 2293
       }
     }
   ],
@@ -321,7 +321,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 269557
+        "cost": 269556
       }
     }
   ],
@@ -330,7 +330,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 529319
+        "cost": 529031
       }
     }
   ],
@@ -341,7 +341,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "FLYCATCHER_UPGRADE#0",
-        "cost": 28024133,
+        "cost": 28023743,
         "ingredients": {
           "TARANTULA_SILK": 102,
           "FLY_SWATTER": 1
@@ -354,7 +354,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 5765961
+        "cost": 5765959
       }
     }
   ],
@@ -405,7 +405,7 @@
     {
       "cheapest": {
         "type": "auction_house",
-        "cost": 3800000
+        "cost": 3580000
       }
     }
   ],
@@ -444,7 +444,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 3324
+        "cost": 3322
       }
     }
   ],
@@ -453,7 +453,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 386090
+        "cost": 394452
       }
     }
   ],
@@ -464,7 +464,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "MOLTEN_POWDER#0",
-        "cost": 300902,
+        "cost": 310753,
         "ingredients": {
           "DERELICT_ASHE": 128,
           "AMALGAMATED_CRIMSONITE_NEW": 1
@@ -506,7 +506,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "INFERNO_GENERATOR_1#0",
-        "cost": 144720,
+        "cost": 150880,
         "ingredients": {
           "DERELICT_ASHE": 80,
           "BLAZE_GENERATOR_1": 1
@@ -521,7 +521,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "INFERNO_GENERATOR_2#0",
-        "cost": 718480,
+        "cost": 749600,
         "ingredients": {
           "DERELICT_ASHE": 320,
           "INFERNO_GENERATOR_1": 1
@@ -563,7 +563,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "INFERNO_GENERATOR_6#0",
-        "cost": 31257728,
+        "cost": 31888192,
         "ingredients": {
           "MOLTEN_POWDER": 64,
           "INFERNO_GENERATOR_5": 1
@@ -596,7 +596,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "INFERNO_GENERATOR_9#0",
-        "cost": 163208352,
+        "cost": 165864000,
         "ingredients": {
           "MOLTEN_POWDER": 256,
           "INFERNO_VERTEX": 16,
@@ -612,7 +612,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "INFERNO_GENERATOR_10#0",
-        "cost": 258771584,
+        "cost": 264350464,
         "ingredients": {
           "MOLTEN_POWDER": 256,
           "INFERNO_VERTEX": 48,
@@ -628,7 +628,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "INFERNO_GENERATOR_11#0",
-        "cost": 444985663,
+        "cost": 453487775,
         "ingredients": {
           "MOLTEN_POWDER": 256,
           "INFERNO_APEX": 1,
@@ -660,11 +660,11 @@
   [
     "MAGMA_BUCKET",
     {
-      "directBuyCost": 4045796,
+      "directBuyCost": 4039363,
       "cheapest": {
         "type": "craft",
         "recipeId": "MAGMA_BUCKET#0",
-        "cost": 3908754,
+        "cost": 3688754,
         "ingredients": {
           "ENCHANTED_LAVA_BUCKET": 2,
           "HEAT_CORE": 1
@@ -675,11 +675,11 @@
   [
     "MITHRIL_INFUSION",
     {
-      "directBuyCost": 4898312,
+      "directBuyCost": 4903467,
       "cheapest": {
         "type": "craft",
         "recipeId": "MITHRIL_INFUSION#0",
-        "cost": 4614802,
+        "cost": 4392754,
         "ingredients": {
           "ENCHANTED_MITHRIL": 512,
           "MAGMA_BUCKET": 1
@@ -692,7 +692,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 831901
+        "cost": 832325
       }
     }
   ],
@@ -701,7 +701,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 17678894
+        "cost": 17678893
       }
     }
   ],
@@ -712,7 +712,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "REHEATED_GUMMY_POLAR_BEAR#0",
-        "cost": 586320,
+        "cost": 587196,
         "ingredients": {
           "CHILI_PEPPER": 4,
           "ENCHANTED_SLIME_BALL": 4,
@@ -735,7 +735,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 189053
+        "cost": 189032
       }
     }
   ]

@@ -13,36 +13,43 @@ import {
 } from '../types/minion';
 import { INFERNO_DROP_TABLE, INFERNO_FUEL, INFERNO_MINION_TIERS } from '../types/minion';
 import type { PricedItem } from '../types/items';
+import { calculateFuelCost } from './operationCosts';
 
 export async function calculateSetupProfit(pricedItems: Map<string, PricedItem>): Promise<number> {
   const minionSetup = await readMinionSetup();
-  const setupDrops = calculateSetupDrops(minionSetup);
+
+  const { collectionIntervalHours, globalBonuses } = minionSetup;
+  const { postcardActive, beaconTier, scorchedPowerCrystalActive, otherGlobalSpeedBonus } = globalBonuses;
+  const { beaconPerTier, postcard, scorchedPowerCrystal, risingCelsius } = SPEED_BONUSES.global;
+  const nonFuelGlobalBonuses = beaconTier * beaconPerTier + (postcardActive ? postcard : 0) + (scorchedPowerCrystalActive ? scorchedPowerCrystal : 0) + otherGlobalSpeedBonus;
+  const risingCelsiusBonus = risingCelsius.perMinion * Math.min(minionSetup.minions.length, risingCelsius.maxStack);
+  const fuelCost = await calculateFuelCost(pricedItems);
+
+  const setupDrops = {} as Record<InfernoUniqueDropKey, number>;
+  let dailyFuelCost = 0;
+  for (const minion of minionSetup.minions) {
+    const minionDrops = calculateMinionDrops(minion, collectionIntervalHours, nonFuelGlobalBonuses, risingCelsiusBonus);
+    for (const [key, amount] of Object.entries(minionDrops) as [InfernoUniqueDropKey, number][]) {
+      if (!setupDrops[key]) setupDrops[key] = amount;
+      else setupDrops[key] += amount;
+    }
+
+    dailyFuelCost += fuelCost[minion.fuel];
+    if(minion.upgrades.capsaicinEyedrops)dailyFuelCost += pricedItems.get("CAPSAICIN_EYEDROPS")?.cheapest.cost ?? 0;
+  }
+
   const setupProfit = Object.entries(setupDrops).reduce((acc, [productName, productAmount]) => {
     const itemPrice = pricedItems.get(productName)?.cheapest.cost ?? 0;
     return acc + itemPrice * productAmount;
   }, 0);
-  return Math.ceil(setupProfit);
-}
 
-function calculateSetupDrops(minionSetup: MinionSetup): Record<InfernoUniqueDropKey, number> {
-  const { collectionIntervalHours, globalBonuses } = minionSetup;
-  const { postcardActive, beaconTier, scorchedPowerCrystalActive, otherGlobalSpeedBonus } = globalBonuses;
-  const { beaconPerTier, postcard, scorchedPowerCrystal, risingCelsius } = SPEED_BONUSES.global;
-
-  const nonFuelGlobalBonuses = beaconTier * beaconPerTier + (postcardActive ? postcard : 0) + (scorchedPowerCrystalActive ? scorchedPowerCrystal : 0) + otherGlobalSpeedBonus;
-  const risingCelsiusBonus = risingCelsius.perMinion * Math.min(minionSetup.minions.length, risingCelsius.maxStack);
-
-  const setupDrops = {} as Record<InfernoUniqueDropKey, number>;
-
-  for (const minion of minionSetup.minions) {
-    const minionDrops = calculateMinionDrops(minion, collectionIntervalHours, nonFuelGlobalBonuses, risingCelsiusBonus);
-    for (const [key, value] of Object.entries(minionDrops) as [InfernoUniqueDropKey, number][]) {
-      if (!setupDrops[key]) setupDrops[key] = value;
-      else setupDrops[key] += value;
-    }
-  }
-
-  return setupDrops;
+  // const setupDropsExtended = Object.entries(setupDrops).reduce((acc, [productName, productAmount]) => {
+  //   const price = pricedItems.get(productName)?.cheapest.cost ?? 0;
+  //   acc[productName] = { amount: productAmount, price, profit: price * productAmount };
+  //   return acc;
+  // }, {})
+  
+  return Math.ceil(setupProfit - dailyFuelCost);
 }
 
 function calculateMinionDrops(minion: Minion, collectionIntervalHours: number, nonFuelGlobalBonuses: number, risingCelsiusBonus: number): Partial<Record<InfernoUniqueDropKey, number>> {
@@ -53,7 +60,7 @@ function calculateMinionDrops(minion: Minion, collectionIntervalHours: number, n
 
   const legendaryDrops = (Object.entries(INFERNO_DROP_TABLE.legendaryDrops.uniqueDrops) as [BaseUniqueDropKey, { chancePerGeneratedItem: number }][])
     .reduce<Partial<Record<InfernoUniqueDropKey, number>>>((acc, [key, drop]) => {
-      const baseDropAmount = harvestCount * drop.chancePerGeneratedItem * (minion.upgrades.capsaicinEyedrops ? 1.3 : 0);
+      const baseDropAmount = harvestCount * drop.chancePerGeneratedItem * (minion.upgrades.capsaicinEyedrops ? 1.3 : 1);
       if (INFERNO_FUEL[minion.fuel].enablesUniqueDrops && INFERNO_DROP_TABLE.legendaryDrops.uniqueDrops[key].tierMultiplier) acc[key] = baseDropAmount * 2;
       else acc[key] = baseDropAmount;
       return acc;
