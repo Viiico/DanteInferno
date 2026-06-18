@@ -4,7 +4,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 1784
+        "cost": 1767
       }
     }
   ],
@@ -13,7 +13,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 1686
+        "cost": 1788
       }
     }
   ],
@@ -22,7 +22,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 1812
+        "cost": 1894
       }
     }
   ],
@@ -31,7 +31,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 2052
+        "cost": 2499
       }
     }
   ],
@@ -40,7 +40,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 1835
+        "cost": 1780
       }
     }
   ],
@@ -49,7 +49,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 640
+        "cost": 708
       }
     }
   ],
@@ -58,7 +58,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 64241
+        "cost": 91864
       }
     }
   ],
@@ -67,7 +67,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 128934
+        "cost": 128381
       }
     }
   ],
@@ -76,7 +76,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 204264
+        "cost": 203102
       }
     }
   ],
@@ -85,7 +85,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 238585
+        "cost": 236997
       }
     }
   ],
@@ -94,7 +94,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 281019
+        "cost": 257229
       }
     }
   ],
@@ -103,18 +103,18 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 102893
+        "cost": 101854
       }
     }
   ],
   [
     "AMALGAMATED_CRIMSONITE_NEW",
     {
-      "directBuyCost": 90742,
+      "directBuyCost": 90743,
       "cheapest": {
         "type": "craft",
         "recipeId": "AMALGAMATED_CRIMSONITE_NEW#1",
-        "cost": 71247
+        "cost": 73021
       }
     }
   ],
@@ -123,7 +123,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 15
+        "cost": 8
       }
     }
   ],
@@ -134,7 +134,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "BLAZE_GENERATOR_1#0",
-        "cost": 1200
+        "cost": 640
       }
     }
   ],
@@ -143,7 +143,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 145179
+        "cost": 164982
       }
     }
   ],
@@ -152,7 +152,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 13499
+        "cost": 11675
       }
     }
   ],
@@ -170,18 +170,18 @@
     {
       "cheapest": {
         "type": "auction_house",
-        "cost": 3199999
+        "cost": 2700000
       }
     }
   ],
   [
     "CAPSAICIN_EYEDROPS_NO_CHARGES",
     {
-      "directBuyCost": 2389022,
+      "directBuyCost": 2155687,
       "cheapest": {
         "type": "craft",
         "recipeId": "CAPSAICIN_EYEDROPS_NO_CHARGES#0",
-        "cost": 1859833
+        "cost": 1641746
       }
     }
   ],
@@ -190,7 +190,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 998
+        "cost": 556
       }
     }
   ],
@@ -199,7 +199,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 13366
+        "cost": 13307
       }
     }
   ],
@@ -208,7 +208,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 1847
+        "cost": 1890
       }
     }
   ],
@@ -217,7 +217,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 2217
+        "cost": 1746
       }
     }
   ],
@@ -226,7 +226,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 26422
+        "cost": 27797
       }
     }
   ],
@@ -235,18 +235,18 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 509
+        "cost": 499
       }
     }
   ],
   [
     "ENCHANTED_LAVA_BUCKET",
     {
-      "directBuyCost": 69977,
+      "directBuyCost": 71561,
       "cheapest": {
         "type": "craft",
         "recipeId": "ENCHANTED_LAVA_BUCKET#0",
-        "cost": 54371
+        "cost": 57091
       }
     }
   ],
@@ -255,7 +255,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 1367
+        "cost": 1434
       }
     }
   ],
@@ -264,7 +264,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 1753
+        "cost": 1722
       }
     }
   ],
@@ -273,7 +273,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 1030
+        "cost": 1140
       }
     }
   ],
@@ -282,7 +282,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 588
+        "cost": 580
       }
     }
   ],
@@ -291,7 +291,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 2397
+        "cost": 1819
       }
     }
   ],
@@ -300,7 +300,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 271998
+        "cost": 270995
       }
     }
   ],
@@ -309,18 +309,16 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 528307
+        "cost": 509727
       }
     }
   ],
   [
     "FLYCATCHER_UPGRADE",
     {
-      "directBuyCost": 29457538,
       "cheapest": {
-        "type": "craft",
-        "recipeId": "FLYCATCHER_UPGRADE#0",
-        "cost": 28272103
+        "type": "bazaar",
+        "cost": 27996156
       }
     }
   ],
@@ -329,16 +327,18 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 5749999
+        "cost": 3688522
       }
     }
   ],
   [
     "SULPHURIC_COAL",
     {
+      "directBuyCost": 8214,
       "cheapest": {
-        "type": "bazaar",
-        "cost": 8663
+        "type": "craft",
+        "recipeId": "SULPHURIC_COAL#0",
+        "cost": 7438
       }
     }
   ],
@@ -347,18 +347,18 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 52277
+        "cost": 56133
       }
     }
   ],
   [
     "FUEL_GABAGOOL",
     {
-      "directBuyCost": 20393,
+      "directBuyCost": 20391,
       "cheapest": {
         "type": "craft",
         "recipeId": "FUEL_GABAGOOL#1",
-        "cost": 15197
+        "cost": 14454
       }
     }
   ],
@@ -376,29 +376,29 @@
     {
       "cheapest": {
         "type": "auction_house",
-        "cost": 3499999
+        "cost": 3500000
       }
     }
   ],
   [
     "HEAVY_GABAGOOL",
     {
-      "directBuyCost": 429989,
+      "directBuyCost": 429986,
       "cheapest": {
         "type": "craft",
         "recipeId": "HEAVY_GABAGOOL#0",
-        "cost": 373391
+        "cost": 354334
       }
     }
   ],
   [
     "HYPERGOLIC_GABAGOOL",
     {
-      "directBuyCost": 4499992,
+      "directBuyCost": 4484287,
       "cheapest": {
         "type": "craft",
         "recipeId": "HYPERGOLIC_GABAGOOL#0",
-        "cost": 4489355
+        "cost": 4259446
       }
     }
   ],
@@ -407,7 +407,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 3316
+        "cost": 3220
       }
     }
   ],
@@ -416,18 +416,18 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 395294
+        "cost": 397589
       }
     }
   ],
   [
     "MOLTEN_POWDER",
     {
-      "directBuyCost": 310991,
+      "directBuyCost": 338052,
       "cheapest": {
         "type": "craft",
         "recipeId": "MOLTEN_POWDER#0",
-        "cost": 307663
+        "cost": 314941
       }
     }
   ],
@@ -436,7 +436,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 10650847
+        "cost": 10496635
       }
     }
   ],
@@ -445,7 +445,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 70000
+        "cost": 67849
       }
     }
   ],
@@ -456,7 +456,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "INFERNO_FUEL_CRUDE_GABAGOOL#0",
-        "cost": 235393
+        "cost": 229994
       }
     }
   ],
@@ -467,7 +467,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "INFERNO_GENERATOR_1#0",
-        "cost": 148960
+        "cost": 151840
       }
     }
   ],
@@ -478,7 +478,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "INFERNO_GENERATOR_2#0",
-        "cost": 740000
+        "cost": 756640
       }
     }
   ],
@@ -516,7 +516,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "INFERNO_GENERATOR_6#0",
-        "cost": 31690432
+        "cost": 32156224
       }
     }
   ],
@@ -545,7 +545,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "INFERNO_GENERATOR_9#0",
-        "cost": 165086432
+        "cost": 166986320
       }
     }
   ],
@@ -556,18 +556,18 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "INFERNO_GENERATOR_10#0",
-        "cost": 262822272
+        "cost": 266695488
       }
     }
   ],
   [
     "INFERNO_GENERATOR_11",
     {
-      "directBuyCost": 585000000,
+      "directBuyCost": 499000000,
       "cheapest": {
         "type": "craft",
         "recipeId": "INFERNO_GENERATOR_11#0",
-        "cost": 451208959
+        "cost": 456901291
       }
     }
   ],
@@ -578,7 +578,7 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "INFERNO_HEAVY_CRUDE_GABAGOOL#0",
-        "cost": 593587
+        "cost": 569874
       }
     }
   ],
@@ -589,29 +589,29 @@
       "cheapest": {
         "type": "craft",
         "recipeId": "INFERNO_HYPERGOLIC_CRUDE_GABAGOOL#0",
-        "cost": 4709551
+        "cost": 4474986
       }
     }
   ],
   [
     "MAGMA_BUCKET",
     {
-      "directBuyCost": 4045796,
+      "directBuyCost": 4329922,
       "cheapest": {
         "type": "craft",
         "recipeId": "MAGMA_BUCKET#0",
-        "cost": 3608741
+        "cost": 3614182
       }
     }
   ],
   [
     "MITHRIL_INFUSION",
     {
-      "directBuyCost": 4913508,
+      "directBuyCost": 5199129,
       "cheapest": {
         "type": "craft",
         "recipeId": "MITHRIL_INFUSION#0",
-        "cost": 4308645
+        "cost": 4348390
       }
     }
   ],
@@ -620,7 +620,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 825203
+        "cost": 702130
       }
     }
   ],
@@ -629,18 +629,16 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 17678894
+        "cost": 17678884
       }
     }
   ],
   [
     "REHEATED_GUMMY_POLAR_BEAR",
     {
-      "directBuyCost": 634951,
       "cheapest": {
-        "type": "craft",
-        "recipeId": "REHEATED_GUMMY_POLAR_BEAR#0",
-        "cost": 587188
+        "type": "bazaar",
+        "cost": 634948
       }
     }
   ],
@@ -649,7 +647,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 971270
+        "cost": 920387
       }
     }
   ],
@@ -658,7 +656,7 @@
     {
       "cheapest": {
         "type": "bazaar",
-        "cost": 189010
+        "cost": 181818
       }
     }
   ]

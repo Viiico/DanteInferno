@@ -68,8 +68,7 @@ Reaper Pepper - B
 
 # TODO
 clear up minionSetup structure
-Fuel is calculated wrong based on collectionIntervalHours
-Work on minion structures and price obtaining - especially applying missing upgrades from minionAH.
+Fuel is calculated wrong based on collectionIntervalHours, just math.ceil intervalhr/24
 resolveItemPrice has no circular prevention!!!
 add ceramic into profit calculations
 
