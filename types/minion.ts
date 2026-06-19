@@ -46,18 +46,7 @@ export interface MinionSetup {
     postcardActive: boolean;
     beaconTier: 0 | 1 | 2 | 3 | 4 | 5;
     scorchedPowerCrystalActive: boolean;
-    otherGlobalSpeedBonus: number;
   };
-}
-
-export interface MarketPrices {
-  crudeGabagool: number;
-  hypergolicIonizedCeramic: number;
-
-  uniqueDrops: Record<InfernoUniqueDropKey, number>;
-
-  fuels: Record<InfernoFuelRarity, number>;
-  capsaicinEyedrops: number;
 }
 
 export interface Minion {

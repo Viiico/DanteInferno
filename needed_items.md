@@ -67,10 +67,7 @@ Gabagool the fish - A
 Reaper Pepper - B
 
 # TODO
-clear up minionSetup structure
-Fuel is calculated wrong based on collectionIntervalHours, just math.ceil intervalhr/24
 resolveItemPrice has no circular prevention!!!
-add ceramic into profit calculations
 
 Calculator for free will
 Calculations for sustainability of eyedrops

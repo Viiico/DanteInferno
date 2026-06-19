@@ -12,15 +12,19 @@ import {
   SPEED_BONUSES,
 } from '../types/minion';
 import { INFERNO_DROP_TABLE, INFERNO_FUEL, INFERNO_MINION_TIERS } from '../types/minion';
-import type { ItemDef, PricedItem } from '../types/items';
+import type { PricedItem } from '../types/items';
 
 export async function calculateSetupProfit(pricedItems: Map<string, PricedItem>): Promise<number> {
   const minionSetup = await readMinionSetup();
   const { collectionIntervalHours, globalBonuses } = minionSetup;
-  const { postcardActive, beaconTier, scorchedPowerCrystalActive, otherGlobalSpeedBonus } = globalBonuses;
+  const { postcardActive, beaconTier, scorchedPowerCrystalActive } = globalBonuses;
   const { beaconPerTier, postcard, scorchedPowerCrystal, risingCelsius } = SPEED_BONUSES.global;
-  const nonFuelGlobalBonuses = beaconTier * beaconPerTier + (postcardActive ? postcard : 0) + (scorchedPowerCrystalActive ? scorchedPowerCrystal : 0) + otherGlobalSpeedBonus;
-  const risingCelsiusBonus = risingCelsius.perMinion * Math.min(minionSetup.minions.length, risingCelsius.maxStack);
+
+  const numberOfDays = Math.floor(collectionIntervalHours / 24);
+  const minionNumber = minionSetup.minions.length;
+
+  const nonFuelGlobalBonuses = beaconTier * beaconPerTier + (postcardActive ? postcard : 0) + (scorchedPowerCrystalActive ? scorchedPowerCrystal : 0);
+  const risingCelsiusBonus = risingCelsius.perMinion * Math.min(minionNumber, risingCelsius.maxStack);
   const fuelCost = prepareFuelCost(pricedItems);
 
   const setupDrops = {} as Record<InfernoUniqueDropKey, number>;
@@ -36,18 +40,14 @@ export async function calculateSetupProfit(pricedItems: Map<string, PricedItem>)
     if (minion.upgrades.capsaicinEyedrops) dailyFuelCost += pricedItems.get("CAPSAICIN_EYEDROPS_NO_CHARGES")?.cheapest.cost ?? 0;
   }
 
-  const setupProfit = Object.entries(setupDrops).reduce((acc, [productName, productAmount]) => {
+  let setupProfit = Object.entries(setupDrops).reduce((acc, [productName, productAmount]) => {
     const itemPrice = pricedItems.get(productName)?.cheapest.cost ?? 0;
     return acc + (itemPrice === Infinity ? 0 : itemPrice) * productAmount;
   }, 0);
 
-  // const setupDropsExtended = Object.entries(setupDrops).reduce((acc, [productName, productAmount]) => {
-  //   const price = pricedItems.get(productName)?.cheapest.cost ?? 0;
-  //   acc[productName] = { amount: productAmount, price, profit: price * productAmount };
-  //   return acc;
-  // }, {})
+  setupProfit += numberOfDays * minionNumber * (pricedItems.get("HYPERGOLIC_IONIZED_CERAMICS")?.cheapest.cost ?? 0);
 
-  return Math.ceil(setupProfit - dailyFuelCost);
+  return Math.ceil(setupProfit - numberOfDays*dailyFuelCost);
 }
 
 function calculateMinionDrops(minion: Minion, collectionIntervalHours: number, nonFuelGlobalBonuses: number, risingCelsiusBonus: number): Partial<Record<InfernoUniqueDropKey, number>> {

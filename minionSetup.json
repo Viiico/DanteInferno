@@ -1,23 +1,11 @@
 {
   "unlockedMinionSlots": 24,
-  "collectionIntervalHours": 24,
+  "collectionIntervalHours": 48,
   "externalIncomeCoinsPerDay": 10e7,
   "globalBonuses": {
     "postcardActive": true,
     "beaconTier": 5,
-    "scorchedPowerCrystalActive": true,
-    "otherGlobalSpeedBonus": 0
-  },
-  "prices": {
-    "crudeGabagool": 0,
-    "hypergolicIonizedCeramic": 0,
-    "uniqueDrops": {
-      "chiliPepper": 0,
-      "infernoVertex": 0,
-      "infernoApex": 0,
-      "reaperPepper": 0,
-      "gabagoolTheFish": 0
-    }
+    "scorchedPowerCrystalActive": true
   },
   "minions": [
     {
