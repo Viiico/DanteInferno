@@ -67,8 +67,6 @@ Gabagool the fish - A
 Reaper Pepper - B
 
 # TODO
-resolveItemPrice has no circular prevention!!!
-
 Calculator for free will
 Calculations for sustainability of eyedrops
 Compress information in minionSetup - declare states so we can store information like mithrilInfusion, freeWill in single bits.
@@ -77,11 +75,12 @@ Cost of slots unlocking - LATER after having base platform and already working s
 Predicted xp
 required collections
 
-Calculate fastest way to make fuel based off amount(crafting)
-Predicted fill up time
 
 Based of costs and profit differences calculate most optimal upgrade path
 Add providing current setup
+Simplify minionSetup for smaller footprint and optimizing by not repeating calculations for same minions
+Add minion storage
+Predicted fill up time
 Think wether it is linear or is there some minmaxing to do
 First assume already having minimal amounts of minions for full speed bonus
 Calculator for estimated time till upgrade - include checking only once per certain period

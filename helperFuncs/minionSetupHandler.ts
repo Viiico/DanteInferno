@@ -21,6 +21,7 @@ export async function calculateSetupProfit(pricedItems: Map<string, PricedItem>)
   const { beaconPerTier, postcard, scorchedPowerCrystal, risingCelsius } = SPEED_BONUSES.global;
 
   const numberOfDays = Math.floor(collectionIntervalHours / 24);
+  console.log(numberOfDays);
   const minionNumber = minionSetup.minions.length;
 
   const nonFuelGlobalBonuses = beaconTier * beaconPerTier + (postcardActive ? postcard : 0) + (scorchedPowerCrystalActive ? scorchedPowerCrystal : 0);
@@ -30,10 +31,10 @@ export async function calculateSetupProfit(pricedItems: Map<string, PricedItem>)
   const setupDrops = {} as Record<InfernoUniqueDropKey, number>;
   let dailyFuelCost = 0;
   for (const minion of minionSetup.minions) {
-    const minionDrops = calculateMinionDrops(minion, collectionIntervalHours, nonFuelGlobalBonuses, risingCelsiusBonus);
+    const minionDrops = calculateHourlyMinionDrops(minion, nonFuelGlobalBonuses, risingCelsiusBonus);
     for (const [key, amount] of Object.entries(minionDrops) as [InfernoUniqueDropKey, number][]) {
-      if (!setupDrops[key]) setupDrops[key] = amount;
-      else setupDrops[key] += amount;
+      if (!setupDrops[key]) setupDrops[key] = amount * collectionIntervalHours;
+      else setupDrops[key] += amount * collectionIntervalHours;
     }
 
     dailyFuelCost += fuelCost[minion.fuel];
@@ -50,8 +51,8 @@ export async function calculateSetupProfit(pricedItems: Map<string, PricedItem>)
   return Math.ceil(setupProfit - numberOfDays*dailyFuelCost);
 }
 
-function calculateMinionDrops(minion: Minion, collectionIntervalHours: number, nonFuelGlobalBonuses: number, risingCelsiusBonus: number): Partial<Record<InfernoUniqueDropKey, number>> {
-  const harvestCount = calculateHarvestCount(minion, collectionIntervalHours, nonFuelGlobalBonuses, risingCelsiusBonus);
+function calculateHourlyMinionDrops(minion: Minion, nonFuelGlobalBonuses: number, risingCelsiusBonus: number): Partial<Record<InfernoUniqueDropKey, number>> {
+  const harvestCount = calculateHarvestCount(minion, nonFuelGlobalBonuses, risingCelsiusBonus) * 3600;
   const veryCrudeGabagoolDrops = harvestCount / 192;
 
   if (minion.fuel !== "legendary") return { "VERY_CRUDE_GABAGOOL": veryCrudeGabagoolDrops };
@@ -68,7 +69,8 @@ function calculateMinionDrops(minion: Minion, collectionIntervalHours: number, n
   return legendaryDrops;
 }
 
-function calculateHarvestCount(minion: Minion, collectionIntervalHours: number, nonFuelGlobalBonuses: number, risingCelsiusBonus: number): number {
+
+function calculateHarvestCount(minion: Minion, nonFuelGlobalBonuses: number, risingCelsiusBonus: number): number {
   const { flycatchers, mithrilInfusion, freeWill } = minion.upgrades;
   const { perFlycatcherBonus, mithrilInfusionBonus, freeWillBonus } = SPEED_BONUSES.local;
 
@@ -78,7 +80,7 @@ function calculateHarvestCount(minion: Minion, collectionIntervalHours: number, 
   const baseMinionActionTime = INFERNO_MINION_TIERS[minion.tier].baseActionSeconds;
   const infernoFuelMultiplier = INFERNO_FUEL[minion.fuel].speedMultiplier;
 
-  return (3600 * collectionIntervalHours) / (2 * baseMinionActionTime) * infernoFuelMultiplier * (1 + nonFuelBonuses);
+  return infernoFuelMultiplier * (1 + nonFuelBonuses) / (2 * baseMinionActionTime);
 }
 
 
@@ -118,4 +120,9 @@ function prepareFuelCost(pricedItems: Map<string, PricedItem>): Record<InfernoFu
     "epic": pricedItems.get("INFERNO_HEAVY_CRUDE_GABAGOOL")?.cheapest.cost ?? 0,
     "legendary": pricedItems.get("INFERNO_HYPERGOLIC_CRUDE_GABAGOOL")?.cheapest.cost ?? 0
   }
+}
+
+function predictFillUpTimeHours(minionDrops: Partial<Record<InfernoUniqueDropKey, number>>) {
+    // const 
+    // console.log(minionDrops)
 }
