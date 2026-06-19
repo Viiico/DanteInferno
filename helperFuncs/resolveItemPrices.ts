@@ -29,14 +29,19 @@ export async function resolveItemPrices(saveResults: boolean = false): Promise<M
     return ctx.pricedItems;
 }
 
-function resolveItemPrice(ctx: PriceContext, productId: string): PricedItem | undefined {
+function resolveItemPrice(ctx: PriceContext, productId: string, visiting: Set<string> = new Set()): PricedItem | undefined {
     const cached = ctx.pricedItems.get(productId);
     if (cached) return cached;
+
+    if(visiting.has(productId)) return undefined; // prevent circular dependency
 
     const product = ctx.itemContent.get(productId);
     if (!product) throw new Error(`No product found with id ${productId}`);
 
-    const craftingPrice = calculateCraftPrice(ctx, product.simplifiedRecipes);
+    visiting.add(productId);
+    const craftingPrice = calculateCraftPrice(ctx, product.simplifiedRecipes, visiting);
+    visiting.delete(productId);
+
     const buyPrice = getBuyPrice(ctx, productId, product.source);
     const useCraft = craftingPrice && craftingPrice.cost < (buyPrice ?? Infinity);
 
@@ -49,12 +54,12 @@ function resolveItemPrice(ctx: PriceContext, productId: string): PricedItem | un
     return result;
 }
 
-function calculateCraftPrice(ctx: PriceContext, simplifiedRecipes: SimplifiedRecipe[] | undefined): CraftMethod | undefined {
+function calculateCraftPrice(ctx: PriceContext, simplifiedRecipes: SimplifiedRecipe[] | undefined, visiting: Set<string>): CraftMethod | undefined {
     if (!simplifiedRecipes) return undefined;
 
     const crafts: CraftMethod[] = simplifiedRecipes.map((simplifiedRecipe) => {
         const craftPrice = Object.entries(simplifiedRecipe.ingredients).reduce((acc, [ingredient, count]) => {
-            const ingredientPrice = resolveItemPrice(ctx, ingredient);
+            const ingredientPrice = resolveItemPrice(ctx, ingredient, visiting);
             if(count <= 0)throw new Error(`Invalid count ${count} for ingredient ${ingredient}`);
             return acc + (ingredientPrice ? ingredientPrice.cheapest.cost * count : Infinity);
         }, 0) / simplifiedRecipe.count;
