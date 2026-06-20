@@ -25,7 +25,7 @@ export async function resolveItemPrices(saveResults: boolean = false): Promise<M
 
     for (const productId of itemContent.keys()) resolveItemPrice(ctx, productId);
 
-    if (saveResults) await Bun.write("./pricedItems.json", JSON.stringify([...ctx.pricedItems], null, 2));
+    if (saveResults) await Bun.write("./cli/pricedItems.json", JSON.stringify([...ctx.pricedItems], null, 2));
     return ctx.pricedItems;
 }
 

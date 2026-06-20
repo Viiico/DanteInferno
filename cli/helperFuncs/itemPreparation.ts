@@ -7,10 +7,10 @@ interface NeededItems {
 }
 
 export async function prepareItemContent(): Promise<Map<string, ItemDef>> {
-    const itemNames = await Array.fromAsync(new Bun.Glob("*").scan("./neededItems"));
+    const itemNames = await Array.fromAsync(new Bun.Glob("*").scan("./cli/neededItems"));
     const itemContent = (await Promise.all(
         itemNames.map(fileName => 
-            Bun.file(`neededItems/${fileName}`).json().catch(err => {
+            Bun.file(`cli/neededItems/${fileName}`).json().catch(err => {
                 throw new Error(`Failed to parse ${fileName}: ${err.message}`);
             }) as Promise<ItemDef>
         )

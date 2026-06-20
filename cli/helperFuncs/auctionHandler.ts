@@ -2,7 +2,7 @@ import type {AuctionPriceCache, AuctionResponse} from "../types/auction.ts";
 import type {AuctionWorkerInput, AuctionWorkerOutput} from "../types/workers.ts";
 
 const CACHE_TTL_MS = 10 * 60 * 1000;
-const CACHE_PATH = "./auctionPricesCache.json";
+const CACHE_PATH = "./cli/auctionPricesCache.json";
 
 export async function fetchAuctionPrices(neededItems: string[]) {
     const cached = await loadCache();

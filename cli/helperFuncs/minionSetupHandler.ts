@@ -21,7 +21,6 @@ export async function calculateSetupProfit(pricedItems: Map<string, PricedItem>)
   const { beaconPerTier, postcard, scorchedPowerCrystal, risingCelsius } = SPEED_BONUSES.global;
 
   const numberOfDays = Math.floor(collectionIntervalHours / 24);
-  console.log(numberOfDays);
   const minionNumber = minionSetup.minions.length;
 
   const nonFuelGlobalBonuses = beaconTier * beaconPerTier + (postcardActive ? postcard : 0) + (scorchedPowerCrystalActive ? scorchedPowerCrystal : 0);
